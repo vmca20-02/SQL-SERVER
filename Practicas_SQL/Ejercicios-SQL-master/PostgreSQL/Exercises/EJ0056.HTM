@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-56">Ejercicio 56</h2>
+<p>Una empresa tiene registrados datos de sus empleados en una tabla llamada &quot;empleados&quot;.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>documento</strong>, <em>varchar(8)</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>seccion</strong>, <em>varchar(20)</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros, dos de ellos con el mismo número de documento:</p>
+<ul>
+<li><em>'22222222', 'Alberto López', 'Sistemas'</em>.</li>
+<li><em>'23333333', 'Beatriz García', 'Administración'</em>.</li>
+<li><em>'23333333', 'Carlos Fuentes', 'Administración'</em>.</li>
+</ul></li>
+<li>Intente establecer una restricción &quot;primary key&quot; para la tabla para que el documento no se repita<br />ni admita valores nulos<br />No lo permite porque la tabla contiene datos que no cumplen con la restricción, debemos eliminar (<em>o<br />modificar</em>) el registro que tiene documento duplicado.</li>
+<li>Establezca la restricción &quot;primary key&quot; del punto 3</li>
+<li>Intente actualizar un documento para que se repita.<br />No lo permite porque va contra la restricción.</li>
+<li>Intente establecer otra restricción &quot;primary key&quot; con el campo &quot;nombre&quot;.<br />No lo permite, sólo puede haber una restricción &quot;primary key&quot; por tabla.</li>
+<li>Intente ingresar un registro con valor nulo para el documento.<br />No lo permite porque la restricción no admite valores nulos.</li>
+<li><p>Vea las restricciones de la tabla empleados (<em>2 filas</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 56
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    documento VARCHAR(8) NOT NULL,
+    nombre VARCHAR(30),
+    seccion VARCHAR(20)
+);
+INSERT INTO empleados
+    VALUES  (&#39;22222222&#39;,&#39;Alberto Lopez&#39;,&#39;Sistemas&#39;),
+        (&#39;23333333&#39;,&#39;Beatriz Garcia&#39;,&#39;AdMINistracion&#39;),
+        (&#39;23333333&#39;,&#39;Carlos Fuentes&#39;,&#39;AdMINistracion&#39;);
+
+ALTER TABLE empleados
+    ADD CONSTRAINT PK_empleados_documento
+    PRIMARY KEY(documento);
+
+DELETE FROM empleados
+    WHERE nombre=&#39;Carlos Fuentes&#39;;
+
+ALTER TABLE empleados
+    ADD CONSTRAINT PK_empleados_documento
+    PRIMARY KEY(documento);
+
+UPDATE empleados SET documento=&#39;22222222&#39;
+    WHERE documento=&#39;23333333&#39;;
+
+ALTER TABLE empleados
+    ADD CONSTRAINT PK_empleados_nombre
+    PRIMARY KEY(nombre);
+
+INSERT INTO empleados VALUES    (NULL,&#39;Marcelo Juarez&#39;,&#39;Sistemas&#39;);
+
+SELECT * FROM empleados;
+
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;empleados&#39;;
+</code></pre>
+
+</body>
+</html>
+

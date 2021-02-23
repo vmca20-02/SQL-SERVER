@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-70">Ejercicio 70</h2>
+<p>Varios clubes de barrio se organizaron para realizar campeonatos entre ellos. La tabla llamada &quot;equipos&quot; guarda la información de los distintos equipos que jugarán.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>barrio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>entrenador</strong>, <em>varchar(30)</em>.</li>
+</ul></li>
+<li>Ingrese los siguientes registros.</li>
+<li>Cada equipo jugará con todos los demás 2 veces, una vez en cada sede. Realice un &quot;cross join&quot; para combinar los equipos teniendo en cuenta que un equipo no juega consigo mismo (<em>12 registros</em>)</li>
+<li>Obtenga el mismo resultado empleando un &quot;join&quot;.</li>
+<li><p>Realice un &quot;cross join&quot; para combinar los equipos para que cada equipo juegue con cada uno de los otros una sola vez (<em>6 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 70
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS equipos;
+
+CREATE TABLE equipos (
+    nombre VARCHAR(30),
+    barrio VARCHAR(20),
+    domicilio VARCHAR(30),
+    entrenador VARCHAR(30)
+);
+
+INSERT INTO equipos 
+    VALUES  (&#39;Los tigres&#39;,&#39;Gral. Paz&#39;,&#39;Sarmiento 234&#39;,&#39;Juan Lopez&#39;),
+        (&#39;Los leones&#39;,&#39;Centro&#39;,&#39;Colon 123&#39;,&#39;Gustavo Fuentes&#39;),
+        (&#39;Campeones&#39;,&#39;Pueyrredon&#39;,&#39;Guemes 346&#39;,&#39;Carlos Moreno&#39;),
+        (&#39;Cebollitas&#39;,&#39;Alberdi&#39;,&#39;Colon 1234&#39;,&#39;Luis Duarte&#39;);
+        
+SELECT e1.nombre,e2.nombre,e1.barrio AS sede
+    FROM equipos AS e1
+    CROSS JOIN equipos AS e2
+    WHERE e1.nombre &lt;&gt; e2.nombre;
+    
+SELECT e1.nombre,e2.nombre,e1.barrio AS sede
+    FROM equipos AS e1
+    JOIN equipos AS e2
+    ON e1.nombre &lt;&gt; e2.nombre;
+    
+SELECT e1.nombre,e2.nombre,e1.barrio AS sede
+    FROM equipos AS e1
+    CROSS JOIN equipos AS e2
+    WHERE e1.nombre &gt; e2.nombre;
+</code></pre>
+
+</body>
+</html>
+

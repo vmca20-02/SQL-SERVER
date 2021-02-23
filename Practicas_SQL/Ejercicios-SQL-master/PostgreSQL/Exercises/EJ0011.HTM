@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-11">Ejercicio 11</h2>
+<p>Un comercio que vende artículos de computación registra los datos de sus artículos en una tabla con ese nombre.</p>
+<ol>
+<li><p>Cree la tabla, con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>integer</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>descripcion</strong>, <em>varchar(30)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+<li><strong>cantidad</strong>, <em>integer</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>1, 'impresora', 'Epson Stylus C45', 400.80, 20</em>.</li>
+<li><em>2, 'impresora', 'Epson Stylus C85', 500, 30</em>.</li>
+<li><em>3, 'monitor', 'Samsung 14', 800, 10</em>.</li>
+<li><em>4, 'teclado', 'ingles Biswal', 100, 50</em>.</li>
+<li><em>5, 'teclado', 'español Biswal', 90, 50</em>.</li>
+</ul></li>
+<li>Seleccione los datos de las impresoras (<em>2 registros</em>)</li>
+<li>Seleccione los artículos cuyo precio sea mayor o igual a 400 (<em>3 registros</em>)</li>
+<li>Seleccione el código y nombre de los artículos cuya cantidad sea menor a 30 (<em>2 registros</em>)</li>
+<li><p>Selecciones el nombre y descripción de los artículos que NO cuesten $100 (<em>4 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 11
+******************************************************************************/
+
+DROP TABLE IF EXISTS articulos;
+
+CREATE TABLE articulos (
+    codigo INTEGER,
+    nombre VARCHAR(20),
+    descripcion VARCHAR(30),
+    precio FLOAT,
+    cantidad INTEGER
+);
+INSERT INTO articulos (codigo, nombre, descripcion, precio,cantidad)
+    VALUES  (1,&#39;impresora&#39;,&#39;Epson Stylus C45&#39;,400.80,20),
+        (2,&#39;impresora&#39;,&#39;Epson Stylus C85&#39;,500,30),
+        (3,&#39;monitor&#39;,&#39;Samsung 14&#39;,800,10),
+        (4,&#39;teclado&#39;,&#39;ingles Biswal&#39;,100,50),
+        (5,&#39;teclado&#39;,&#39;espaniol Biswal&#39;,90,50);
+        
+SELECT * FROM articulos
+    WHERE nombre=&#39;impresora&#39;;
+    
+SELECT * FROM articulos
+    WHERE precio &lt;&gt;400;
+    
+SELECT codigo,nombre
+    FROM articulos
+    WHERE cantidad &lt; 30;
+    
+SELECT nombre, descripcion
+    FROM articulos
+    WHERE precio &lt;&gt; 100;
+</code></pre>
+
+</body>
+</html>
+

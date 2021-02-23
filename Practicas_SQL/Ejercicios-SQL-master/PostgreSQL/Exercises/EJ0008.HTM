@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-8">Ejercicio 8</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla llamada &quot;empleados&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>documento</strong>, <em>varchar(8)</em>.</li>
+<li><strong>sexo</strong>, <em>varchar(1)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>sueldobasico</strong>, <em>float</em>.</li>
+</ul></li>
+<li>Vea la estructura de la tabla</li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Juárez', '22333444', 'm', 'Sarmiento 123', 500</em>.</li>
+<li><em>'Ana Acosta', '27888999', 'f', 'Colon 134', 700</em>.</li>
+<li><em>'Carlos Caseres', '31222333', 'm', 'Urquiza 479', 850</em>.</li>
+</ul></li>
+<li>Muestre todos los datos de los empleados.</li>
+<li>Muestre el nombre, documento y domicilio de los empleados.</li>
+<li><p>Muestre el documento, sexo y sueldo básico de todos los empleados.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 8
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(20),
+    documento VARCHAR(8), 
+    sexo VARCHAR(1),
+    domicilio VARCHAR(30),
+    sueldobasico FLOAT
+);
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;empleados&#39;;
+    
+INSERT INTO empleados (nombre, documento, sexo, domicilio, sueldobasico)
+    VALUES  (&#39;Juan Juarez&#39;,&#39;22333444&#39;,&#39;m&#39;,&#39;Sarmiento 123&#39;,500),
+        (&#39;Ana Acosta&#39;,&#39;27888999&#39;,&#39;f&#39;,&#39;Colon 134&#39;,700),
+        (&#39;Carlos Caseres&#39;,&#39;31222333&#39;,&#39;m&#39;,&#39;Urquiza 479&#39;,850);
+        
+SELECT * FROM empleados;
+SELECT nombre,documento,domicilio FROM empleados;
+SELECT documento,sexo,sueldobasico FROM empleados;
+</code></pre>
+
+</body>
+</html>
+

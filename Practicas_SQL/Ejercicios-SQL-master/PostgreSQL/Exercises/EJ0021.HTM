@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-21">Ejercicio 21</h2>
+<p>Una farmacia guarda información referente a sus medicamentos en una tabla<br />llamada &quot;medicamentos&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+<li><strong>cantidad</strong>, <em>integer</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;medicamentos&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 100</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 200</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100</em>.</li>
+</ul></li>
+<li><p>Verifique que el campo &quot;código&quot; generó los valores de modo automático.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 21
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio FLOAT,
+    cantidad INTEGER,
+    PRIMARY KEY (codigo)
+);
+SELECT table_name,column_name,udt_name,character_maximum_length,is_NULLable 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;medicamentos&#39;;
+    
+INSERT INTO medicamentos (nombre, laboratorio,precio,cantidad)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,100),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,200),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100);
+SELECT * FROM medicamentos;
+</code></pre>
+
+</body>
+</html>
+

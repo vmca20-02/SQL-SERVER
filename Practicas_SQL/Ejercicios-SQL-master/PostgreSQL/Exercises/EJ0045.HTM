@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-45">Ejercicio 45</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla &quot;empleados&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>seccion</strong>, <em>varchar(20)</em>.</li>
+<li><strong>sueldo</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>cantidadhijos</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Pérez', '22333444', 'Colon 123', 'Gerencia', 5000, 2</em>.</li>
+<li><em>'Ana Acosta', '23444555', 'Caseros 987', 'Secretaria', 2000, 0</em>.</li>
+<li><em>'Lucas Duarte', '25666777', 'Sucre 235', 'Sistemas', 4000, 1</em>.</li>
+<li><em>'Pamela González', '26777888', 'Sarmiento 873', 'Secretaria', 2200, 3</em>.</li>
+<li><em>'Marcos Juárez', '30000111', 'Rivadavia 801', 'Contaduría', 3000, 0</em>.</li>
+<li><em>'Yolanda Pérez', '35111222', 'Colon 180', 'Administración', 3200, 1</em>.</li>
+<li><em>'Rodolfo Pérez', '35555888', 'Coronel Olmedo 588', 'Sistemas', 4000, 3</em>.</li>
+<li><em>'Martina Rodríguez', '30141414', 'Sarmiento 1234', 'Administración', 3800, 4</em>.</li>
+<li><em>'Andrés Costa', '28444555', default, 'Secretaria', null, null</em>.</li>
+</ul></li>
+<li>Muestre la cantidad de empleados usando &quot;count&quot; (<em>9 empleados</em>)</li>
+<li>Muestre la cantidad de empleados con sueldo no nulo de la sección &quot;Secretaria&quot; (<em>2 empleados</em>)</li>
+<li>Muestre el sueldo más alto y el más bajo colocando un alias (<em>5000 y 2000</em>)</li>
+<li>Muestre el valor mayor de &quot;cantidadhijos&quot; de los empleados &quot;Pérez&quot; (<em>3 hijos</em>)</li>
+<li>Muestre el promedio de sueldos de todo los empleados (<em>3400. Note que hay un sueldo nulo y no es<br />tenido en cuenta</em>)</li>
+<li>Muestre el promedio de sueldos de los empleados de la sección &quot;Secretaría&quot; (2100)</li>
+<li><p>Muestre el promedio de hijos de todos los empleados de &quot;Sistemas&quot; (2)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 45
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    domicilio VARCHAR(30),
+    seccion VARCHAR(20),
+    sueldo DECIMAL(6,2),
+    cantidadhijos SMALLINT,
+    PRIMARY KEY(documento)
+);
+
+INSERT INTO empleados
+    VALUES  (&#39;Juan Perez&#39;,&#39;22333444&#39;,&#39;Colon 123&#39;,&#39;Gerencia&#39;,5000,2),
+        (&#39;Ana Acosta&#39;,&#39;23444555&#39;,&#39;Caseros 987&#39;,&#39;Secretaria&#39;,2000,0),
+        (&#39;Lucas Duarte&#39;,&#39;25666777&#39;,&#39;Sucre 235&#39;,&#39;Sistemas&#39;,4000,1),
+        (&#39;Pamela Gonzalez&#39;,&#39;26777888&#39;,&#39;Sarmiento 873&#39;,&#39;Secretaria&#39;,2200,3),
+        (&#39;Marcos Juarez&#39;,&#39;30000111&#39;,&#39;Rivadavia 801&#39;,&#39;Contaduria&#39;,3000,0),
+        (&#39;Yolanda Perez&#39;,&#39;35111222&#39;,&#39;Colon 180&#39;,&#39;AdMINistracion&#39;,3200,1),
+        (&#39;Rodolfo Perez&#39;,&#39;35555888&#39;,&#39;Coronel Olmedo 588&#39;,&#39;Sistemas&#39;,4000,3),
+        (&#39;Martina Rodriguez&#39;,&#39;30141414&#39;,&#39;Sarmiento 1234&#39;,&#39;AdMINistracion&#39;,3800,4),
+        (&#39;Andres Costa&#39;,&#39;28444555&#39;,DEFAULT,&#39;Secretaria&#39;,NULL,NULL);
+        
+SELECT COUNT(*)
+    FROM empleados;
+    
+SELECT COUNT(sueldo)
+    FROM empleados
+    WHERE seccion=&#39;Secretaria&#39;;
+    
+SELECT MAX(sueldo) AS Mayorsueldo,
+    MIN(sueldo) AS Menorsueldo
+    FROM empleados;
+    
+SELECT MAX(cantidadhijos)
+    FROM empleados
+    WHERE nombre like &#39;%Perez%&#39;;
+    
+SELECT AVG(sueldo)
+    FROM empleados;
+    
+SELECT AVG(sueldo)
+    FROM empleados
+    WHERE seccion=&#39;Secretaria&#39;;
+    
+SELECT AVG(cantidadhijos)
+    FROM empleados
+    WHERE seccion=&#39;Sistemas&#39;;
+</code></pre>
+
+</body>
+</html>
+

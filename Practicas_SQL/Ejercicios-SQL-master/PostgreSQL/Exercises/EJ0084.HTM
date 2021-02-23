@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-84">Ejercicio 84</h2>
+<p>Un club dicta clases de distintos deportes a sus socios. El club tiene una tabla llamada &quot;inscritos&quot; en la cual almacena el número de &quot;socio&quot;, el código del deporte en el cual se inscribe y si la matricula está o no paga, y una tabla denominada &quot;socios&quot; en la que guarda los datos personales de cada socio.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>socios</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+<li><p>inscritos</p>
+<ul>
+<li><strong>numerosocio</strong>, <em>int</em>. not null</li>
+<li><strong>deporte</strong>, <em>varchar(20)</em>. not null</li>
+<li><strong>matricula</strong>, <em>char(1)</em>., -- 'n' o 's'</li>
+<li><strong>primary key</strong>, *(numerosocio., deporte)</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros:</li>
+<li>Actualizamos la cuota (<em>'s'</em>) de todas las inscripciones de un socio determinado (<em>por documento</em>) empleando subconsulta.</li>
+<li><p>Elimine todas las inscripciones de los socios que deben alguna matrícula (<em>5 registros eliminados</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 84
+******************************************************************************/
+
+DROP TABLE IF EXISTS socios;
+
+CREATE TABLE socios (
+    numero SERIAL,
+    documento CHAR(8),
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY (numero)
+);
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    numerosocio INT NOT NULL,
+    deporte VARCHAR(20) NOT NULL,
+    matricula CHAR(1),-- &#39;n&#39; o &#39;s&#39;
+    PRIMARY KEY(numerosocio,deporte)
+);
+
+INSERT INTO socios(documento,nombre,domicilio) 
+    VALUES  (&#39;23333333&#39;,&#39;Alberto Paredes&#39;,&#39;Colon 111&#39;),
+        (&#39;24444444&#39;,&#39;Carlos Conte&#39;,&#39;Sarmiento 755&#39;),
+        (&#39;25555555&#39;,&#39;Fabian Fuentes&#39;,&#39;Caseros 987&#39;),
+        (&#39;26666666&#39;,&#39;Hector Lopez&#39;,&#39;Sucre 344&#39;);
+        
+INSERT INTO inscritos 
+    VALUES  (1,&#39;tenis&#39;,&#39;s&#39;),
+        (1,&#39;basquet&#39;,&#39;s&#39;),
+        (1,&#39;natacion&#39;,&#39;s&#39;),
+        (2,&#39;tenis&#39;,&#39;s&#39;),
+        (2,&#39;natacion&#39;,&#39;s&#39;),
+        (2,&#39;basquet&#39;,&#39;n&#39;),
+        (2,&#39;futbol&#39;,&#39;n&#39;),
+        (3,&#39;tenis&#39;,&#39;s&#39;),
+        (3,&#39;basquet&#39;,&#39;s&#39;),
+        (3,&#39;natacion&#39;,&#39;n&#39;),
+        (4,&#39;basquet&#39;,&#39;n&#39;);
+        
+UPDATE inscritos SET matricula=&#39;s&#39;
+    WHERE numerosocio=
+    (SELECT numero
+         FROM socios
+         WHERE documento=&#39;25555555&#39;);
+         
+DELETE FROM inscritos
+    WHERE numerosocio in
+    (SELECT numero
+        FROM socios AS s
+        JOIN inscritos
+        ON numerosocio=numero
+        WHERE matricula=&#39;n&#39;);
+</code></pre>
+
+</body>
+</html>
+

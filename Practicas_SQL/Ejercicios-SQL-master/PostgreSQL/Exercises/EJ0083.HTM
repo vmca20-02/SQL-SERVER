@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-83">Ejercicio 83</h2>
+<p>Un club dicta clases de distintos deportes. En una tabla llamada &quot;socios&quot; guarda los datos de los socios, en una tabla llamada &quot;deportes&quot; la información referente a los diferentes deportes que se dictan y en una tabla denominada &quot;inscritos&quot;, las inscripciones de los socios a los distintos deportes.</p>
+<p>Un socio puede inscribirse en varios deportes el mismo año. Un socio no puede inscribirse en el mismo deporte el mismo año. Distintos socios se inscriben en un mismo deporte en el mismo año.</p>
+<ol>
+<li><p>Cree las tablas con las siguientes estructuras:</p>
+<ul>
+<li><p>socios</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null,</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>deportes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>profesor</strong>, <em>varchar(15)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>inscritos</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null,</li>
+<li><strong>codigodeporte</strong>, <em>smallint</em>. not null</li>
+<li><strong>año</strong> <em>char(4)</em></li>
+<li><em><strong>matricula</strong>, </em>char(1)<em>., --'s'=paga, 'n'=impaga</em>.</li>
+<li><em><strong>primary key</strong>, </em>(documento., codigodeporte, año)*.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros en las 3 tablas:</li>
+<li>Realice una consulta en la cual muestre todos los datos de las inscripciones, incluyendo el nombre del deporte y del profesor. Esta consulta es un join.</li>
+<li><p>Utilice el resultado de la consulta anterior como una tabla derivada para emplear en lugar de una tabla para realizar un &quot;join&quot; y recuperar el nombre del socio, el deporte en el cual está inscripto, el año, el nombre del profesor y la matrícula.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 83
+******************************************************************************/
+
+DROP TABLE IF EXISTS socios;
+
+CREATE TABLE socios (
+    documento CHAR(8) NOT NULL, 
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(documento)
+);
+
+DROP TABLE IF EXISTS deportes;
+
+CREATE TABLE deportes (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    profesor VARCHAR(15),
+    PRIMARY KEY(codigo)
+);
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    documento CHAR(8) NOT NULL, 
+    codigodeporte SMALLINT NOT NULL,
+    anio CHAR(4),
+    matricula CHAR(1),--&#39;s&#39;=paga, &#39;n&#39;=impaga
+    PRIMARY KEY(documento,codigodeporte,anio)
+);
+
+INSERT INTO socios 
+    VALUES  (&#39;22222222&#39;,&#39;Ana Acosta&#39;,&#39;Avellaneda 111&#39;),
+        (&#39;23333333&#39;,&#39;Betina Bustos&#39;,&#39;Bulnes 222&#39;),
+        (&#39;24444444&#39;,&#39;Carlos Castro&#39;,&#39;Caseros 333&#39;),
+        (&#39;25555555&#39;,&#39;Daniel Duarte&#39;,&#39;Dinamarca 44&#39;);
+
+INSERT INTO deportes(nombre,profesor) 
+    VALUES  (&#39;basquet&#39;,&#39;Juan Juarez&#39;),
+        (&#39;futbol&#39;,&#39;Pedro Perez&#39;),
+        (&#39;natacion&#39;,&#39;Marina Morales&#39;),
+        (&#39;tenis&#39;,&#39;Marina Morales&#39;);
+
+INSERT INTO inscritos 
+    VALUES  (&#39;22222222&#39;,3,&#39;2006&#39;,&#39;s&#39;),
+        (&#39;23333333&#39;,3,&#39;2006&#39;,&#39;s&#39;),
+        (&#39;24444444&#39;,3,&#39;2006&#39;,&#39;n&#39;),
+        (&#39;22222222&#39;,3,&#39;2005&#39;,&#39;s&#39;),
+        (&#39;22222222&#39;,3,&#39;2007&#39;,&#39;n&#39;),
+        (&#39;24444444&#39;,1,&#39;2006&#39;,&#39;s&#39;),
+        (&#39;24444444&#39;,2,&#39;2006&#39;,&#39;s&#39;);
+
+SELECT i.documento,i.codigodeporte,d.nombre AS deporte, anio, matricula, d.profesor     
+    FROM deportes AS d
+    JOIN inscritos AS i
+    ON d.codigo=i.codigodeporte;
+
+SELECT s.nombre,td.deporte,td.profesor,td.anio,td.matricula
+    FROM socios AS s
+    JOIN (SELECT i.documento,i.codigodeporte,d.nombre AS deporte, anio, matricula, d.profesor   
+    FROM deportes AS d
+    JOIN inscritos AS i
+    ON d.codigo=i.codigodeporte) AS td
+    ON td.documento=s.documento;
+</code></pre>
+
+</body>
+</html>
+

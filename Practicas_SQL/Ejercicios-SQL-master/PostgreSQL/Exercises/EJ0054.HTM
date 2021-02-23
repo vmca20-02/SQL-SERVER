@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-54">Ejercicio 54</h2>
+<p>Una empresa tiene registrados datos de sus empleados en una tabla llamada &quot;empleados&quot;.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>documento</strong>, <em>varchar(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>fechanacimiento</strong>, <em>date</em>.</li>
+<li><strong>cantidadhijos</strong>, <em>smallint</em>.</li>
+<li><strong>seccion</strong>, <em>varchar(20)</em>.</li>
+<li><strong>sueldo</strong>, <em>decimal(6,2)</em>.</li>
+</ul></li>
+<li>Agregue una restricción &quot;check&quot; para asegurarse que no se ingresen valores negativos para el sueldo.</li>
+<li><p>Ingrese algunos registros válidos:</p>
+<ul>
+<li><em>'22222222','Alberto Lopez','1965/10/05',1,'Sistemas',1000</em>.</li>
+<li><em>'33333333','Beatriz Garcia','1972/08/15',2,'Administracion',3000</em>.</li>
+<li><em>'34444444','Carlos Caseres','1980/10/05',0,'Contaduría',6000</em>.</li>
+</ul></li>
+<li>Intente agregar otra restricción &quot;check&quot; al campo sueldo para asegurar que ninguno supere el valor 5000 (<em>La sentencia no se ejecuta porque hay un sueldo que no cumple la restricción</em>).</li>
+<li>Elimine el registro infractor y vuelva a crear la restricción.</li>
+<li>Establezca una restricción para controlar que la fecha de nacimiento que se ingresa no supere la fecha actual.</li>
+<li>Establezca una restricción &quot;check&quot; para &quot;cantidadhijos&quot; que permita solamente valores entre 0 y 15.</li>
+<li>Vea todas las restricciones de la tabla (5 filas)</li>
+<li>Intente agregar un registro que vaya contra alguna de las restricciones al campo &quot;sueldo&quot; (<em>Mensaje de error porque se infringe la restricción &quot;CK_empleados_sueldo_positivo&quot;.</em>).</li>
+<li>Intente agregar un registro con fecha de nacimiento futura (<em>Mensaje de error</em>).</li>
+<li><p>Intente modificar un registro colocando en &quot;cantidadhijos&quot; el valor &quot;21&quot;. (<em>Mensaje de error</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 54
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    documento VARCHAR(8),
+    nombre VARCHAR(30),
+    fechanacimiento DATE,
+    cantidadhijos SMALLINT,
+    seccion VARCHAR(20),
+    sueldo DECIMAL(6,2)
+);
+
+ALTER TABLE empleados
+    ADD CONSTRAINT CK_empelados_sueldo_positivo
+    CHECK (sueldo &gt; 0);
+    
+INSERT INTO empleados 
+    VALUES  (&#39;22222222&#39;,&#39;Alberto Lopez&#39;,&#39;1965/10/05&#39;,1,&#39;Sistemas&#39;,1000),
+        (&#39;33333333&#39;,&#39;Beatriz Garcia&#39;,&#39;1972/08/15&#39;,2,&#39;AdMINistracion&#39;,3000),
+        (&#39;34444444&#39;,&#39;Carlos Caseres&#39;,&#39;1980/10/05&#39;,0,&#39;Contadur&amp;iacute;a&#39;,6000);
+        
+ALTER TABLE empleados
+    ADD CONSTRAINT CK_empleados_sueldo_maximo
+    CHECK (sueldo &lt;&gt;5000);
+    
+DELETE FROM empleados WHERE sueldo=6000;
+
+ALTER TABLE empleados
+    ADD CONSTRAINT CK_empleados_sueldo_maximo
+    CHECK (sueldo &lt;&gt;5000); 
+    
+ALTER TABLE empleados
+    ADD CONSTRAINT CK_fechanacimiento_actual
+    CHECK (fechanacimiento &lt; CURRENT_DATE);
+    
+ALTER TABLE empleados
+    ADD CONSTRAINT CK_cantidadhijos_valores
+    CHECK (cantidadhijos BETWEEN 0 AND 15);
+    
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;empleados&#39;;
+    
+INSERT INTO empleados
+    VALUES  (&#39;24444444&#39;,&#39;Carlos Fuentes&#39;,&#39;1980/02/05&#39;,2,&#39;AdMINistracion&#39;,-1500);
+    
+INSERT INTO empleados
+    VALUES  (&#39;25555555&#39;,&#39;Daniel Garcia&#39;,&#39;2007/05/05&#39;,2,&#39;Sistemas&#39;,1550);
+    
+UPDATE empleados SET cantidadhijos=21 WHERE documento=&#39;22222222&#39;;
+</code></pre>
+
+</body>
+</html>
+

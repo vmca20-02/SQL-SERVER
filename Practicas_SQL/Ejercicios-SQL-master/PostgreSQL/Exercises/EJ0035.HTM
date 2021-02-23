@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-35">Ejercicio 35</h2>
+<p>Una facultad almacena los datos de sus alumnos en una tabla denominada &quot;alumnos&quot;.</p>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para cada campo:</p>
+<ul>
+<li><strong>apellido</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>fechaingreso</strong>, <em>date</em>.</li>
+<li><strong>fechanacimiento</strong>, <em>date</em>.</li>
+</ul></li>
+<li>Setee el formato para entrada de datos de tipo fecha para que acepte valores &quot;día-mes-año&quot;</li>
+<li>Ingrese un alumno empleando distintos separadores para las fechas</li>
+<li>Ingrese otro alumno empleando solamente un dígito para día y mes y 2 para el año</li>
+<li>Ingrese un alumno empleando 2 dígitos para el año de la fecha de ingreso y &quot;null&quot; en &quot;fechanacimiento&quot;</li>
+<li>Muestre todos los alumnos que ingresaron antes del '1-1-91'.</li>
+<li>Muestre todos los alumnos que tienen &quot;null&quot; en &quot;fechanacimiento&quot;.</li>
+<li><p>Muestre el año de nacimiento de todos los alumnos.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 35
+******************************************************************************/
+
+DROP TABLE IF EXISTS alumnos;
+
+CREATE TABLE alumnos (
+    apellido VARCHAR(30),
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    domicilio VARCHAR(30),
+    fechaingreso DATE,
+    fechanacimiento DATE
+);
+
+SET DATESTYLE to &#39;European&#39;;
+
+INSERT INTO alumnos 
+    VALUES  (&#39;Gonzalez&#39;,&#39;Ana&#39;,&#39;22222222&#39;,&#39;Colon 123&#39;,&#39;10-08-1990&#39;,&#39;15/02/1972&#39;),
+        (&#39;Juarez&#39;,&#39;Bernardo&#39;,&#39;25555555&#39;,&#39;Sucre 456&#39;,&#39;03-03-1991&#39;,&#39;15/02/1972&#39;),
+        (&#39;Perez&#39;,&#39;Laura&#39;,&#39;26666666&#39;,&#39;Bulnes 345&#39;,&#39;03-03-91&#39;,NULL);
+        
+SELECT * FROM alumnos 
+    WHERE fechanacimiento is NULL;
+
+SELECT apellido,nombre,EXTRACT(year FROM fechanacimiento) 
+    FROM alumnos;
+</code></pre>
+
+</body>
+</html>
+

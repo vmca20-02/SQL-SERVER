@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-61">Ejercicio 61</h2>
+<p>Trabaje con la tabla &quot;agenda&quot; que registra la información referente a sus amigos.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>apellido</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>. not null</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+<li><strong>mail</strong>, <em>varchar(30)</em>.</li>
+</ul></li>
+<li>Ingrese 5 registros.</li>
+<li>Realice una consulta limitando la salida a sólo 3 registros.</li>
+<li>Muestre los registros desde el 2 al 4.</li>
+<li><p>Muestre 4 registros a partir del 2 ordenado por apellido.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 61
+******************************************************************************/
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20) NOT NULL,
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11),
+    mail VARCHAR(30)
+);
+
+INSERT INTO agenda(apellido,nombre,domicilio,telefono,mail) 
+    VALUES  (&#39;Martinez&#39;,&#39;Pablo&#39;,&#39;Colon 233&#39;,&#39;236712&#39;,&#39;mpablo@gmail.com&#39;),
+        (&#39;Rodriguez&#39;,&#39;Luis&#39;,&#39;Dean Funes 345&#39;,&#39;451111&#39;,&#39;rluis@yahoo.com.ar&#39;),
+        (&#39;Lopez&#39;,&#39;Ana&#39;,&#39;Peron 344&#39;,&#39;349696&#39;,&#39;alopez@hotmail.com&#39;),
+        (&#39;Cosario&#39;,&#39;Carla&#39;,&#39;Leones 334&#39;,&#39;349595&#39;,&#39;ccorsario@gmail.com&#39;),
+        (&#39;Revol&#39;,&#39;Carlos&#39;,&#39;Lima 333&#39;,&#39;6712343&#39;,&#39;crevol@gmail.com&#39;);
+
+SELECT * FROM agenda LIMIT 3;
+
+SELECT * FROM agenda LIMIT 3 OFFSET 2;
+
+SELECT * FROM agenda ORDER BY apellido LIMIT 4 OFFSET 2;
+</code></pre>
+
+</body>
+</html>
+

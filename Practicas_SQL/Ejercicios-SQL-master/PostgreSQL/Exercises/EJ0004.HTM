@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-4">Ejercicio 4</h2>
+<p>Trabaje con la tabla &quot;libros&quot; que almacena los datos de los libros de su propia biblioteca.</p>
+<ol>
+<li><p>Cree una tabla llamada <strong>libros</strong> que tenga la siguiente estructura:</p>
+<ul>
+<li><strong>titulo</strong>, <em>cadena de 20</em>.</li>
+<li><strong>autor</strong>, <em>cadena de 30</em>.</li>
+<li><strong>editorial</strong>, <em>cadena de 15</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;libros&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'El aleph', 'Borges', 'Planeta'</em>.</li>
+<li><em>'Martin Fierro', 'José Hernández', 'Emece'</em>.</li>
+<li><em>'Aprenda PHP', 'Mario Molina', 'Emece'</em>.</li>
+</ul></li>
+<li><p>Muestre todos los registros.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 4
+******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros (
+    titulo VARCHAR(20),
+    autor VARCHAR(30),
+    editorial VARCHAR(15)
+);
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;agenda&#39;;
+
+INSERT INTO libros (titulo,autor,editorial)
+    VALUES  (&#39;El aleph&#39;,&#39;Borges&#39;,&#39;Planeta&#39;),
+        (&#39;Martin Fierro&#39;,&#39;Jose Hernandez&#39;,&#39;Emece&#39;),
+        (&#39;Aprenda PHP&#39;,&#39;Mario Molina&#39;,&#39;Emece&#39;);
+
+SELECT * FROM libros;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-9">Ejercicio 9</h2>
+<p>Trabaje con la tabla &quot;agenda&quot; en la que registra los datos de sus amigos.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>apellido</strong>, <em>cadena de 30</em>.</li>
+<li><strong>nombre</strong>, <em>cadena de 20</em>.</li>
+<li><strong>domicilio</strong>, <em>cadena de 30</em>.</li>
+<li><strong>telefono</strong>, <em>cadena de 11</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;agenda&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>Acosta, Ana, Colon 123, 4234567</em>.</li>
+<li><em>Bustamante, Betina, Avellaneda 135, 4458787</em>.</li>
+<li><em>López, Héctor, Salta 545, 4887788</em>.</li>
+<li><em>López, Luis, Urquiza 333, 4545454</em>.</li>
+<li><em>López, Marisa, Urquiza 333, 4545454.</em>.</li>
+</ul></li>
+<li>Seleccione todos los registros de la tabla</li>
+<li>Seleccione el registro cuyo nombre sea &quot;Marisa&quot; (<em>1 registro</em>)</li>
+<li>Seleccione los nombres y domicilios de quienes tengan apellido igual a &quot;López&quot; (<em>3 registros</em>)</li>
+<li><p>Muestre el nombre de quienes tengan el teléfono &quot;4545454&quot; (<em>2 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 9
+******************************************************************************/
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11)
+);
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;agenda&#39;;
+INSERT INTO agenda(apellido,nombre,domicilio,telefono) 
+    VALUES  (&#39;Acosta&#39;, &#39;Ana&#39;, &#39;Colon 123&#39;, &#39;4234567&#39;),
+        (&#39;Bustamante&#39;, &#39;Betina&#39;, &#39;Avellaneda 135&#39;, &#39;4458787&#39;),
+        (&#39;Lopez&#39;, &#39;Hector&#39;, &#39;Salta 545&#39;, &#39;4887788&#39;), 
+        (&#39;Lopez&#39;, &#39;Luis&#39;, &#39;Urquiza 333&#39;, &#39;4545454&#39;),
+        (&#39;Lopez&#39;, &#39;Marisa&#39;, &#39;Urquiza 333&#39;, &#39;4545454&#39;);
+        
+SELECT * FROM agenda;
+
+SELECT * FROM agenda
+    WHERE nombre=&#39;Marisa&#39;;
+    
+SELECT nombre,domicilio FROM agenda
+    WHERE apellido=&#39;Lopez&#39;;
+    
+SELECT nombre FROM agenda
+    WHERE telefono=&#39;4545454&#39;;
+</code></pre>
+
+</body>
+</html>
+

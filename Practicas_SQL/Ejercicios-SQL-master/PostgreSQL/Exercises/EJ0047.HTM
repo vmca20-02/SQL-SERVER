@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-47">Ejercicio 47</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla &quot;empleados&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>seccion</strong>, <em>varchar(20)</em>.</li>
+<li><strong>sueldo</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>cantidadhijos</strong>, <em>smallint</em>.</li>
+<li><strong>fechaingreso</strong>, <em>date</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Pérez', '22333444', 'Colon 123', 'Gerencia', 5000, 2, '1980-05-10'</em>.</li>
+<li><em>'Ana Acosta', '23444555', 'Caseros 987', 'Secretaria', 2000, 0, '1980-10-12'</em>.</li>
+<li><em>'Lucas Duarte', '25666777', 'Sucre 235', 'Sistemas', 4000, 1, '1985-05-25'</em>.</li>
+<li><em>'Pamela González', '26777888', 'Sarmiento 873', 'Secretaria', 2200, 3, '1990-06-25'</em>.</li>
+<li><em>'Marcos Juárez', '30000111', 'Rivadavia 801', 'Contaduría', 3000, 0, '1996-05-01'</em>.</li>
+<li><em>'Yolanda Pérez', '35111222', 'Colon 180', 'Administración', 3200, 1, '1996-05-01'</em>.</li>
+<li><em>'Rodolfo Pérez', '35555888', 'Coronel Olmedo 588', 'Sistemas', 4000, 3, '1996-05-01'</em>.</li>
+<li><em>'Martina Rodríguez', '30141414', 'Sarmiento 1234', 'Administración', 3800, 4, '2000-09-01'</em>.</li>
+<li><em>'Andrés Costa', '28444555', default, 'Secretaria', null, null, null</em>.</li>
+</ul></li>
+<li>Cuente la cantidad de empleados agrupados por sección (<em>5 filas</em>)</li>
+<li>Calcule el promedio de hijos por sección (<em>5 filas</em>)</li>
+<li>Cuente la cantidad de empleados agrupados por año de ingreso (<em>6 filas</em>)</li>
+<li><p>Calcule el promedio de sueldo por sección de los empleados con hijos (<em>4 filas</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 47
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    domicilio VARCHAR(30),
+    seccion VARCHAR(20),
+    sueldo DECIMAL(6,2),
+    cantidadhijos SMALLINT,
+    fechaingreso DATE,
+    PRIMARY KEY(documento)
+);
+
+INSERT INTO empleados
+    VALUES  (&#39;Juan Perez&#39;,&#39;22333444&#39;,&#39;Colon 123&#39;,&#39;Gerencia&#39;,5000,2,&#39;1980-05-10&#39;),
+        (&#39;Ana Acosta&#39;,&#39;23444555&#39;,&#39;Caseros 987&#39;,&#39;Secretaria&#39;,2000,0,&#39;1980-10-12&#39;),
+        (&#39;Lucas Duarte&#39;,&#39;25666777&#39;,&#39;Sucre 235&#39;,&#39;Sistemas&#39;,4000,1,&#39;1985-05-25&#39;),
+        (&#39;Pamela Gonzalez&#39;,&#39;26777888&#39;,&#39;Sarmiento 873&#39;,&#39;Secretaria&#39;,2200,3,&#39;1990-06-25&#39;),
+        (&#39;Marcos Juarez&#39;,&#39;30000111&#39;,&#39;Rivadavia 801&#39;,&#39;Contaduria&#39;,3000,0,&#39;1996-05-01&#39;),
+        (&#39;Yolanda Perez&#39;,&#39;35111222&#39;,&#39;Colon 180&#39;,&#39;AdMINistracion&#39;,3200,1,&#39;1996-05-01&#39;),
+        (&#39;Rodolfo Perez&#39;,&#39;35555888&#39;,&#39;Coronel Olmedo 588&#39;,&#39;Sistemas&#39;,4000,3,&#39;1996-05-01&#39;),
+        (&#39;Martina Rodriguez&#39;,&#39;30141414&#39;,&#39;Sarmiento 1234&#39;,&#39;AdMINistracion&#39;,3800,4,&#39;2000-09-01&#39;),
+        (&#39;Andres Costa&#39;,&#39;28444555&#39;,DEFAULT,&#39;Secretaria&#39;,NULL,NULL,NULL);
+        
+SELECT seccion, COUNT(*)
+    FROM empleados
+    GROUP BY seccion;
+    
+SELECT seccion, AVG(cantidadhijos) AS promediodehijos
+    FROM empleados
+    GROUP BY seccion;
+    
+SELECT EXTRACT(year FROM fechaingreso), COUNT(*)
+    FROM empleados
+    GROUP BY EXTRACT(year FROM fechaingreso);
+    
+SELECT seccion, AVG(sueldo) AS promediodesueldo
+    FROM empleados
+    WHERE cantidadhijos &gt; 0 AND cantidadhijos is NOT NULL
+    GROUP BY seccion;
+</code></pre>
+
+</body>
+</html>
+

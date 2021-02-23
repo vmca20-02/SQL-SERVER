@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-37">Ejercicio 37</h2>
+<p>Trabaje con la tabla llamada &quot;medicamentos&quot; de una farmacia.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(5</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 100</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 200</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100</em>.</li>
+<li><em>'Paracetamol 500', 'Bago'</em>.<br />1.90, 200</li>
+<li><em>'Bayaspirina', 'Bayer', 2.10, 150); </em>.</li>
+<li><em>'Amoxidal jarabe', 'Bayer', 5.10, 250); </em>.</li>
+</ul></li>
+<li>Recupere los códigos y nombres de los medicamentos cuyo laboratorio sea 'Roche' y cuyo precio sea<br />menor a 5 (<em>1 registro cumple con ambas condiciones</em>)</li>
+<li>Recupere los medicamentos cuyo laboratorio sea 'Roche' o cuyo precio sea menor a 5 (<em>4 registros</em>)<br />Note que el resultado es diferente al del punto 4, hemos cambiado el operador de la sentencia<br />anterior.</li>
+<li>Muestre todos los medicamentos cuyo laboratorio NO sea &quot;Bayer&quot; y cuya cantidad sea=100 (<em>1<br />registro</em>)</li>
+<li>Muestre todos los medicamentos cuyo laboratorio sea &quot;Bayer&quot; y cuya cantidad NO sea=100 (<em>2 registros</em>)<br />Analice estas 2 últimas sentencias. El operador &quot;not&quot; afecta a la condición a la cual antecede, no a<br />las siguientes. Los resultados de los puntos 6 y 7 son diferentes.</li>
+<li>Elimine todos los registros cuyo laboratorio sea igual a &quot;Bayer&quot; y su precio sea mayor a 10 (<em>1<br />registro eliminado</em>)</li>
+<li>Cambie la cantidad por 200, a todos los medicamentos de &quot;Roche&quot; cuyo precio sea mayor a 5 (<em>1<br />registro afectado</em>)</li>
+<li><p>Borre los medicamentos cuyo laboratorio sea &quot;Bayer&quot; o cuyo precio sea menor a 3 (<em>3 registros<br />borrados</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 37
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio DECIMAL(5,2),
+    cantidad SMALLINT,
+    PRIMARY KEY(codigo)
+);
+INSERT INTO medicamentos (nombre,laboratorio,precio,cantidad)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,100),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,200),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100),
+        (&#39;Paracetamol 500&#39;,&#39;Bago&#39;,1.90,200),
+        (&#39;Bayaspirina&#39;,&#39;Bayer&#39;,2.10,150); 
+
+INSERT INTO medicamentos (nombre,laboratorio,precio,cantidad)
+    VALUES  (&#39;Amoxidal jarabe&#39;,&#39;Bayer&#39;,5.10,250); 
+
+SELECT codigo,nombre
+    FROM medicamentos
+    WHERE laboratorio=&#39;Roche&#39; AND precio &lt; 5;
+
+SELECT * FROM medicamentos
+    WHERE laboratorio=&#39;Roche&#39; OR precio &lt; 5;
+
+SELECT * FROM medicamentos
+    WHERE NOT laboratorio=&#39;Bayer&#39; AND cantidad=100;
+    
+SELECT * FROM medicamentos
+    WHERE laboratorio=&#39;Bayer&#39; AND NOT cantidad=100;
+    
+DELETE FROM medicamentos
+    WHERE laboratorio=&#39;Bayer&#39; AND precio &gt; 10;
+    
+UPDATE medicamentos SET cantidad=200
+    WHERE laboratorio=&#39;Roche&#39; AND precio &gt; 5;
+    
+DELETE FROM medicamentos
+    WHERE laboratorio=&#39;Bayer&#39; OR precio &lt; 3;
+</code></pre>
+
+</body>
+</html>
+

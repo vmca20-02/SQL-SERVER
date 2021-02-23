@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-74">Ejercicio 74</h2>
+<p>Una empresa registra los datos de sus clientes en una tabla llamada &quot;clientes&quot;. Dicha tabla contiene un campo<br />que hace referencia al cliente que lo recomendó denominado &quot;referenciadopor&quot;. Si un cliente<br />no ha sido referenciado por ningún otro cliente, tal campo almacena &quot;null&quot;.</p>
+<ol>
+<li><p>Creemos la tabla:</p>
+<ul>
+<li><strong>codigo</strong>, <em>int</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>referenciadopor</strong>, <em>int</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li>Ingresamos algunos registros.</li>
+<li>Intente agregar una restricción &quot;foreign key&quot; para evitar que en el campo &quot;referenciadopor&quot; se ingrese un valor de código de cliente que no exista.<br />No se permite porque existe un registro que no cumple con la restricción que se intenta establecer.</li>
+<li>Cambie el valor inválido de &quot;referenciadopor&quot; del registro que viola la restricción por uno válido.</li>
+<li>Agregue la restricción &quot;foreign key&quot; que intentó agregar en el punto 3.</li>
+<li>Intente agregar un registro que infrinja la restricción.<br />No lo permite.</li>
+<li>Intente modificar el código de un cliente que está referenciado en &quot;referenciadopor&quot;. No se puede.</li>
+<li>Intente eliminar un cliente que sea referenciado por otro en &quot;referenciadopor&quot;. No se puede.</li>
+<li>Cambie el valor de código de un cliente que no referenció a nadie.</li>
+<li><p>Elimine un cliente que no haya referenciado a otros.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 74
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo INT,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    referenciadopor INT,
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO clientes 
+    VALUES  (50,&#39;Juan Perez&#39;,&#39;Sucre 123&#39;,&#39;Cordoba&#39;,NULL),
+        (90,&#39;Marta Juarez&#39;,&#39;Colon 345&#39;,&#39;Carlos Paz&#39;,NULL),
+        (110,&#39;Fabian Torres&#39;,&#39;San Martin 987&#39;,&#39;Cordoba&#39;,50),
+        (125,&#39;Susana Garcia&#39;,&#39;Colon 122&#39;,&#39;Carlos Paz&#39;,90),
+        (140,&#39;Ana Herrero&#39;,&#39;Colon 890&#39;,&#39;Carlos Paz&#39;,9);
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_referenciadopor FOREIGN KEY (referenciadopor)
+    REFERENCES clientes (codigo);
+
+UPDATE clientes SET referenciadopor=90 WHERE referenciadopor=9;
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_referenciadopor FOREIGN KEY (referenciadopor)
+    REFERENCES clientes (codigo);
+
+INSERT INTO clientes VALUES (150,&#39;Karina Gomez&#39;,&#39;Caseros 444&#39;,&#39;Cruz del Eje&#39;,8);
+
+UPDATE clientes SET codigo=180 WHERE codigo=90;
+
+DELETE FROM clientes WHERE nombre=&#39;Marta Juarez&#39;;
+
+UPDATE clientes SET codigo=180 WHERE codigo=125;
+
+DELETE FROM clientes WHERE codigo=110;
+</code></pre>
+
+</body>
+</html>
+

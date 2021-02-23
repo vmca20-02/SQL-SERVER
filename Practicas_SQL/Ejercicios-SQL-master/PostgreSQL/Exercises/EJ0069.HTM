@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-69">Ejercicio 69</h2>
+<p>Una agencia matrimonial almacena la información de sus clientes en una tabla llamada &quot;clientes&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><em><strong>sexo</strong>, </em>char(1)<em>., --'f'=femenino, 'm'=masculino</em>.</li>
+<li><strong>edad</strong>, <em>int</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+</ul></li>
+<li>Ingrese los siguientes registros.</li>
+<li>La agencia necesita la combinación de todas las personas de sexo femenino con las de sexo masculino. Use un &quot;cross join&quot; (<em>12 registros</em>)</li>
+<li>Obtenga la misma salida anterior pero realizando un &quot;join&quot;.</li>
+<li><p>Realice la misma autocombinación que el punto 3 pero agregue la condición que las parejas no tengan una diferencia superior a 5 años (<em>5 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 69
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    nombre VARCHAR(30),
+    sexo CHAR(1),
+    edad INT,
+    domicilio VARCHAR(30)
+);
+
+INSERT INTO clientes 
+    VALUES  (&#39;Maria Lopez&#39;,&#39;f&#39;,45,&#39;Colon 123&#39;),
+        (&#39;Liliana Garcia&#39;,&#39;f&#39;,35,&#39;Sucre 456&#39;),
+        (&#39;Susana Lopez&#39;,&#39;f&#39;,41,&#39;Avellaneda 98&#39;),
+        (&#39;Juan Torres&#39;,&#39;m&#39;,44,&#39;Sarmiento 755&#39;),
+        (&#39;Marcelo Oliva&#39;,&#39;m&#39;,56,&#39;San Martin 874&#39;),
+        (&#39;Federico Pereyra&#39;,&#39;m&#39;,38,&#39;Colon 234&#39;),
+        (&#39;Juan Garcia&#39;,&#39;m&#39;,50,&#39;Peru 333&#39;);
+        
+SELECT cm.nombre,cm.edad,cv.nombre,cv.edad
+    FROM clientes AS cm
+    CROSS JOIN clientes cv
+    WHERE cm.sexo=&#39;f&#39; AND cv.sexo=&#39;m&#39;;
+    
+SELECT cm.nombre,cm.edad,cv.nombre,cv.edad
+    FROM clientes AS cm
+    JOIN clientes cv
+    ON cm.nombre &lt;&gt; cv.nombre
+    WHERE cm.sexo=&#39;f&#39; AND cv.sexo=&#39;m&#39;;
+    
+SELECT cm.nombre,cm.edad,cv.nombre,cv.edad
+    FROM clientes AS cm
+    CROSS JOIN clientes cv
+    WHERE cm.sexo=&#39;f&#39; AND cv.sexo=&#39;m&#39; AND cm.edad-cv.edad BETWEEN -5 AND 5;
+</code></pre>
+
+</body>
+</html>
+

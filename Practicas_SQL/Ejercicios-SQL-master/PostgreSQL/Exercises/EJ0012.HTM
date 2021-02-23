@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-12">Ejercicio 12</h2>
+<p>Un vídeo club que alquila películas en vídeo almacena la información de sus películas en alquiler en una tabla denominada &quot;peliculas&quot;.</p>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para cada campo:</p>
+<ul>
+<li><strong>titulo</strong>, <em>varchar(20)</em>.</li>
+<li><strong>actor</strong>, <em>varchar(20)</em>.</li>
+<li><strong>duracion</strong>, <em>integer</em>.</li>
+<li><strong>cantidad</strong>, <em>integer</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Misión imposible', 'Tom Cruise', 120, 3</em>.</li>
+<li><em>'Misión imposible 2', 'Tom Cruise', 180, 4</em>.</li>
+<li><em>'Mujer bonita', 'Julia R.', 90, 1</em>.</li>
+<li><em>'Elsa y Fred', 'China Zorrilla', 80, 2</em>.</li>
+</ul></li>
+<li>Seleccione las películas cuya duración no supere los 90 minutos (<em>2 registros</em>)</li>
+<li>Seleccione el título de todas las películas en las que el actor NO sea &quot;Tom Cruise&quot; (<em>2 registros</em>)</li>
+<li><p>Muestre todos los campos, excepto &quot;duracion&quot;, de todas las películas de las que haya más de 2 copias (<em>2 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 12
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS peliculas;
+
+CREATE TABLE peliculas (
+    titulo VARCHAR(20),
+    actor VARCHAR(20),
+    duracion INTEGER,
+    cantidad INTEGER
+);
+
+INSERT INTO peliculas (titulo, actor, duracion, cantidad)
+    VALUES  (&#39;Mision imposible&#39;,&#39;Tom Cruise&#39;,120,3),
+        (&#39;Mision imposible 2&#39;,&#39;Tom Cruise&#39;,180,4),
+        (&#39;Mujer bonita&#39;,&#39;Julia R.&#39;,90,1),
+        (&#39;Elsa y Fred&#39;,&#39;China Zorrilla&#39;,80,2);
+        
+SELECT * FROM peliculas
+    WHERE duracion &lt;&gt;90;
+    
+SELECT * FROM peliculas
+    WHERE actor &lt;&gt; &#39;Tom Cruise&#39;;
+    
+SELECT titulo,actor,cantidad
+    FROM peliculas
+    WHERE cantidad &gt; 2;
+</code></pre>
+
+</body>
+</html>
+

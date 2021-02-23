@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-16">Ejercicio 16</h2>
+<p>Trabaje con la tabla &quot;libros&quot; de una librería.</p>
+<ol>
+<li><p>Créela con los siguientes campos:</p>
+<ul>
+<li><strong>titulo</strong>, <em>varchar(30)</em>.</li>
+<li><strong>autor</strong>, <em>varchar(20)</em>.</li>
+<li><strong>editorial</strong>, <em>varchar(15)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'El aleph', 'Borges', 'Emece', 25.00</em>.</li>
+<li><em>'Martin Fierro', 'José Hernández', 'Planeta', 35.50</em>.</li>
+<li><em>'Aprenda PHP', 'Mario Molina', 'Emece', 45.50</em>.</li>
+<li><em>'Cervantes y el quijote', 'Borges', 'Emece', 25</em>.</li>
+<li><em>'Matemática estas ahí', 'Paenza', 'Siglo XXI', 15</em>.</li>
+</ul></li>
+<li>Muestre todos los registros (<em>5 registros</em>).</li>
+<li>Modifique los registros cuyo autor sea igual a &quot;Paenza&quot;, por &quot;Adrián Paenza&quot; (<em>1 registro afectado</em>)</li>
+<li>Modifique los registros cuyo autor sea igual a &quot;Paenza&quot;, por &quot;Adrián Paenza&quot; (<em>ningún registro afectado porque ninguno cumple la condición</em>)</li>
+<li>Actualice el precio del libro de &quot;Mario Molina&quot; a 27 pesos (<em>1 registro afectado</em>)</li>
+<li>Actualice el valor del campo &quot;editorial&quot; por &quot;Emece S.A.&quot;, para todos los registros cuya editorial sea igual a &quot;Emece&quot; (<em>3 registros afectados</em>)</li>
+<li><p>Tras cada actualización muestre los datos de la tabla.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 16
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros (
+    titulo VARCHAR(30),
+    autor VARCHAR(20),
+    editorial VARCHAR(15),
+    precio FLOAT
+);
+INSERT INTO libros (titulo, autor, editorial, precio)
+    VALUES  (&#39;El aleph&#39;,&#39;Borges&#39;,&#39;Emece&#39;,25.00),
+        (&#39;Martin Fierro&#39;,&#39;Jose Hernandez&#39;,&#39;Planeta&#39;,35.50),
+        (&#39;Aprenda PHP&#39;,&#39;Mario Molina&#39;,&#39;Emece&#39;,45.50),
+        (&#39;Cervantes y el quijote&#39;,&#39;Borges&#39;,&#39;Emece&#39;,25),
+        (&#39;Matematica estas ahi&#39;,&#39;Paenza&#39;,&#39;Siglo XXI&#39;,15);
+        
+SELECT * FROM libros;
+
+UPDATE libros SET autor=&#39;Adrian Paenza&#39;
+    WHERE autor=&#39;Paenza&#39;;
+SELECT * FROM libros;
+
+UPDATE libros SET autor=&#39;Adrian Paenza&#39;
+    WHERE autor=&#39;Paenza&#39;;
+SELECT * FROM libros;
+
+UPDATE libros SET precio=27
+    WHERE autor=&#39;Mario Molina&#39;;
+SELECT * FROM libros;
+
+UPDATE libros SET editorial=&#39;Emece S.A.&#39;
+    WHERE editorial=&#39;Emece&#39;;
+SELECT * FROM libros;
+</code></pre>
+
+</body>
+</html>
+

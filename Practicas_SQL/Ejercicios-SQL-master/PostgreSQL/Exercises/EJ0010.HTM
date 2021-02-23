@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-10">Ejercicio 10</h2>
+<p>Trabaje con la tabla &quot;libros&quot; de una librería que guarda información referente a sus libros disponibles para la venta.</p>
+<ol>
+<li><p>Cree una tabla llamada <strong>libros</strong> que posea los siguientes campos:</p>
+<ul>
+<li><strong>titulo</strong>, <em>varchar(20)</em>.</li>
+<li><strong>autor</strong>, <em>varchar(30)</em>.</li>
+<li><strong>editorial</strong>, <em>varchar(15)</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;libros&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>El (aleph), Borges, Emece</em>.</li>
+<li><em>Martin (Fierro), José Hernández, Emece</em>.</li>
+<li><em>Martin (Fierro), José Hernández, Planeta</em>.</li>
+<li><em>Aprenda (PHP), Mario Molina, Siglo XXI</em>.</li>
+</ul></li>
+<li>Seleccione los registros cuyo autor sea &quot;Borges&quot; (<em>1 registro</em>)</li>
+<li>Seleccione los títulos de los libros cuya editorial sea &quot;Emece&quot; (<em>2 registros</em>)</li>
+<li><p>Seleccione los nombres de las editoriales de los libros cuyo título sea &quot;Martin Fierro&quot; (<em>2 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 10
+******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros (
+    titulo VARCHAR(20),
+    autor VARCHAR(30),
+    editorial VARCHAR(15)
+);
+
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;libros&#39;;
+    
+INSERT INTO libros(titulo,autor,editorial)
+    VALUES  (&#39;El aleph&#39;,&#39;Borges&#39;,&#39;Emece&#39;),
+        (&#39;Martin Fierro&#39;,&#39;Jose Hernandez&#39;,&#39;Emece&#39;),
+        (&#39;Martin Fierro&#39;,&#39;Jose Hernandez&#39;,&#39;Planeta&#39;),
+        (&#39;Aprenda PHP&#39;,&#39;Mario Molina&#39;,&#39;Siglo XXI&#39;);
+        
+SELECT * FROM libros
+    WHERE autor=&#39;Borges&#39;;
+    
+SELECT titulo FROM libros
+    WHERE editorial=&#39;Emece&#39;;
+    
+SELECT editorial FROM libros
+    WHERE titulo=&#39;Martin Fierro&#39;;
+</code></pre>
+
+</body>
+</html>
+

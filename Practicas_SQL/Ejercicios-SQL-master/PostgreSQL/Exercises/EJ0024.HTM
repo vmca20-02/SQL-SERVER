@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-24">Ejercicio 24</h2>
+<p>Una concesionaria de autos vende autos usados y almacena los datos de los autos en una tabla llamada &quot;autos&quot;.</p>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para cada campo, estableciendo el campo<br />&quot;patente&quot; como clave primaria:</p>
+<ul>
+<li><strong>patente</strong>, <em>char(6)</em>.</li>
+<li><strong>marca</strong>, <em>varchar(20)</em>.</li>
+<li><strong>modelo</strong>, <em>char(4)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+<li><strong>primary key</strong>, <em>patente</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'ACD123', 'Fiat 128', '1970', 15000</em>.</li>
+<li><em>'ACG234', 'Renault 11', '1990', 40000</em>.</li>
+<li><em>'BCD333', 'Peugeot 505', '1990', 80000</em>.</li>
+<li><em>'GCD123', 'Renault Clio', '1990', 70000</em>.</li>
+<li><em>'BCC333', 'Renault Megane', '1998', 95000</em>.</li>
+<li><em>'BVF543', 'Fiat 128', '1975', 20000</em>.</li>
+</ul></li>
+<li>Seleccione todos los autos del año 1990.</li>
+<li>Borre la tabla.</li>
+<li>Crearla nuevamente con la misma estructura pero utilizando las otras palabras claves para los tipos<br />de datos char y varchar.</li>
+<li>Ingrese un registro.</li>
+<li><p>Mostrar el contenido de la tabla.</p></li>
+</ol>
+<blockquote>
+<p>Hemos definido el campo &quot;patente&quot; de tipo &quot;char&quot; y no &quot;varchar&quot; porque la cadena de caracteres siempre tendrá la misma longitud (<em>6 caracteres</em>). Lo mismo sucede con el campo &quot;modelo&quot;, en el cual almacenaremos el año, necesitamos 4 caracteres fijos.</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 24
+******************************************************************************/
+
+DROP TABLE IF EXISTS autos;
+
+CREATE TABLE autos (
+    patente CHAR(6),
+    marca VARCHAR(20),
+    modelo CHAR(4),
+    precio FLOAT,
+    PRIMARY KEY (patente)
+);
+
+INSERT INTO autos
+    VALUES  (&#39;ACD123&#39;,&#39;Fiat 128&#39;,&#39;1970&#39;,15000),
+        (&#39;ACG234&#39;,&#39;Renault 11&#39;,&#39;1990&#39;,40000),
+        (&#39;BCD333&#39;,&#39;Peugeot 505&#39;,&#39;1990&#39;,80000),
+        (&#39;GCD123&#39;,&#39;Renault Clio&#39;,&#39;1990&#39;,70000),
+        (&#39;BCC333&#39;,&#39;Renault Megane&#39;,&#39;1998&#39;,95000),
+        (&#39;BVF543&#39;,&#39;Fiat 128&#39;,&#39;1975&#39;,20000);
+        
+SELECT * FROM autos
+    WHERE modelo=&#39;1990&#39;;
+    
+DROP TABLE autos;
+
+DROP TABLE IF EXISTS autos;
+
+CREATE TABLE autos (
+    patente CHARACTER(6),
+    marca CHARACTER varying(20),
+    modelo CHARACTER(4),
+    precio FLOAT,
+    PRIMARY KEY (patente)
+);
+
+INSERT INTO autos
+    VALUES  (&#39;ACD123&#39;,&#39;Fiat 128&#39;,&#39;1970&#39;,15000);
+    
+SELECT * FROM autos;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-17">Ejercicio 17</h2>
+<p>Una farmacia guarda información referente a sus medicamentos en una tabla llamada &quot;medicamentos&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>integer</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>. not null</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+<li><strong>cantidad</strong>, <em>integer</em>. not null</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;medicamentos&quot; indicando si el campo admite valores null.</li>
+<li><p>Ingrese algunos registros con valores &quot;null&quot; para los campos que lo admitan:</p>
+<ul>
+<li>**1, 'Sertal gotas', null, null, 100*.</li>
+<li>**2, 'Sertal compuesto', null, 8.90, 150*.</li>
+<li>**3, 'Buscapina', 'Roche', null, 200*.</li>
+</ul></li>
+<li>Vea todos los registros.</li>
+<li>Ingrese un registro con valor &quot;0&quot; para el precio y cadena vacía para el laboratorio.</li>
+<li>Ingrese un registro con valor &quot;0&quot; para el código y cantidad y cadena vacía para el nombre.</li>
+<li>Muestre todos los registros.</li>
+<li>Intente ingresar un registro con valor nulo para un campo que no lo admite (<em>aparece un mensaje de error</em>).</li>
+<li>Recupere los registros que contengan valor &quot;null&quot; en el campo &quot;laboratorio&quot;, luego los que tengan una cadena vacía en el mismo campo. Note que el resultado es diferente.</li>
+<li>Recupere los registros que contengan valor &quot;null&quot; en el campo &quot;precio&quot;, luego los que tengan el valor 0 en el mismo campo. Note que el resultado es distinto.</li>
+<li>Recupere los registros cuyo laboratorio no contenga una cadena vacía, luego los que sean distintos de &quot;null&quot;.<br />Note que la salida de la primera sentencia no muestra los registros con cadenas vacías y tampoco los que tienen valor nulo; el resultado de la segunda sentencia muestra los registros con valor para el campo laboratorio (<em>incluso cadena vacía</em>).</li>
+<li><p>Recupere los registros cuyo precio sea distinto de 0, luego los que sean distintos de &quot;null&quot;.</p></li>
+</ol>
+<blockquote>
+<p>Note que la salida de la primera sentencia no muestra los registros con valor 0 y tampoco los que tienen valor nulo; el resultado de la segunda sentencia muestra los registros con valor para el campo precio (<em>incluso el valor 0</em>).</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 17
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo INTEGER NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    laboratorio VARCHAR(20),
+    precio FLOAT,
+    cantidad INTEGER NOT NULL
+);
+SELECT table_name,column_name,udt_name,character_maximum_length,is_NULLable 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;medicamentos&#39;;
+    
+INSERT INTO medicamentos (codigo,nombre,laboratorio,precio,cantidad)
+    VALUES  (1,&#39;Sertal gotas&#39;,NULL,NULL,100),
+        (2,&#39;Sertal compuesto&#39;,NULL,8.90,150),
+        (3,&#39;Buscapina&#39;,&#39;Roche&#39;,NULL,200);
+        
+SELECT * FROM medicamentos;
+
+INSERT INTO medicamentos (codigo,nombre, laboratorio,precio,cantidad)
+    VALUES  (4,&#39;Bayaspirina&#39;,&#39;&#39;,0,150),
+        (0,&#39;&#39;,&#39;Bayer&#39;,15.60,0);
+    
+SELECT * FROM medicamentos;
+
+INSERT INTO medicamentos (codigo,nombre,laboratorio,precio,cantidad)
+    VALUES  (NULL,&#39;Amoxidal jarabe&#39;,&#39;Bayer&#39;,25,120); -- Should fail
+    
+SELECT * FROM medicamentos
+    WHERE laboratorio is NULL;
+    
+SELECT * FROM medicamentos
+    WHERE laboratorio=&#39;&#39;;
+    
+SELECT * FROM medicamentos
+    WHERE precio is NULL;
+    
+SELECT * FROM medicamentos
+    WHERE precio=0;
+    
+SELECT * FROM medicamentos
+    WHERE laboratorio &lt;&gt; &#39;&#39;;
+    
+SELECT * FROM medicamentos
+    WHERE laboratorio is NOT NULL;
+    
+SELECT * FROM medicamentos
+    WHERE precio &lt;&gt; 0;
+    
+SELECT * FROM medicamentos
+    WHERE precio is NOT NULL;
+</code></pre>
+
+</body>
+</html>
+

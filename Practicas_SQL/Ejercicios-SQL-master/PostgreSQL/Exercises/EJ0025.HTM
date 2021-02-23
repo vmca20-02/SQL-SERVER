@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-25">Ejercicio 25</h2>
+<p>Una empresa almacena los datos de sus clientes en una tabla llamada &quot;clientes&quot;.</p>
+<ol>
+<li><p>Créela eligiendo el tipo de dato más adecuado para cada campo:</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>apellido</strong>, <em>varchar(20)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar</em>. (11)</li>
+</ul></li>
+<li>Analice la definición de los campos. Se utiliza char(8) para el documento porque siempre constará de 8 caracteres. Para el número telefónico se usar &quot;varchar&quot; y no un tipo numérico porque si bien es un número, con él no se realizarán operaciones matemáticas.</li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'2233344', 'Pérez', 'Juan', 'Sarmiento 980', '4342345'</em>.</li>
+<li><em>'2333344', 'Pérez', 'Ana', 'Colon 234'</em>.</li>
+<li><em>'2433344', 'García', 'Luis', 'Avellaneda 1454', '4558877'</em>.</li>
+<li><em>'2533344', 'Juárez', 'Ana', 'Urquiza 444', '4789900'</em>.</li>
+</ul></li>
+<li><p>Seleccione todos los clientes de apellido &quot;Pérez&quot; (<em>2 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 25
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    documento CHAR(8),
+    apellido VARCHAR(20),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR (11)
+);
+
+INSERT INTO clientes
+    VALUES  (&#39;2233344&#39;,&#39;Perez&#39;,&#39;Juan&#39;,&#39;Sarmiento 980&#39;,&#39;4342345&#39;),
+        (&#39;2333344&#39;,&#39;Perez&#39;,&#39;Ana&#39;,&#39;Colon 234&#39;),
+        (&#39;2433344&#39;,&#39;Garcia&#39;,&#39;Luis&#39;,&#39;Avellaneda 1454&#39;,&#39;4558877&#39;),
+        (&#39;2533344&#39;,&#39;Juarez&#39;,&#39;Ana&#39;,&#39;Urquiza 444&#39;,&#39;4789900&#39;);
+        
+SELECT * FROM clientes
+    WHERE apellido=&#39;Perez&#39;;
+</code></pre>
+
+</body>
+</html>
+

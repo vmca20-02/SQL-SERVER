@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-53">Ejercicio 53</h2>
+<p>Un club dicta clases de distintos deportes. En una tabla llamada &quot;inscritos&quot; almacena la<br />información necesaria.</p>
+<ol>
+<li><p>La tabla contiene los siguientes campos:</p>
+<ul>
+<li><strong>documento del socio alumno</strong>: <em>char(8) not null</em></li>
+<li><strong>nombre del socio</strong>: <em>varchar(30)</em></li>
+<li><em><strong>nombre del deporte</strong> (</em>tenis, futbol, natación, básquet<em>): </em>varchar(15) not null**.</li>
+<li><strong>año de inscripción</strong>: <em>smallint</em></li>
+<li><strong>matricula</strong>: si la matrícula ha sido o no pagada (<em>'s' o 'n'</em>).</li>
+</ul></li>
+<li><p>Necesitamos una clave primaria que identifique cada registro. Un socio puede inscribirse en<br />varios deportes en distintos años. Un socio no puede inscribirse en el mismo deporte el mismo año.<br />Varios socios se inscriben en un mismo deporte en distintos años. Cree la tabla con una clave<br />compuesta:</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null,</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>deporte</strong>, <em>varchar(15)</em>. not null</li>
+<li><strong>año</strong> <em>(date)</em></li>
+<li><strong>matricula</strong>, <em>char(1)</em>.</li>
+<li><strong>primary key</strong>, <em>(documento., deporte, año)</em>.</li>
+</ul></li>
+<li>Inscriba a varios alumnos en el mismo deporte en el mismo año</li>
+<li>Inscriba a un mismo alumno en varios deportes en el mismo año</li>
+<li>Ingrese un registro con el mismo documento de socio en el mismo deporte en distintos años</li>
+<li>Intente inscribir a un socio alumno en un deporte en el cual ya esté inscrito.</li>
+<li><p>Intente actualizar un registro para que la clave primaria se repita.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 53
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    documento CHAR(8) NOT NULL, 
+    nombre VARCHAR(30),
+    deporte VARCHAR(15) NOT NULL,
+    anio SMALLINT,
+    matricula CHAR(1),
+    PRIMARY KEY(documento,deporte,anio)
+);
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;tenis&#39;,&#39;2005&#39;,&#39;s&#39;),
+        (&#39;23333333&#39;,&#39;Marta Garcia&#39;,&#39;tenis&#39;,&#39;2005&#39;,&#39;s&#39;),
+        (&#39;34444444&#39;,&#39;Luis Perez&#39;,&#39;tenis&#39;,&#39;2005&#39;,&#39;n&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;futbol&#39;,&#39;2005&#39;,&#39;s&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;natacion&#39;,&#39;2005&#39;,&#39;s&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;basquet&#39;,&#39;2005&#39;,&#39;n&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;tenis&#39;,&#39;2006&#39;,&#39;s&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;tenis&#39;,&#39;2007&#39;,&#39;s&#39;);
+
+INSERT INTO inscritos
+    VALUES  (&#39;12222222&#39;,&#39;Juan Perez&#39;,&#39;tenis&#39;,&#39;2005&#39;,&#39;s&#39;);
+
+UPDATE inscritos SET deporte=&#39;tenis&#39;
+    WHERE documento=&#39;12222222&#39; AND deporte=&#39;futbol&#39; AND anio=&#39;2005&#39;;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-5">Ejercicio 5</h2>
+<p>Un videoclub que alquila películas en vídeo almacena la información de sus películas en una tabla llamada &quot;peliculas&quot;.</p>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para cada campo.</p>
+<ul>
+<li><strong>nombre</strong>, <em>cadena de caracteres de 20 de longitud</em>.</li>
+<li><strong>actor</strong>, <em>cadena de caracteres de 20 de longitud</em>.</li>
+<li><strong>duracion</strong>, <em>valor numérico entero</em>.</li>
+<li><strong>cantidadcopias</strong>, <em>valor entero</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Misión imposible', 'Tom Cruise', 128, 3</em>.</li>
+<li><em>'Misión imposible 2', 'Tom Cruise', 130, 2</em>.</li>
+<li><em>'Mujer bonita', 'Julia Roberts', 118, 3</em>.</li>
+<li><em>'Elsa y Fred', 'China Zorrilla', 110, 2</em>.</li>
+</ul></li>
+<li><p>Muestre todos los registros.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 5
+******************************************************************************/
+
+DROP TABLE IF EXISTS peliculas;
+
+CREATE TABLE peliculas (
+    nombre VARCHAR(20),
+    actor VARCHAR(20),
+    duracion INTEGER,
+    cantidad INTEGER
+);
+
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;peliculas&#39;;
+    
+INSERT INTO peliculas (nombre, actor, duracion, cantidad)
+    VALUES  (&#39;Mision imposible&#39;,&#39;Tom Cruise&#39;,128,3),
+        (&#39;Mision imposible 2&#39;,&#39;Tom Cruise&#39;,130,2),
+        (&#39;Mujer bonita&#39;,&#39;Julia Roberts&#39;,118,3),
+        (&#39;Elsa y Fred&#39;,&#39;China Zorrilla&#39;,110,2);
+        
+SELECT *FROM peliculas;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-63">Ejercicio 63</h2>
+<p>Un club dicta clases de distintos deportes. Almacena la información en una tabla llamada &quot;inscritos&quot; que incluye el documento, el nombre, el deporte y si la matricula esta paga o no y una tabla llamada &quot;inasistencias&quot; que incluye el documento, el deporte y la fecha de la inasistencia.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>inscritos</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>deporte</strong>, <em>varchar(15)</em>.</li>
+<li><strong>matricula</strong>, <em>char(1)</em>., --'s'=paga 'n'=impaga</li>
+<li><strong>primary key</strong>, <em>(documento., deporte)</em>.</li>
+</ul></li>
+<li><p>inasistencias*</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>deporte</strong>, <em>varchar(15)</em>.</li>
+<li><strong>fecha</strong>, <em>date</em>.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros para ambas tablas.</li>
+<li>Muestre el nombre, el deporte y las fechas de inasistencias, ordenado por nombre y deporte.</li>
+<li>Obtenga el nombre, deporte y las fechas de inasistencias de un determinado inscripto en un<br />determinado deporte (<em>3 registros</em>)</li>
+<li><p>Obtenga el nombre, deporte y las fechas de inasistencias de todos los inscritos que pagaron la matrícula (<em>4 registros</em>)</p></li>
+</ol>
+<blockquote>
+<p>Note que la condición es compuesta porque para identificar los registros de la tabla &quot;inasistencias&quot; necesitamos ambos campos.</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 63
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    deporte VARCHAR(15),
+    matricula CHAR(1),
+    PRIMARY KEY(documento,deporte)
+);
+DROP TABLE IF EXISTS inasistencias;
+
+CREATE TABLE inasistencias (
+    documento CHAR(8),
+    deporte VARCHAR(15),
+    fecha DATE
+);
+
+INSERT INTO inscritos 
+    VALUES  (&#39;Juan Perez&#39;,&#39;22222222&#39;,&#39;tenis&#39;,&#39;s&#39;),
+        (&#39;Maria Lopez&#39;,&#39;23333333&#39;,&#39;tenis&#39;,&#39;s&#39;),
+        (&#39;Agustin Juarez&#39;,&#39;24444444&#39;,&#39;tenis&#39;,&#39;n&#39;),
+        (&#39;Marta Garcia&#39;,&#39;25555555&#39;,&#39;natacion&#39;,&#39;s&#39;),
+        (&#39;Juan Perez&#39;,&#39;22222222&#39;,&#39;natacion&#39;,&#39;s&#39;),
+        (&#39;Maria Lopez&#39;,&#39;23333333&#39;,&#39;natacion&#39;,&#39;n&#39;);
+
+INSERT INTO inasistencias 
+    VALUES  (&#39;22222222&#39;,&#39;tenis&#39;,&#39;2006-12-01&#39;),
+        (&#39;22222222&#39;,&#39;tenis&#39;,&#39;2006-12-08&#39;),
+        (&#39;23333333&#39;,&#39;tenis&#39;,&#39;2006-12-01&#39;),
+        (&#39;24444444&#39;,&#39;tenis&#39;,&#39;2006-12-08&#39;),
+        (&#39;22222222&#39;,&#39;natacion&#39;,&#39;2006-12-02&#39;),
+        (&#39;23333333&#39;,&#39;natacion&#39;,&#39;2006-12-02&#39;);
+
+SELECT nombre,insc.deporte,ina.fecha
+    FROM inscritos AS insc
+    JOIN inasistencias AS ina
+    ON insc.documento=ina.documento AND insc.deporte=ina.deporte
+    ORDER BY nombre, insc.deporte;
+
+SELECT nombre,insc.deporte, ina.fecha
+    FROM inscritos AS insc
+    JOIN inasistencias AS ina
+    ON insc.documento=ina.documento AND insc.deporte=ina.deporte
+    WHERE insc.documento=&#39;22222222&#39;;
+
+SELECT nombre,insc.deporte, ina.fecha
+    FROM inscritos AS insc
+    JOIN inasistencias AS ina
+    ON insc.documento=ina.documento AND insc.deporte=ina.deporte
+    WHERE insc.matricula=&#39;s&#39;;
+</code></pre>
+
+</body>
+</html>
+

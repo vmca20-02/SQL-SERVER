@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-26">Ejercicio 26</h2>
+<p>Un banco tiene registrados las cuentas corrientes de sus clientes en una tabla llamada &quot;cuentas&quot;.</p>
+<p>La tabla contiene estos datos:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nº de Cuenta</th>
+<th align="left">Documento</th>
+<th align="left">Nombre</th>
+<th align="left">Saldo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1234</td>
+<td align="left">25666777</td>
+<td align="left">Pedro Pérez</td>
+<td align="left">500000.60</td>
+</tr>
+<tr class="even">
+<td align="left">2234</td>
+<td align="left">27888999</td>
+<td align="left">Juan López</td>
+<td align="left">-250000</td>
+</tr>
+<tr class="odd">
+<td align="left">3344</td>
+<td align="left">27888999</td>
+<td align="left">Juan López</td>
+<td align="left">4000.50</td>
+</tr>
+<tr class="even">
+<td align="left">3346</td>
+<td align="left">32111222</td>
+<td align="left">Susana Molina</td>
+<td align="left">1000</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para almacenar los datos descritos arriba:</p>
+<ul>
+<li>Número de cuenta: entero, no puede haber valores repetidos, clave primaria</li>
+<li>Documento (del) propietario de la cuenta: cadena de caracteres de 8 de longitud (<em>siempre 8</em>), no nulo</li>
+<li>Nombre (del) propietario de la cuenta: cadena de caracteres de 30 de longitud</li>
+<li>Saldo (de) la cuenta: valores altos con decimales.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'1234', '25666777', 'Pedro Pérez', 500000.60</em>.</li>
+<li><em>'2234', '27888999', 'Juan López', -250000</em>.</li>
+<li><em>'3344', '27888999', 'Juan López', 4000.50</em>.</li>
+<li><em>'3346', '32111222', 'Susana Molina', 1000</em>.</li>
+</ul></li>
+<li>Seleccione todos los registros cuyo saldo sea mayor a &quot;4000&quot; (<em>2 registros</em>)</li>
+<li>Muestre el número de cuenta y saldo de todas las cuentas cuyo propietario sea &quot;Juan López&quot; (<em>2 registros</em>)</li>
+<li>Muestre las cuentas con saldo negativo (<em>1 registro</em>)</li>
+<li><p>Muestre todas las cuentas cuyo número es igual o mayor a &quot;3000&quot; (<em>2 registros</em>).</p></li>
+</ol>
+<blockquote>
+<p>Note que hay dos cuentas, con distinto número de cuenta, de la misma persona.</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 26
+******************************************************************************/
+
+DROP TABLE IF EXISTS cuentas;
+
+CREATE TABLE cuentas (
+    numero INT NOT NULL,
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(30),
+    saldo DECIMAL(15,2),
+    PRIMARY KEY (numero)
+);
+
+INSERT INTO cuentas(numero,documento,nombre,saldo)
+    VALUES  (&#39;1234&#39;,&#39;25666777&#39;,&#39;Pedro Perez&#39;,500000.60),
+        (&#39;2234&#39;,&#39;27888999&#39;,&#39;Juan Lopez&#39;,-250000),
+        (&#39;3344&#39;,&#39;27888999&#39;,&#39;Juan Lopez&#39;,4000.50),
+        (&#39;3346&#39;,&#39;32111222&#39;,&#39;Susana Molina&#39;,1000);
+        
+SELECT * FROM cuentas
+    WHERE saldo &lt; 4000;
+    
+SELECT numero,saldo FROM cuentas
+    WHERE nombre=&#39;Juan Lopez&#39;;
+    
+SELECT * FROM cuentas
+    WHERE saldo &lt; 0;
+    
+SELECT * FROM cuentas
+    WHERE numero &lt;&gt;3000;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-86">Ejercicio 86</h2>
+<p>Un club dicta cursos de distintos deportes. Almacena la información en varias tablas.<br />El director no quiere que los empleados de administración conozcan la estructura de las tablas ni algunos datos de los profesores y socios, por ello se crean vistas a las cuales tendrán acceso.</p>
+<ol>
+<li><p>Crear las tablas:</p>
+<ul>
+<li><p>Socios</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(40)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Profesores</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(40)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Cursos</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>deporte</strong>, <em>varchar(20)</em>.</li>
+<li><strong>dia</strong>, <em>varchar(15)</em>.</li>
+<li><strong>documentoprofesor</strong>, <em>char(8)</em>.</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+<li><p>Inscritos</p>
+<ul>
+<li><strong>documentosocio</strong>, <em>char(8)</em>. not null</li>
+<li><strong>numero</strong>, <em>smallint</em>. not null</li>
+<li><strong>matricula</strong>, <em>char(1)</em>.</li>
+<li><strong>primary key</strong>, <em>documentosocio, numero</em>.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros para todas las tablas:</li>
+<li>Cree una vista en la que aparezca el nombre y documento del socio, el deporte, el día y el nombre del profesor.</li>
+<li>Muestre la información contenida en la vista.</li>
+<li>Realice una consulta a la vista donde muestre la cantidad de socios inscritos en cada deporte ordenados por cantidad.</li>
+<li>Muestre (<em>consultando la vista</em>) los cursos (<em>deporte y día</em>) para los cuales no hay inscritos.</li>
+<li>Muestre los nombres de los socios que no se han inscripto en ningún curso (<em>consultando la vista</em>)</li>
+<li>Muestre (<em>consultando la vista</em>) los profesores que no tienen asignado ningún deporte aún.</li>
+<li>Muestre (<em>consultando la vista</em>) el nombre y documento de los socios que deben matrículas.</li>
+<li>Consulte la vista y muestre los nombres de los profesores y los días en que asisten al club para<br />dictar sus clases.</li>
+<li>Muestre la misma información anterior pero ordenada por día.</li>
+<li><p>Muestre todos los socios que son compañeros en tenis los lunes.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 86
+******************************************************************************/
+
+DROP TABLE IF EXISTS socios;
+
+CREATE TABLE socios (
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(40),
+    domicilio VARCHAR(30),
+    PRIMARY KEY (documento)
+);
+
+DROP TABLE IF EXISTS profesores;
+
+CREATE TABLE profesores (
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(40),
+    domicilio VARCHAR(30),
+    PRIMARY KEY (documento)
+);
+DROP TABLE IF EXISTS cursos;
+
+CREATE TABLE cursos (
+    numero SERIAL,
+    deporte VARCHAR(20),
+    dia VARCHAR(15),
+    documentoprofesor CHAR(8),
+    PRIMARY KEY (numero)
+);
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    documentosocio CHAR(8) NOT NULL,
+    numero SMALLINT NOT NULL,
+    matricula CHAR(1),
+    PRIMARY KEY (documentosocio,numero)
+);
+
+INSERT INTO socios 
+    VALUES  (&#39;30000000&#39;,&#39;Fabian Fuentes&#39;,&#39;Caseros 987&#39;),
+        (&#39;31111111&#39;,&#39;Gaston Garcia&#39;,&#39;Guemes 65&#39;),
+        (&#39;32222222&#39;,&#39;Hector Huerta&#39;,&#39;Sucre 534&#39;),
+        (&#39;33333333&#39;,&#39;Ines Irala&#39;,&#39;Bulnes 345&#39;);
+        
+INSERT INTO profesores 
+    VALUES  (&#39;22222222&#39;,&#39;Ana Acosta&#39;,&#39;Avellaneda 231&#39;),
+        (&#39;23333333&#39;,&#39;Carlos Caseres&#39;,&#39;Colon 245&#39;),
+        (&#39;24444444&#39;,&#39;Daniel Duarte&#39;,&#39;Sarmiento 987&#39;),
+        (&#39;25555555&#39;,&#39;Esteban Lopez&#39;,&#39;Sucre 1204&#39;);
+        
+INSERT INTO cursos(deporte,dia,documentoprofesor) 
+    VALUES  (&#39;tenis&#39;,&#39;lunes&#39;,&#39;22222222&#39;),
+        (&#39;tenis&#39;,&#39;martes&#39;,&#39;22222222&#39;),
+        (&#39;natacion&#39;,&#39;miercoles&#39;,&#39;22222222&#39;),
+        (&#39;natacion&#39;,&#39;jueves&#39;,&#39;23333333&#39;),
+        (&#39;natacion&#39;,&#39;viernes&#39;,&#39;23333333&#39;),
+        (&#39;futbol&#39;,&#39;sabado&#39;,&#39;24444444&#39;),
+        (&#39;futbol&#39;,&#39;lunes&#39;,&#39;24444444&#39;),
+        (&#39;basquet&#39;,&#39;martes&#39;,&#39;24444444&#39;);
+        
+INSERT INTO inscritos 
+    VALUES  (&#39;30000000&#39;,1,&#39;s&#39;),
+        (&#39;30000000&#39;,3,&#39;n&#39;),
+        (&#39;30000000&#39;,6,NULL),
+        (&#39;31111111&#39;,1,&#39;s&#39;),
+        (&#39;31111111&#39;,4,&#39;s&#39;),
+        (&#39;32222222&#39;,8,&#39;s&#39;);
+        
+CREATE view vista_club as
+    SELECT s.nombre AS socio,s.documento AS docsocio,s.domicilio AS domsocio,c.deporte,dia,
+    p.nombre AS profesor, matricula
+        FROM socios AS s
+        FULL JOIN inscritos AS i
+        ON s.documento=i.documentosocio
+        FULL JOIN cursos AS c
+        ON i.numero=c.numero
+        FULL JOIN profesores AS p
+        ON c.documentoprofesor=p.documento;
+        
+SELECT *FROM vista_club;
+
+SELECT deporte,dia,COUNT(socio) AS cantidad
+    FROM vista_club
+    WHERE deporte is NOT NULL
+    GROUP BY deporte,dia
+    ORDER BY cantidad;
+    
+SELECT deporte,dia FROM vista_club
+    WHERE socio is NULL AND deporte is NOT NULL;
+    
+SELECT socio FROM vista_club
+    WHERE deporte is NULL AND socio is NOT NULL;
+    
+SELECT profesor FROM vista_club WHERE deporte is NULL AND profesor is NOT NULL;
+
+SELECT socio, docsocio FROM vista_club WHERE deporte is NOT NULL AND matricula &lt;&gt; &#39;s&#39;;
+
+SELECT distinct profesor,dia
+    FROM vista_club WHERE profesor is NOT NULL;
+
+SELECT distinct profesor,dia
+    FROM vista_club WHERE profesor is NOT NULL
+    ORDER BY dia;
+
+SELECT socio FROM vista_club
+    WHERE deporte=&#39;tenis&#39; AND dia=&#39;lunes&#39;;
+</code></pre>
+
+</body>
+</html>
+

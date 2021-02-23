@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-34">Ejercicio 34</h2>
+<p>Una empresa tiene registrados sus clientes en una tabla llamada &quot;clientes&quot;.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>. not null</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>provincia</strong>, <em>varchar</em>. (20)</li>
+<li><strong>credito</strong>, <em>decimal(9</em>., 2)</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese 5 registros:</p>
+<ul>
+<li><em>'López Marcos', 'Colon 111', 'Córdoba', 'Córdoba', 1900.56</em>.</li>
+<li><em>'Pérez Ana', 'San Martin 222', 'Cruz del Eje', 'Córdoba', 450.33</em>.</li>
+<li><em>'García Juan', 'Rivadavia 333', 'Villa del Rosario', 'Córdoba', 190</em>.</li>
+<li><em>'Olmos Luis', 'Sarmiento 444', 'Rosario', 'Santa Fe', 670.22</em>.</li>
+<li><em>'Pereyra Lucas', 'San Martin 555', 'Cruz del Eje', 'Córdoba', 500.55</em>.</li>
+</ul></li>
+<li>Muestre todos los registros.</li>
+<li><p>Mostrar el campo crédito redondeado hacia arriba.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 34
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR(30) NOT NULL,
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    provincia VARCHAR (20),
+    credito DECIMAL(9,2),
+    PRIMARY KEY(codigo)
+);
+INSERT INTO clientes(nombre,domicilio,ciudad,provincia,credito)
+    VALUES  (&#39;Lopez Marcos&#39;,&#39;Colon 111&#39;,&#39;Cordoba&#39;,&#39;Cordoba&#39;,1900.56),
+        (&#39;Perez Ana&#39;,&#39;San Martin 222&#39;,&#39;Cruz del Eje&#39;,&#39;Cordoba&#39;,450.33),
+        (&#39;Garcia Juan&#39;,&#39;Rivadavia 333&#39;,&#39;Villa del Rosario&#39;,&#39;Cordoba&#39;,190),
+        (&#39;Olmos Luis&#39;,&#39;Sarmiento 444&#39;,&#39;Rosario&#39;,&#39;Santa Fe&#39;,670.22),
+        (&#39;Pereyra Lucas&#39;,&#39;San Martin 555&#39;,&#39;Cruz del Eje&#39;,&#39;Cordoba&#39;,500.55);
+
+SELECT * FROM clientes;
+
+SELECT codigo,nombre,domicilio,ciudad,provincia,ceil(credito) 
+    FROM clientes;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-76">Ejercicio 76</h2>
+<p>Un supermercado almacena en una tabla denominada &quot;proveedores&quot; los datos de las compañías que le proveen de mercaderías; en una tabla llamada &quot;clientes&quot;, los datos de los comercios que le compran y en otra tabla &quot;empleados&quot; los datos de los empleados.</p>
+<ol>
+<li><p>Cree las tablas.</p>
+<ul>
+<li><p>proveedores</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar</em>. (30)</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>clientes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar</em>. (30)</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>empleados</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>apellido</strong>, <em>varchar(20)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros.</li>
+<li>El supermercado quiere enviar una tarjeta de salutación a todos los proveedores, clientes y empleados y necesita el nombre y domicilio de todos ellos. Emplee el operador &quot;union&quot; para obtener dicha información de las tres tablas.</li>
+<li><p>Agregue una columna con un literal para indicar si es un proveedor, un cliente o un empleado y ordene por dicha columna.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 76
+******************************************************************************/
+
+DROP TABLE IF EXISTS proveedores;
+
+CREATE TABLE proveedores (
+    codigo SERIAL,
+    nombre VARCHAR (30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(codigo)
+);
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR (30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(codigo)
+);
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(20),
+    apellido VARCHAR(20),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(documento)
+);
+
+INSERT INTO proveedores(nombre,domicilio) 
+    VALUES  (&#39;Bebida cola&#39;,&#39;Colon 123&#39;),
+        (&#39;Carnes Unica&#39;,&#39;Caseros 222&#39;),
+        (&#39;Lacteos Blanca&#39;,&#39;San Martin 987&#39;),
+        (&#39;Supermercado Lopez&#39;,&#39;Avellaneda 34&#39;),
+        (&#39;Almacen Anita&#39;,&#39;Colon 987&#39;),
+        (&#39;Garcia Juan&#39;,&#39;Sucre 345&#39;),
+        (&#39;23333333&#39;,&#39;Federico&#39;,&#39;Lopez&#39;,&#39;Colon 987&#39;),
+        (&#39;28888888&#39;,&#39;Ana&#39;,&#39;Marquez&#39;,&#39;Sucre 333&#39;),
+        (&#39;30111111&#39;,&#39;Luis&#39;,&#39;Perez&#39;,&#39;Caseros 956&#39;);
+
+SELECT nombre, domicilio FROM proveedores
+    UNION
+    SELECT nombre, domicilio FROM clientes
+        UNION
+        SELECT (apellido||&#39; &#39;||nombre), domicilio FROM empleados;
+
+SELECT nombre, domicilio, &#39;proveedor&#39; AS categoria FROM proveedores
+    UNION
+    SELECT nombre, domicilio, &#39;cliente&#39; FROM clientes
+        UNION
+        SELECT (apellido||&#39; &#39;||nombre), domicilio , &#39;empleado&#39; FROM empleados
+            ORDER BY categoria;
+</code></pre>
+
+</body>
+</html>
+

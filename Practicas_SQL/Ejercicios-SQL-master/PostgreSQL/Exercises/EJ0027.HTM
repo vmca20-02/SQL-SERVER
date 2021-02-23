@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-27">Ejercicio 27</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla &quot;empleados&quot; que guarda los siguientes datos: nombre, documento, sexo, domicilio, sueldobasico.</p>
+<ol>
+<li><p>Cree la tabla eligiendo el tipo de dato adecuado para cada campo:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><em><strong>sueldobasico</strong>, </em>decimal(7<em>., 2), --máximo estimado 99999.99</em>.</li>
+<li><strong>cantidadhijos</strong>, <em>smallint</em>. --no superará los 255</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Pérez', '22333444', 'm', 'Sarmiento 123', 500, 2</em>.</li>
+<li><em>'Ana Acosta', '24555666', 'f', 'Colon 134', 850, 0</em>.</li>
+<li><em>'Bartolomé Barrios', '27888999', 'm', 'Urquiza 479', 10000.80, 4</em>.</li>
+</ul></li>
+<li><p>Ingrese un valor de &quot;sueldobasico&quot; con más decimales que los definidos (<em>redondea los decimales al valor más cercano 800.89</em>).</p>
+<ul>
+<li><em>'Susana Molina', '29000555', 'f', 'Salta 876', 800.888, 3</em>.</li>
+</ul></li>
+<li>Intente ingresar un sueldo que supere los 7 dígitos (<em>no lo permite</em>)</li>
+<li>Muestre todos los empleados cuyo sueldo no supere los 900 pesos (<em>1 registro</em>).</li>
+<li><p>Seleccione los nombres de los empleados que tengan hijos (<em>3 registros</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 27
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    sexo CHAR(1),
+    domicilio VARCHAR(30),
+    sueldobasico DECIMAL(7,2),
+    cantidadhijos SMALLINT
+);
+
+INSERT INTO empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+    VALUES  (&#39;Juan Perez&#39;,&#39;22333444&#39;,&#39;m&#39;,&#39;Sarmiento 123&#39;,500,2),
+        (&#39;Ana Acosta&#39;,&#39;24555666&#39;,&#39;f&#39;,&#39;Colon 134&#39;,850,0),
+        (&#39;Bartolome Barrios&#39;,&#39;27888999&#39;,&#39;m&#39;,&#39;Urquiza 479&#39;,10000.80,4),
+        (&#39;Susana Molina&#39;,&#39;29000555&#39;,&#39;f&#39;,&#39;Salta 876&#39;,800.888,3),
+        (&#39;Marta Juarez&#39;,&#39;32444555&#39;,&#39;f&#39;,&#39;Sucre 1086&#39;,5000000,2);
+
+SELECT * FROM empleados
+    WHERE sueldobasico &lt;&gt;900;
+    
+SELECT * FROM empleados
+    WHERE cantidadhijos &gt; 0;
+</code></pre>
+
+</body>
+</html>
+

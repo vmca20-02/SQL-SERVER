@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-19">Ejercicio 19</h2>
+<p>Trabaje con la tabla &quot;libros&quot; de una librería.</p>
+<ol>
+<li><p>Créela con los siguientes campos, estableciendo como clave primaria el campo &quot;codigo&quot;:</p>
+<ul>
+<li><strong>codigo</strong>, <em>int</em>. not null</li>
+<li><strong>titulo</strong>, <em>varchar(40)</em>. not null</li>
+<li><strong>autor</strong>, <em>varchar(20)</em>.</li>
+<li><strong>editorial</strong>, <em>varchar(15)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>1, 'El aleph', 'Borges', 'Emece'</em>.</li>
+<li><em>2, 'Martin Fierro', 'José Hernández', 'Planeta'</em>.</li>
+<li><em>3, 'Aprenda PHP', 'Mario Molina', 'Nuevo Siglo'</em>.</li>
+</ul></li>
+<li>Ingrese un registro con código repetido (<em>aparece un mensaje de error</em>)</li>
+<li>Intente ingresar el valor &quot;null&quot; en el campo &quot;codigo&quot;</li>
+<li><p>Intente actualizar el código del libro &quot;Martin Fierro&quot; a &quot;1&quot; (<em>mensaje de error</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 19
+******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros (
+    codigo INT NOT NULL,
+    titulo VARCHAR(40) NOT NULL,
+    autor VARCHAR(20),
+    editorial VARCHAR(15),
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO libros (codigo,titulo,autor,editorial)
+    VALUES  (1,&#39;El aleph&#39;,&#39;Borges&#39;,&#39;Emece&#39;),
+        (2,&#39;Martin Fierro&#39;,&#39;Jose Hernandez&#39;,&#39;Planeta&#39;),
+        (3,&#39;Aprenda PHP&#39;,&#39;Mario Molina&#39;,&#39;Nuevo Siglo&#39;);
+        
+INSERT INTO libros (codigo,titulo,autor,editorial)
+    VALUES  (2,&#39;Alicia en el pais de las maravillas&#39;,&#39;Lewis Carroll&#39;,&#39;Planeta&#39;);
+    
+INSERT INTO libros (codigo,titulo,autor,editorial)
+    VALUES  (NULL,&#39;Alicia en el pais de las maravillas&#39;,&#39;Lewis Carroll&#39;,&#39;Planeta&#39;);
+    
+UPDATE libros SET codigo=1
+    WHERE titulo=&#39;Martin Fierro&#39;;
+</code></pre>
+
+</body>
+</html>
+

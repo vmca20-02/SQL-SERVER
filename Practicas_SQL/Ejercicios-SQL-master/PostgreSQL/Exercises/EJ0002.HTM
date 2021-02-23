@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-2">Ejercicio 2</h2>
+<p>Necesita almacenar información referente a los libros de su biblioteca personal. Los datos que guardará serán: título del libro, nombre del autor y nombre de la editorial.</p>
+<ol>
+<li><p>Cree una tabla llamada <strong>&quot;libros&quot;</strong> que tenga la siguiente estructura:</p>
+<ul>
+<li><strong>titulo</strong>, <em>varchar(20)</em>.</li>
+<li><strong>autor</strong>, <em>varchar(30)</em>.</li>
+<li><strong>editorial</strong>, <em>varchar(15)</em>.</li>
+</ul></li>
+<li>Intente crearla nuevamente (<em>Aparece mensaje de error</em>).</li>
+<li>Visualice la estructura de la tabla.</li>
+<li>Elimine la tabla.</li>
+<li><p>Intente eliminar la tabla nuevamente.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 2
+******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros(
+    titulo VARCHAR(20),
+    autor VARCHAR(30),
+    editorial VARCHAR(15)
+);
+
+CREATE TABLE libros(
+    titulo VARCHAR(20),
+    autor VARCHAR(30),
+    editorial VARCHAR(15)
+); -- Should fail
+
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;libros&#39;;
+
+DROP TABLE libros;
+
+DROP TABLE libros; -- Should fail
+</code></pre>
+
+</body>
+</html>
+

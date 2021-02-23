@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-32">Ejercicio 32</h2>
+<p>Trabaje con la tabla &quot;libros&quot; de una librería.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>titulo</strong>, <em>varchar(40)</em>. not null</li>
+<li><strong>autor</strong>, <em>varchar(20)</em>. default 'Desconocido'</li>
+<li><strong>editorial</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>. default 0</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'El aleph', 'Borges', 'Emece', 25</em>.</li>
+<li><em>'Java en 10 minutos', 'Mario Molina', 'Siglo XXI', 50.40, 100</em>.</li>
+<li><em>'Alicia en el pais de las maravillas', 'Lewis Carroll', 'Emece', 15, 50</em>.</li>
+</ul></li>
+<li>Muestre todos los campos de los libros y un campo extra, con el encabezado &quot;monto_total&quot; en la que calcule el monto total en dinero de cada libro (<em>precio por cantidad</em>)</li>
+<li>Muestre el título, autor y precio de todos los libros de editorial &quot;Emece&quot; y agregue dos columnas extra en las cuales muestre el descuento de cada libro, con el encabezado &quot;descuento&quot; y el precio con un 10% de descuento con el encabezado &quot;precio_final&quot;.</li>
+<li><p>Muestre una columna con el título y el autor concatenados con el encabezado &quot;título_y_autor&quot;</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 32
+******************************************************************************/
+
+DROP TABLE IF EXISTS libros;
+
+CREATE TABLE libros (
+    codigo SERIAL,
+    titulo VARCHAR(40) NOT NULL,
+    autor VARCHAR(20) DEFAULT &#39;DESConocido&#39;,
+    editorial VARCHAR(20),
+    precio DECIMAL(6,2),
+    cantidad SMALLINT DEFAULT 0,
+    PRIMARY KEY (codigo)
+);
+INSERT INTO libros (titulo,autor,editorial,precio)
+    VALUES  (&#39;El aleph&#39;,&#39;Borges&#39;,&#39;Emece&#39;,25),
+        (&#39;Java en 10 MINutos&#39;,&#39;Mario Molina&#39;,&#39;Siglo XXI&#39;,50.40,100),
+        (&#39;Alicia en el pais de las maravillas&#39;,&#39;Lewis Carroll&#39;,&#39;Emece&#39;,15,50);
+
+SELECT titulo, autor,editorial,precio,cantidad,precio*cantidad AS monto_total
+    FROM libros;
+
+SELECT titulo,autor,precio,
+    precio*0.1 AS descuento,
+    precio-(precio*0.1) AS precio_final
+    FROM libros
+    WHERE editorial=&#39;Emece&#39;;
+
+SELECT titulo||&#39;-&#39;||autor AS titulo_y_autor
+    FROM libros;
+</code></pre>
+
+</body>
+</html>
+

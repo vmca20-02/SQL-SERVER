@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-87">Ejercicio 87</h2>
+<p>Una empresa registra los datos de sus empleados en una tabla llamada &quot;empleados&quot;.</p>
+<ol>
+<li>Cree la secuencia &quot;sec_legajoempleados&quot; estableciendo el valor mínimo (1), máximo (999), valor inicial (100), valor de incremento (2) y no circular.</li>
+<li><p>Cree la tabla:</p>
+<ul>
+<li><strong>legajo</strong>, <em>bigint</em>. default nextval('sec_legajoempleados')</li>
+<li><strong>documento</strong>, <em>char(8)</em>. not null</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>. not null</li>
+<li><strong>primary key</strong>, <em>legajo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'22333444', 'Ana Acosta'</em>.</li>
+<li><em>'23444555', 'Betina Bustamante'</em>.</li>
+<li><em>'24555666', 'Carlos Caseros'</em>.</li>
+<li><em>'25666777', 'Diana Domínguez'</em>.</li>
+<li><em>'26777888', 'Estela Esper'</em>.</li>
+</ul></li>
+<li>Recupere los registros de la tabla empleados.</li>
+<li>Efectue un #####</li>
+<li><p>Elimine la secuencia y la tabla asociada a dicha secuencia.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 87
+******************************************************************************/
+
+CREATE SEQUENCE sec_legajoempleados
+    START WITH 100
+    MINVALUE 1
+    MAXVALUE 999
+    INCREMENT BY 2;
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    legajo bigINT DEFAULT NEXTVAL(&#39;sec_legajoempleados&#39;),
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    PRIMARY KEY(legajo)
+);
+
+INSERT INTO empleados(documento,nombre)
+    VALUES  (&#39;22333444&#39;,&#39;Ana Acosta&#39;),
+        (&#39;23444555&#39;,&#39;Betina Bustamante&#39;),
+        (&#39;24555666&#39;,&#39;Carlos Caseros&#39;),
+        (&#39;25666777&#39;,&#39;Diana DoMINguez&#39;),
+        (&#39;26777888&#39;,&#39;Estela Esper&#39;);
+
+SELECT * FROM empleados;
+
+SELECT * FROM sec_legajoempleados;
+
+DROP SEQUENCE sec_legajoempleados;
+</code></pre>
+
+</body>
+</html>
+

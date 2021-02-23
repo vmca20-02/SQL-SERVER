@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-49">Ejercicio 49</h2>
+<p>Un comercio que tiene un stand en una feria registra en una tabla llamada &quot;visitantes&quot; algunos datos<br />de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>smallint</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+<li><strong>montocompra</strong>, <em>decimal(6</em>., 2) not null</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Susana Molina', 28, 'f', null, 'Córdoba', null, 45.50); </em>.</li>
+<li><em>'Marcela Mercado', 36, 'f', 'Avellaneda 345', 'Córdoba', '4545454', 22.40</em>.</li>
+<li><em>'Alberto García', 35, 'm', 'Gral. Paz 123', 'Alta Gracia', '03547123456', 25); </em>.</li>
+<li><em>'Teresa García', 33, 'f', default, 'Alta Gracia', '03547123456', 120</em>.</li>
+<li><em>'Roberto Pérez', 45, 'm', 'Urquiza 335', 'Córdoba', '4123456', 33.20</em>.</li>
+<li><em>'Marina Torres', 22, 'f', 'Colon 222', 'Villa Dolores', '03544112233', 95</em>.</li>
+<li><em>'Julieta Gómez', 24, 'f', 'San Martin 333', 'Alta Gracia', null, 53.50</em>.</li>
+<li><em>'Roxana López', 20, 'f', 'null', 'Alta Gracia', null, 240</em>.</li>
+<li><em>'Liliana García', 50, 'f', 'Paso 999', 'Córdoba', '4588778', 48</em>.</li>
+<li><em>'Juan Torres', 43, 'm', 'Sarmiento 876', 'Córdoba', null, 15.30</em>.</li>
+</ul></li>
+<li>Obtenga el total de las compras agrupados por ciudad y sexo de aquellas filas que devuelvan un<br />valor superior a 50 (<em>3 filas</em>)</li>
+<li><p>Agrupe por ciudad y sexo, muestre para cada grupo el total de visitantes, la suma de sus compras<br />y el promedio de compras, ordenado por la suma total y considerando las filas con promedio superior<br />a 30 (<em>3 filas</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 49
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS visitantes;
+
+CREATE TABLE visitantes (
+    nombre VARCHAR(30),
+    edad SMALLINT,
+    sexo CHAR(1),
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    telefono VARCHAR(11),
+    montocompra DECIMAL(6,2) NOT NULL
+);
+INSERT INTO visitantes
+    VALUES  (&#39;Susana Molina&#39;,28,&#39;f&#39;,NULL,&#39;Cordoba&#39;,NULL,45.50),
+        (&#39;Marcela Mercado&#39;,36,&#39;f&#39;,&#39;Avellaneda 345&#39;,&#39;Cordoba&#39;,&#39;4545454&#39;,22.40),
+        (&#39;Alberto Garcia&#39;,35,&#39;m&#39;,&#39;Gral. Paz 123&#39;,&#39;Alta Gracia&#39;,&#39;03547123456&#39;,25),
+        (&#39;Teresa Garcia&#39;,33,&#39;f&#39;,DEFAULT,&#39;Alta Gracia&#39;,&#39;03547123456&#39;,120),
+        (&#39;Roberto Perez&#39;,45,&#39;m&#39;,&#39;Urquiza 335&#39;,&#39;Cordoba&#39;,&#39;4123456&#39;,33.20),
+        (&#39;Marina Torres&#39;,22,&#39;f&#39;,&#39;Colon 222&#39;,&#39;Villa Dolores&#39;,&#39;03544112233&#39;,95),
+        (&#39;Julieta Gomez&#39;,24,&#39;f&#39;,&#39;San Martin 333&#39;,&#39;Alta Gracia&#39;,NULL,53.50),
+        (&#39;Roxana Lopez&#39;,20,&#39;f&#39;,&#39;NULL&#39;,&#39;Alta Gracia&#39;,NULL,240),
+        (&#39;Liliana Garcia&#39;,50,&#39;f&#39;,&#39;Paso 999&#39;,&#39;Cordoba&#39;,&#39;4588778&#39;,48),
+        (&#39;Juan Torres&#39;,43,&#39;m&#39;,&#39;Sarmiento 876&#39;,&#39;Cordoba&#39;,NULL,15.30);
+        
+SELECT ciudad,sexo,
+    SUM(montocompra) AS Total
+    FROM visitantes
+    GROUP BY ciudad,sexo
+    HAVING SUM(montocompra) &gt; 50;
+
+SELECT ciudad,sexo, COUNT(*) AS cantidad,
+    SUM(montocompra) AS total,
+    AVG(montocompra) AS promedio
+    FROM visitantes
+    GROUP BY ciudad,sexo
+    HAVING AVG(montocompra) &gt; 30
+    ORDER BY total;
+</code></pre>
+
+</body>
+</html>
+

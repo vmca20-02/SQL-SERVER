@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-23">Ejercicio 23</h2>
+<p>Una farmacia guarda información referente a sus medicamentos en una tabla llamada &quot;medicamentos&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>float</em>.</li>
+<li><strong>cantidad</strong>, <em>integer</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 100</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 200</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100</em>.</li>
+</ul></li>
+<li>Elimine todos los registros con &quot;DELETE&quot;.</li>
+<li><p>Inserte los siguientes registros en la tabla:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 100</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100</em>.</li>
+</ul></li>
+<li>Vea los registros para verificar que continuó la secuencia al generar el valor para &quot;codigo&quot;</li>
+<li>Vacíe la tabla con TRUNCATE TABLE reiniciando el índice (<em>RESTART IDENTITY</em>).</li>
+<li><p>Ingrese el siguiente registro:</p>
+<ul>
+<li><em>'Buscapina', 'Roche', 4.10, 200</em>.</li>
+</ul></li>
+<li><p>Vea los registros para verificar que al cargar el código reinició la secuencia en 1.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 23
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio FLOAT,
+    cantidad INTEGER,
+    PRIMARY KEY (codigo)
+);
+
+INSERT INTO medicamentos (nombre, laboratorio,precio,cantidad)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,100),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,200),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100);
+        
+DELETE FROM medicamentos;
+
+INSERT INTO medicamentos (nombre, laboratorio,precio,cantidad)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,100),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100);
+        
+SELECT * FROM medicamentos;
+
+TRUNCATE TABLE medicamentos RESTART IDENTITY;
+
+INSERT INTO medicamentos (nombre, laboratorio,precio,cantidad)
+    VALUES  (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,200);
+    
+SELECT * FROM medicamentos;
+</code></pre>
+
+</body>
+</html>
+

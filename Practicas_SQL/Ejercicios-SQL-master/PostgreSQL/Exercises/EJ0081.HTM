@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-81">Ejercicio 81</h2>
+<p>Un club dicta clases de distintos deportes a sus socios. El club tiene una tabla llamada &quot;inscritos&quot; en la cual almacena el número de &quot;socio&quot;, el código del deporte en el cual se inscribe y la cantidad de cuotas pagas (<em>desde 0 hasta 10 que es el total por todo el año</em>), y una tabla denominada &quot;socios&quot; en la que guarda los datos personales de cada socio.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>inscritos</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+<li><p>socios</p>
+<ul>
+<li><strong>numerosocio</strong>, <em>int</em>. not null</li>
+<li><strong>deporte</strong>, <em>varchar(20)</em>. not null</li>
+<li><strong>cuotas</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, *(numerosocio., deporte)</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros:</li>
+<li>Emplee una subconsulta con el operador &quot;exists&quot; para devolver la lista de socios que se inscribieron en 'natacion' (<em>3 registros</em>).</li>
+<li>Busque los socios que NO se han inscripto en 'natacion' empleando &quot;not exists&quot; (<em>1 registro</em>).</li>
+<li><p>Muestre todos los datos de los socios que han pagado todas las cuotas (<em>1 registro</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 81
+******************************************************************************/
+
+DROP TABLE IF EXISTS socios;
+
+CREATE TABLE socios (
+    numero SERIAL,
+    documento CHAR(8),
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY (numero)
+);
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    numerosocio INT NOT NULL,
+    deporte VARCHAR(20) NOT NULL,
+    cuotas SMALLINT,
+    PRIMARY KEY(numerosocio,deporte)
+);
+
+INSERT INTO socios(documento,nombre,domicilio) 
+    VALUES  (&#39;23333333&#39;,&#39;Alberto Paredes&#39;,&#39;Colon 111&#39;),
+        (&#39;24444444&#39;,&#39;Carlos Conte&#39;,&#39;Sarmiento 755&#39;),
+        (&#39;25555555&#39;,&#39;Fabian Fuentes&#39;,&#39;Caseros 987&#39;),
+        (&#39;26666666&#39;,&#39;Hector Lopez&#39;,&#39;Sucre 344&#39;);
+
+INSERT INTO inscritos 
+    VALUES  (1,&#39;tenis&#39;,1),
+        (1,&#39;basquet&#39;,2),
+        (1,&#39;natacion&#39;,1),
+        (2,&#39;tenis&#39;,9),
+        (2,&#39;natacion&#39;,1),
+        (2,&#39;basquet&#39;,DEFAULT),
+        (2,&#39;futbol&#39;,2),
+        (3,&#39;tenis&#39;,8),
+        (3,&#39;basquet&#39;,9),
+        (3,&#39;natacion&#39;,0),
+        (4,&#39;basquet&#39;,10);
+        
+SELECT nombre
+    FROM socios AS s
+    WHERE exists
+    (SELECT *FROM inscritos AS i
+         WHERE s.numero=i.numerosocio
+         AND i.deporte=&#39;natacion&#39;);
+         
+SELECT nombre
+    FROM socios AS s
+    WHERE NOT exists
+    (SELECT *FROM inscritos AS i
+         WHERE s.numero=i.numerosocio
+         AND i.deporte=&#39;natacion&#39;);
+         
+SELECT s.*
+    FROM socios AS s
+    WHERE exists
+    (SELECT *FROM inscritos AS i
+         WHERE s.numero=i.numerosocio
+         AND i.cuotas=10);
+</code></pre>
+
+</body>
+</html>
+

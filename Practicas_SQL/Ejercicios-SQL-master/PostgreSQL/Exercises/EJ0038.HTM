@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-38">Ejercicio 38</h2>
+<p>Trabajamos con la tabla &quot;peliculas&quot; de un vídeo club que alquila películas en vídeo.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>titulo</strong>, <em>varchar(40)</em>. not null</li>
+<li><strong>actor</strong>, <em>varchar(20)</em>.</li>
+<li><strong>duracion</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Misión imposible', 'Tom Cruise', 120</em>.</li>
+<li><em>'Harry Potter y la piedra filosofal', 'Daniel R.', 180</em>.</li>
+<li><em>'Harry Potter y la cámara secreta', 'Daniel R.', 190</em>.</li>
+<li><em>'Misión imposible 2', 'Tom Cruise', 120</em>.</li>
+<li><em>'Mujer bonita', 'Richard Gere', 120</em>.</li>
+<li><em>'Tootsie', 'D. Hoffman', 90</em>.</li>
+<li><em>'Un oso rojo', 'Julio Chávez', 100</em>.</li>
+<li><em>'Elsa y Fred', 'China Zorrilla', 110</em>.</li>
+</ul></li>
+<li>Recupere los registros cuyo actor sea &quot;Tom Cruise&quot; or &quot;Richard Gere&quot; (<em>3 registros</em>)</li>
+<li>Recupere los registros cuyo actor sea &quot;Tom Cruise&quot; y duración menor a 100 (<em>ninguno cumple ambas<br />condiciones</em>)</li>
+<li>Cambie la duración a 200, de las películas cuyo actor sea &quot;Daniel R.&quot; y cuya duración sea 180 (<em>1<br />registro afectado</em>)</li>
+<li><p>Borre todas las películas donde el actor NO sea &quot;Tom Cruise&quot; y cuya duración sea mayor o igual a<br />100 (<em>2 registros eliminados</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 38
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS peliculas;
+
+CREATE TABLE peliculas (
+    codigo SERIAL,
+    titulo VARCHAR(40) NOT NULL,
+    actor VARCHAR(20),
+    duracion SMALLINT,
+    PRIMARY KEY (codigo)
+);
+INSERT INTO peliculas (titulo,actor,duracion)
+    VALUES  (&#39;Mision imposible&#39;,&#39;Tom Cruise&#39;,120),
+        (&#39;Harry Potter y la piedra filosofal&#39;,&#39;Daniel R.&#39;,180),
+        (&#39;Harry Potter y la camara secreta&#39;,&#39;Daniel R.&#39;,190),
+        (&#39;Mision imposible 2&#39;,&#39;Tom Cruise&#39;,120),
+        (&#39;Mujer bonita&#39;,&#39;Richard Gere&#39;,120),
+        (&#39;Tootsie&#39;,&#39;D. Hoffman&#39;,90),
+        (&#39;Un oso rojo&#39;,&#39;Julio Chavez&#39;,100),
+        (&#39;Elsa y Fred&#39;,&#39;China Zorrilla&#39;,110);
+
+SELECT * FROM peliculas
+    WHERE actor=&#39;Tom Cruise&#39; OR actor=&#39;Richard Gere&#39;;
+    
+SELECT * FROM peliculas
+    WHERE actor=&#39;Tom Cruise&#39; AND duracion &lt; 100;
+    
+UPDATE peliculas SET duracion=200
+    WHERE actor=&#39;Daniel R.&#39; AND duracion=180;
+    
+DELETE FROM peliculas
+    WHERE NOT actor=&#39;Tom Cruise&#39; AND duracion &lt;&gt;100;
+</code></pre>
+
+</body>
+</html>
+

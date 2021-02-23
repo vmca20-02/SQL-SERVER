@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-6">Ejercicio 6</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla &quot;empleados&quot; que guarda los siguientes datos: nombre, documento, sexo, domicilio, sueldobasico.</p>
+<ol>
+<li>Cree la tabla eligiendo el tipo de dato adecuado para cada campo.</li>
+<li>Visualice la estructura de la tabla.</li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Pérez', '22333444', 'm', 'Sarmiento 123', 500</em>.</li>
+<li><em>'Ana Acosta', '24555666', 'f', 'Colon 134', 650</em>.</li>
+<li><em>'Bartolomé Barrios', '27888999', 'm', 'Urquiza 479', 800</em>.</li>
+</ul></li>
+<li><p>Seleccione todos los registros.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 6
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(20),
+    documento VARCHAR(8),
+    sexo VARCHAR(1),
+    domicilio VARCHAR(30),
+    sueldobasico FLOAT
+);
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;empleados&#39;;
+
+INSERT INTO empleados (nombre, documento, sexo, domicilio, sueldobasico)
+    VALUES  (&#39;Juan Perez&#39;,&#39;22333444&#39;,&#39;m&#39;,&#39;Sarmiento 123&#39;,500),
+        (&#39;Ana Acosta&#39;,&#39;24555666&#39;,&#39;f&#39;,&#39;Colon 134&#39;,650),
+        (&#39;Bartolome Barrios&#39;,&#39;27888999&#39;,&#39;m&#39;,&#39;Urquiza 479&#39;,800);
+
+SELECT *FROM empleados;
+</code></pre>
+
+</body>
+</html>
+

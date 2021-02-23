@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-68">Ejercicio 68</h2>
+<p>Una empresa de seguridad almacena los datos de sus guardias de seguridad en una tabla llamada &quot;guardias&quot;. También almacena los distintos sitios que solicitaron sus servicios en una tabla llamada &quot;tareas&quot;.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>guardias</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>., /* 'f' o 'm' */</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>tareas</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>descripcion</strong>, <em>varchar(30)</em>.</li>
+<li><strong>horario</strong>, <em>char(2)</em>., /* 'AM' o 'PM'*/</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Colon 1111', 'vigilancia exterior', 'AM'</em>.</li>
+<li><em>'Urquiza 234', 'vigilancia exterior', 'PM'</em>.</li>
+<li><em>'Perú 345', 'vigilancia interior', 'AM'</em>.</li>
+<li><em>'Avellaneda 890', 'vigilancia interior', 'PM'</em>.</li>
+</ul></li>
+<li>La empresa quiere que todos sus empleados realicen todas las tareas. Realice una &quot;cross join&quot; (<em>20 registros</em>)</li>
+<li><p>En este caso, la empresa quiere que todos los guardias de sexo femenino realicen las tareas de &quot;vigilancia interior&quot; y los de sexo masculino de &quot;vigilancia exterior&quot;. Realice una &quot;cross join&quot; con un &quot;where&quot; que controle tal requisito (<em>10 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 68
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS guardias;
+
+CREATE TABLE guardias (
+    documento CHAR(8),
+    nombre VARCHAR(30),
+    sexo CHAR(1),
+    domicilio VARCHAR(30),
+    PRIMARY KEY (documento)
+);
+DROP TABLE IF EXISTS tareas;
+
+CREATE TABLE tareas (
+    codigo SERIAL,
+    domicilio VARCHAR(30),
+    descripcion VARCHAR(30),
+    horario CHAR(2),
+    PRIMARY KEY (codigo)
+);
+
+INSERT INTO guardias 
+    VALUES  (&#39;22333444&#39;,&#39;Juan Perez&#39;,&#39;m&#39;,&#39;Colon 123&#39;),
+        (&#39;24333444&#39;,&#39;Alberto Torres&#39;,&#39;m&#39;,&#39;San Martin 567&#39;),
+        (&#39;25333444&#39;,&#39;Luis Ferreyra&#39;,&#39;m&#39;,&#39;Chacabuco 235&#39;),
+        (&#39;23333444&#39;,&#39;Lorena Viale&#39;,&#39;f&#39;,&#39;Sarmiento 988&#39;),
+        (&#39;26333444&#39;,&#39;Irma Gonzalez&#39;,&#39;f&#39;,&#39;Mariano Moreno 111&#39;);
+        
+INSERT INTO tareas(domicilio,descripcion,horario) 
+    VALUES  (&#39;Colon 1111&#39;,&#39;vigilancia exterior&#39;,&#39;AM&#39;),
+        (&#39;Urquiza 234&#39;,&#39;vigilancia exterior&#39;,&#39;PM&#39;),
+        (&#39;Peru 345&#39;,&#39;vigilancia interior&#39;,&#39;AM&#39;),
+        (&#39;Avellaneda 890&#39;,&#39;vigilancia interior&#39;,&#39;PM&#39;);
+        
+SELECT nombre,t.domicilio,descripcion
+    FROM guardias
+    CROSS JOIN tareas AS t;
+    
+SELECT nombre,t.domicilio,descripcion
+    FROM guardias AS g
+    CROSS JOIN tareas AS t
+    WHERE (g.sexo=&#39;f&#39; AND t.descripcion=&#39;vigilancia interior&#39;) OR   (g.sexo=&#39;m&#39; AND t.descripcion=&#39;vigilancia exterior&#39;);
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-52">Ejercicio 52</h2>
+<p>Un consultorio médico en el cual trabajan 3 médicos registra las consultas de los pacientes en una<br />tabla llamada &quot;consultas&quot;.</p>
+<ol>
+<li><p>La tabla contiene los siguientes datos:</p>
+<ul>
+<li><strong>fechayhora</strong>: <em>timestamp not null</em>, fecha y hora de la consulta</li>
+<li><em><strong>medico</strong>: </em>varchar(30), not null<em>, nombre del médico (</em>Pérez, López, Duarte<em>)</em>.</li>
+<li><strong>documento</strong>: <em>char(8) not null</em>, documento del paciente</li>
+<li><strong>paciente</strong>: <em>varchar(30)</em>, nombre del paciente</li>
+<li><em><strong>obrasocial</strong>: </em>varchar(30)<em>, nombre de la obra social (</em>IPAM, PAMI, etc.<em>).</em>.</li>
+</ul></li>
+<li><p>Un médico sólo puede atender a un paciente en una fecha y hora determinada. En una fecha y hora determinada, varios médicos atienden a distintos pacientes. Cree la tabla definiendo una clave<br />primaria compuesta:</p>
+<ul>
+<li><strong>fechayhora</strong>, <em>timestamp</em>. not null</li>
+<li><strong>medico</strong>, <em>varchar(30)</em>. not null</li>
+<li><strong>documento</strong>, <em>char(8)</em>. not null</li>
+<li><strong>paciente</strong>, <em>varchar(30)</em>.</li>
+<li><strong>obrasocial</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>(fechayhora., medico)</em>.</li>
+</ul></li>
+<li>Ingrese varias consultas para un mismo médico en distintas horas el mismo día.</li>
+<li>Ingrese varias consultas para diferentes médicos en la misma fecha y hora.</li>
+<li><p>Intente ingresar una consulta para un mismo médico en la misma hora el mismo día.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 52
+******************************************************************************/
+
+DROP TABLE IF EXISTS consultas;
+
+CREATE TABLE consultas (
+    fechayhora TIMESTAMP NOT NULL,
+    medico VARCHAR(30) NOT NULL,
+    documento CHAR(8) NOT NULL,
+    paciente VARCHAR(30),
+    obrasocial VARCHAR(30),
+    PRIMARY KEY(fechayhora,medico)
+);
+INSERT INTO consultas
+    VALUES  (&#39;2006/11/05 8:00&#39;,&#39;Lopez&#39;,&#39;12222222&#39;,&#39;Acosta Betina&#39;,&#39;PAMI&#39;);
+
+INSERT INTO consultas
+    VALUES  (&#39;2006/11/05 8:30&#39;,&#39;Lopez&#39;,&#39;23333333&#39;,&#39;Fuentes Carlos&#39;,&#39;PAMI&#39;);
+
+INSERT INTO consultas
+    VALUES  (&#39;2006/11/05 8:00&#39;,&#39;Perez&#39;,&#39;34444444&#39;,&#39;Garcia Marisa&#39;,&#39;IPAM&#39;);
+
+INSERT INTO consultas
+    VALUES  (&#39;2006/11/05 8:00&#39;,&#39;Duarte&#39;,&#39;45555555&#39;,&#39;Pereyra Luis&#39;,&#39;PAMI&#39;);
+
+INSERT INTO consultas
+    VALUES  (&#39;2006/11/05 8:00&#39;,&#39;Perez&#39;,&#39;23333333&#39;,&#39;Fuentes Carlos&#39;,&#39;PAMI&#39;);
+</code></pre>
+
+</body>
+</html>
+

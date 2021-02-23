@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-44">Ejercicio 44</h2>
+<p>Trabaje con la tabla llamada &quot;medicamentos&quot; de una farmacia.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>.</li>
+<li><strong>fechavencimiento</strong>, <em>date</em>. not null</li>
+<li><strong>numerolote</strong>, <em>int</em>. default null</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 1, '2005-02-01', null</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 3, '2006-03-01', null</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100, '2007-05-01', null</em>.</li>
+<li><em>'Paracetamol 500', 'Bago'</em>.<br />1.90, 20, '2008-02-01', null</li>
+<li><em>'Bayaspirina', null, 2.10, null, '2009-12-01', null); </em>.</li>
+<li><em>'Amoxidal jarabe', 'Bayer', null, 250, '2009-12-15', null); </em>.</li>
+</ul></li>
+<li>Muestre la cantidad de registros empleando la función &quot;count(<em>)&quot; (</em>6 registros*)</li>
+<li>Cuente la cantidad de medicamentos que tienen laboratorio conocido (<em>5 registros</em>)</li>
+<li>Cuente la cantidad de medicamentos que tienen precio distinto a &quot;null&quot; y que tienen cantidad<br />distinto a &quot;null&quot;, disponer alias para las columnas.</li>
+<li>Cuente la cantidad de remedios con precio conocido, cuyo laboratorio comience con &quot;B&quot; (<em>2<br />registros</em>)</li>
+<li><p>Cuente la cantidad de medicamentos con número de lote distinto de &quot;null&quot; (<em>0 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 44
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio DECIMAL(6,2),
+    cantidad SMALLINT,
+    fechavencimiento DATE NOT NULL,
+    numerolote INT DEFAULT NULL,
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO medicamentos(nombre,laboratorio,precio,cantidad,fechavencimiento,numerolote)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,1,&#39;2005-02-01&#39;,NULL),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,3,&#39;2006-03-01&#39;,NULL),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100,&#39;2007-05-01&#39;,NULL),
+        (&#39;Paracetamol 500&#39;,&#39;Bago&#39;,1.90,20,&#39;2008-02-01&#39;,NULL),
+        (&#39;Bayaspirina&#39;,NULL,2.10,NULL,&#39;2009-12-01&#39;,NULL),
+        (&#39;Amoxidal jarabe&#39;,&#39;Bayer&#39;,NULL,250,&#39;2009-12-15&#39;,NULL); 
+        
+SELECT COUNT(*)
+    FROM medicamentos;
+    
+SELECT COUNT(laboratorio)
+    FROM medicamentos;
+    
+SELECT COUNT(precio) AS conprecio,
+    COUNT(cantidad) AS concantidad
+    FROM medicamentos;
+    
+SELECT COUNT(precio)
+    FROM medicamentos
+    WHERE laboratorio like &#39;B%&#39;;
+    
+SELECT COUNT(numerolote) 
+    FROM medicamentos;
+</code></pre>
+
+</body>
+</html>
+

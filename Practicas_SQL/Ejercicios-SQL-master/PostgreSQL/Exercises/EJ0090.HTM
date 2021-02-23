@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-90">Ejercicio 90</h2>
+<p>Trabaje con la tabla llamada &quot;medicamentos&quot; de una farmacia.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(5</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 100</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 200</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100</em>.</li>
+<li><em>'Paracetamol 500', 'Bago', 1.90, 200</em>.</li>
+<li><em>'Bayaspirina', 'Bayer', 2.10, 150); </em>.</li>
+<li><em>'Amoxidal jarabe', 'Bayer', 5.10, 250); </em>.</li>
+</ul></li>
+<li>Implementar una función que reciba el código de un medicamento y proceda a borrarlo. La función no retorna dato.</li>
+<li>Proceder a llamar a la función.</li>
+<li><p>Imprimir la tabla medicamentos.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 90
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio DECIMAL(5,2),
+    cantidad SMALLINT,
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO medicamentos (nombre,laboratorio,precio,cantidad)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,100),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,200),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100),
+        (&#39;Paracetamol 500&#39;,&#39;Bago&#39;,1.90,200),
+        (&#39;Bayaspirina&#39;,&#39;Bayer&#39;,2.10,150),
+        (&#39;Amoxidal jarabe&#39;,&#39;Bayer&#39;,5.10,250); 
+
+CREATE OR REPLACE FUNCTION borrarmedicamento(INTEGER) RETURNS void
+    as
+        &#39;DELETE FROM medicamentos WHERE codigo=$1;&#39;
+    LANGUAGE SQL;
+
+SELECT borrarmedicamento(1);
+
+SELECT * FROM medicamentos;
+</code></pre>
+
+</body>
+</html>
+

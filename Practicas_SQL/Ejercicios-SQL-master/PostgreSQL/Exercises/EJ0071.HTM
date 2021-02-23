@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-71">Ejercicio 71</h2>
+<p>Un comercio que tiene un stand en una feria registra en una tabla llamada &quot;visitantes&quot; algunos datos de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos y en otra tabla llamada &quot;ciudades&quot; los nombres de las ciudades.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>visitantes</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>smallint</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>. default 'f'</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>codigociudad</strong>, <em>smallint</em>. not null</li>
+<li><strong>mail</strong>, <em>varchar(30)</em>.</li>
+<li><strong>montocompra</strong>, <em>decimal</em>. (6, 2)</li>
+</ul></li>
+<li><p>ciudades</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Susana Molina', 35, 'f', 'Colon 123', 1, null, 59.80</em>.</li>
+<li><em>'Marcos Torres', 29, 'm', 'Sucre 56', 1, <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 150.50</em>.</li>
+<li><em>'Mariana Juárez', 45, 'f', 'San Martin 111', 2, null, 23.90</em>.</li>
+<li><em>'Fabián Pérez', 36, 'm', 'Avellaneda 213', 3, <script type="text/javascript">
+<!--
+h='&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#102;&#x61;&#98;&#x69;&#x61;&#110;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#102;&#x61;&#98;&#x69;&#x61;&#110;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 0</em>.</li>
+<li><em>'Alejandra García', 28, 'f', null, 2, null, 280.50</em>.</li>
+<li><em>'Gastón Pérez', 29, 'm', null, 5, <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x67;&#x61;&#x73;&#116;&#x6f;&#110;&#112;&#x65;&#114;&#x65;&#122;&#x31;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x67;&#x61;&#x73;&#116;&#x6f;&#110;&#112;&#x65;&#114;&#x65;&#122;&#x31;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 95.40</em>.</li>
+<li><em>'Mariana Juárez', 33, 'f', null, 2, null, 90</em>.</li>
+</ul></li>
+<li>Cuente la cantidad de visitas por ciudad mostrando el nombre de la ciudad (<em>3 filas</em>)</li>
+<li>Muestre el promedio de gastos de las visitas agrupados por ciudad y sexo (<em>4 filas</em>)</li>
+<li>Muestre la cantidad de visitantes con mail, agrupados por ciudad (<em>3 filas</em>)</li>
+<li><p>Obtenga el monto de compra más alto de cada ciudad (<em>3 filas</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 71
+******************************************************************************/
+
+DROP TABLE IF EXISTS visitantes;
+
+CREATE TABLE visitantes (
+    nombre VARCHAR(30),
+    edad SMALLINT,
+    sexo CHAR(1) DEFAULT &#39;f&#39;,
+    domicilio VARCHAR(30),
+    codigociudad SMALLINT NOT NULL,
+    mail VARCHAR(30),
+    montocompra DECIMAL (6,2)
+);
+
+DROP TABLE IF EXISTS ciudades;
+
+CREATE TABLE ciudades (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO ciudades(nombre) 
+    VALUES  (&#39;Cordoba&#39;),
+        (&#39;Carlos Paz&#39;),
+        (&#39;La Falda&#39;),
+        (&#39;Cruz del Eje&#39;);
+
+INSERT INTO visitantes 
+    VALUES  (&#39;Susana Molina&#39;, 35,&#39;f&#39;,&#39;Colon 123&#39;, 1, NULL,59.80),
+        (&#39;Marcos Torres&#39;, 29,&#39;m&#39;,&#39;Sucre 56&#39;, 1, &#39;marcostorres@hotmail.com&#39;,150.50),
+        (&#39;Mariana Juarez&#39;, 45,&#39;f&#39;,&#39;San Martin 111&#39;,2,NULL,23.90),
+        (&#39;Fabian Perez&#39;,36,&#39;m&#39;,&#39;Avellaneda 213&#39;,3,&#39;fabianperez@xaxamail.com&#39;,0),
+        (&#39;Alejandra Garcia&#39;,28,&#39;f&#39;,NULL,2,NULL,280.50),
+        (&#39;Gaston Perez&#39;,29,&#39;m&#39;,NULL,5,&#39;gastonperez1@gmail.com&#39;,95.40),
+        (&#39;Mariana Juarez&#39;,33,&#39;f&#39;,NULL,2,NULL,90);
+    
+SELECT c.nombre,
+    COUNT(*) AS cantidad
+    FROM ciudades AS c
+    JOIN visitantes AS v
+    ON codigociudad=c.codigo
+    GROUP BY c.nombre;
+
+SELECT c.nombre,sexo,
+    AVG(montocompra) AS promediodecompra
+    FROM ciudades AS c
+    JOIN visitantes AS v
+    ON codigociudad=c.codigo
+    GROUP BY c.nombre,sexo;
+
+SELECT c.nombre,
+    COUNT(mail) AS tienenmail
+    FROM ciudades AS c
+    JOIN visitantes AS v
+    ON codigociudad=c.codigo
+    GROUP BY c.nombre;
+
+SELECT c.nombre,
+    MAX(montocompra)
+    FROM visitantes AS v
+    JOIN ciudades AS c
+    ON codigociudad=c.codigo
+    GROUP BY c.nombre;
+</code></pre>
+
+</body>
+</html>
+

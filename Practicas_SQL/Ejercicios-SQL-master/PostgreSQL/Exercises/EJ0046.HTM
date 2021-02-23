@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-46">Ejercicio 46</h2>
+<p>Un comercio que tiene un stand en una feria registra en una tabla llamada &quot;visitantes&quot; algunos datos<br />de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>smallint</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>. default 'f'</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>. default 'Córdoba'</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+<li><strong>mail</strong>, <em>varchar(30)</em>. default 'no tiene'</li>
+<li><strong>montocompra</strong>, <em>decimal</em>. (6, 2)</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Susana Molina', 35, default, 'Colon 123', default, null, null, 59.80</em>.</li>
+<li><em>'Marcos Torres', 29, 'm', default, 'Carlos Paz', default, <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 150.50</em>.</li>
+<li><em>'Mariana Juárez', 45, default, default, 'Carlos Paz', null, default, 23.90</em>.</li>
+<li>*'Fabián Pérez', 36, 'm', '4556677', <script type="text/javascript">
+<!--
+h='&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;&#42;';a='&#64;';n='&#x27;&#102;&#x61;&#98;&#x69;&#x61;&#110;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#102;&#x61;&#98;&#x69;&#x61;&#110;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;&#42;</noscript>.</li>
+<li><em>'Alejandra González', 'La Falda', 280.50</em>.</li>
+<li><em>'Gastón Pérez', 29, 'm', 'Carlos Paz', <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x67;&#x61;&#x73;&#116;&#x6f;&#110;&#112;&#x65;&#114;&#x65;&#122;&#x31;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x67;&#x61;&#x73;&#116;&#x6f;&#110;&#112;&#x65;&#114;&#x65;&#122;&#x31;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 95.40</em>.</li>
+<li><em>'Liliana Torres', 40, default, 'Sarmiento 876', default, default, default, 85</em>.</li>
+<li><em>'Gabriela Duarte', 21, null, null, 'Rio Tercero', default, <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x67;&#x61;&#98;&#114;&#x69;&#x65;&#108;&#x61;&#108;&#116;&#x6f;&#114;&#114;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x67;&#x61;&#98;&#114;&#x69;&#x65;&#108;&#x61;&#108;&#116;&#x6f;&#114;&#114;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 321.50</em>.</li>
+</ul></li>
+<li>Queremos saber la cantidad de visitantes de cada ciudad utilizando la cláusula &quot;group by&quot; (<em>4 filas devueltas</em>)</li>
+<li>Queremos la cantidad visitantes con teléfono no nulo, de cada ciudad (<em>4 filas devueltas</em>)</li>
+<li>Necesitamos el total del monto de las compras agrupadas por sexo (<em>3 filas</em>)</li>
+<li>Se necesita saber el máximo y mínimo valor de compra agrupados por sexo y ciudad (<em>6 filas</em>)</li>
+<li>Calcule el promedio del valor de compra agrupados por ciudad (<em>4 filas</em>)</li>
+<li><p>Cuente y agrupe por ciudad sin tener en cuenta los visitantes que no tienen mail (<em>3 filas</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 46
+******************************************************************************/
+
+DROP TABLE IF EXISTS visitantes;
+
+CREATE TABLE visitantes (
+    nombre VARCHAR(30),
+    edad SMALLINT,
+    sexo CHAR(1) DEFAULT &#39;f&#39;,
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20) DEFAULT &#39;Cordoba&#39;,
+    telefono VARCHAR(11),
+    mail VARCHAR(30) DEFAULT &#39;no tiene&#39;,
+    montocompra DECIMAL (6,2)
+);
+INSERT INTO visitantes
+    VALUES  (&#39;Susana Molina&#39;,35,DEFAULT,&#39;Colon 123&#39;,DEFAULT,NULL,NULL,59.80),
+        (&#39;Marcos Torres&#39;,29,&#39;m&#39;,DEFAULT,&#39;Carlos Paz&#39;,DEFAULT,&#39;marcostorres@hotmail.com&#39;,150.50),
+        (&#39;Mariana Juarez&#39;,45,DEFAULT,DEFAULT,&#39;Carlos Paz&#39;,NULL,DEFAULT,23.90),
+        (&#39;Fabian Perez&#39;,36,&#39;m&#39;,&#39;4556677&#39;,&#39;fabianperez@xaxamail.com&#39;),
+        (&#39;Alejandra Gonzalez&#39;,&#39;La Falda&#39;,280.50),
+        (&#39;Gaston Perez&#39;,29,&#39;m&#39;,&#39;Carlos Paz&#39;,&#39;gastonperez1@gmail.com&#39;,95.40),
+        (&#39;Liliana Torres&#39;,40,DEFAULT,&#39;Sarmiento 876&#39;,DEFAULT,DEFAULT,DEFAULT,85),
+        (&#39;Gabriela Duarte&#39;,21,NULL,NULL,&#39;Rio Tercero&#39;,DEFAULT,&#39;gabrielaltorres@hotmail.com&#39;,321.50);
+        
+SELECT ciudad, COUNT(*)
+    FROM visitantes
+    GROUP BY ciudad;
+    
+SELECT ciudad, COUNT(telefono)
+    FROM visitantes
+    GROUP BY ciudad;
+    
+SELECT sexo, SUM(montocompra)
+    FROM visitantes
+    GROUP BY sexo;
+    
+SELECT sexo,ciudad,
+    MAX(montocompra) AS mayor,
+    MIN(montocompra) AS menor   FROM visitantes
+    GROUP BY sexo,ciudad;
+    
+SELECT ciudad,
+    AVG(montocompra) AS promediodecompras
+    FROM visitantes
+    GROUP BY ciudad;
+    
+SELECT ciudad,
+    COUNT(*) AS cantidadconmail
+    FROM visitantes
+    WHERE mail is NOT NULL AND mail &lt;&gt; &#39;no tiene&#39;
+    GROUP BY ciudad;
+</code></pre>
+
+</body>
+</html>
+

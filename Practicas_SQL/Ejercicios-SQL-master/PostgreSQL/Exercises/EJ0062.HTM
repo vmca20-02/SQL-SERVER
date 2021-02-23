@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-62">Ejercicio 62</h2>
+<p>Una empresa tiene registrados sus clientes en una tabla llamada &quot;clientes&quot;, también tiene una tabla &quot;provincias&quot; donde registra los nombres de las provincias.</p>
+<ol>
+<li><p>Créelas con las siguientes estructuras:</p>
+<ul>
+<li><p>clientes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>codigoprovincia</strong>, <em>smallint</em>. not null</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>provincias</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+</ul></li>
+<li><p>Ingrese algunos registros para ambas tablas:</p>
+<ul>
+<li><em>'López Marcos', 'Colon 111', 'Córdoba', 1</em>.</li>
+<li><em>'Pérez Ana', 'San Martin 222', 'Cruz del Eje', 1</em>.</li>
+<li><em>'García Juan', 'Rivadavia 333', 'Villa María', 1</em>.</li>
+<li><em>'Pérez Luis', 'Sarmiento 444', 'Rosario', 2</em>.</li>
+<li><em>'Pereyra Lucas', 'San Martin 555', 'Cruz del Eje', 1</em>.</li>
+<li><em>'Gómez Inés', 'San Martin 666', 'Santa Fe', 2</em>.</li>
+<li><em>'Torres Fabiola', 'Alem 777', 'Ibera', 3</em>.</li>
+</ul></li>
+<li>Obtenga los datos de ambas tablas, usando alias</li>
+<li>Obtenga la misma información anterior pero ordenada por nombre de provincia.</li>
+<li><p>Recupere los clientes de la provincia &quot;Santa Fe&quot; (<em>2 registros devueltos</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 62
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    codigoprovincia SMALLINT NOT NULL,
+    PRIMARY KEY(codigo)
+);
+DROP TABLE IF EXISTS provincias;
+
+CREATE TABLE provincias (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    PRIMARY KEY (codigo)
+);
+
+INSERT INTO provincias (nombre) 
+    VALUES  (&#39;Cordoba&#39;),
+        (&#39;Santa Fe&#39;),
+        (&#39;Corrientes&#39;);
+        
+INSERT INTO clientes(nombre,domicilio,ciudad,codigoprovincia) 
+    VALUES  (&#39;Lopez Marcos&#39;,&#39;Colon 111&#39;,&#39;Córdoba&#39;,1),
+        (&#39;Perez Ana&#39;,&#39;San Martin 222&#39;,&#39;Cruz del Eje&#39;,1),
+        (&#39;Garcia Juan&#39;,&#39;Rivadavia 333&#39;,&#39;Villa Maria&#39;,1),
+        (&#39;Perez Luis&#39;,&#39;Sarmiento 444&#39;,&#39;Rosario&#39;,2),
+        (&#39;Pereyra Lucas&#39;,&#39;San Martin 555&#39;,&#39;Cruz del Eje&#39;,1),
+        (&#39;Gomez Ines&#39;,&#39;San Martin 666&#39;,&#39;Santa Fe&#39;,2),
+        (&#39;Torres Fabiola&#39;,&#39;Alem 777&#39;,&#39;Ibera&#39;,3);
+        
+SELECT c.nombre,domicilio,ciudad,p.nombre
+    FROM clientes AS c
+    JOIN provincias AS p
+    ON c.codigoprovincia=p.codigo;
+    
+SELECT c.nombre,domicilio,ciudad,p.nombre
+    FROM clientes AS c
+    JOIN provincias AS p
+    ON c.codigoprovincia=p.codigo
+    ORDER BY p.nombre;
+    
+SELECT c.nombre,domicilio,ciudad
+    FROM clientes AS c
+    JOIN provincias AS p
+    ON c.codigoprovincia=p.codigo
+    WHERE p.nombre=&#39;Santa Fe&#39;;
+</code></pre>
+
+</body>
+</html>
+

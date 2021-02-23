@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-18">Ejercicio 18</h2>
+<p>Trabaje con la tabla que almacena los datos sobre películas, llamada &quot;peliculas&quot;.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>int</em>. not null</li>
+<li><strong>titulo</strong>, <em>varchar(40)</em>. not null</li>
+<li><strong>actor</strong>, <em>varchar(20)</em>.</li>
+<li><strong>duracion</strong>, <em>int</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla note que el campo &quot;codigo&quot; y &quot;titulo&quot;, en la columna &quot;ins_nullable&quot; muestra &quot;NO&quot; y los otros campos &quot;YES&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>1, 'Misión imposible', 'Tom Cruise', 120</em>.</li>
+<li><em>2, 'Harry Potter y la piedra filosofal', null, 180</em>.</li>
+<li><em>3, 'Harry Potter y la camara secreta', 'Daniel R.', null</em>.</li>
+<li><em>0, 'Misión imposible 2', '', 150</em>.</li>
+<li><em>4, '', 'L. Di Caprio', 220</em>.</li>
+<li><em>5, 'Mujer bonita', 'R. Gere-J. Roberts', 0</em>.</li>
+</ul></li>
+<li>Recupere todos los registros para ver cómo PostgreSQL los almacenó.</li>
+<li>Intente ingresar un registro con valor nulo para campos que no lo admiten (<em>aparece un mensaje de error</em>)</li>
+<li>Muestre los registros con valor nulo en el campo &quot;actor&quot; y luego los que guardan una cadena vacía (<em>note que la salida es distinta</em>) (<em>1 registro</em>)</li>
+<li>Modifique los registros que tengan valor de duración desconocido (<em>nulo</em>) por &quot;120&quot; (<em>1 registro actualizado</em>)</li>
+<li>Coloque 'Desconocido' en el campo &quot;actor&quot; en los registros que tengan una cadena vacía en dicho campo (<em>1 registro afectado</em>)</li>
+<li>Muestre todos los registros. Note que el cambio anterior no afectó a los registros con valor nulo en el campo &quot;actor&quot;.</li>
+<li><p>Elimine los registros cuyo título sea una cadena vacía (<em>1 registro</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 18
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS peliculas;
+
+CREATE TABLE peliculas (
+    codigo INT NOT NULL,
+    titulo VARCHAR(40) NOT NULL,
+    actor VARCHAR(20),
+    duracion INT
+);
+SELECT table_name,column_name,udt_name,character_maximum_length,is_NULLable 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;peliculas&#39;;
+    
+INSERT INTO peliculas (codigo,titulo,actor,duracion)
+    VALUES  (1,&#39;Mision imposible&#39;,&#39;Tom Cruise&#39;,120),
+        (2,&#39;Harry Potter y la piedra fi losofal&#39;,NULL,180),
+        (3,&#39;Harry Potter y la camara secreta&#39;,&#39;Daniel R.&#39;,NULL),
+        (0,&#39;Mision imposible 2&#39;,&#39;&#39;,150),
+        (4,&#39;&#39;,&#39;L. Di Caprio&#39;,220),
+        (5,&#39;Mujer bonita&#39;,&#39;R. Gere-J. Roberts&#39;,0);
+        
+SELECT * FROM peliculas;
+
+INSERT INTO peliculas (codigo,titulo,actor,duracion)
+    VALUES  (NULL,&#39;Mujer bonita&#39;,&#39;R. Gere-J. Roberts&#39;,190);
+
+SELECT * FROM peliculas
+    WHERE actor is NULL;
+    
+UPDATE peliculas SET duracion=120 
+    WHERE duracion is NULL;
+UPDATE peliculas SET actor=&#39;DESConocido&#39;
+    WHERE actor=&#39;&#39;;
+SELECT * FROM peliculas;
+
+DELETE FROM peliculas
+    WHERE titulo=&#39;&#39;;
+
+SELECT * FROM peliculas;
+</code></pre>
+
+</body>
+</html>
+

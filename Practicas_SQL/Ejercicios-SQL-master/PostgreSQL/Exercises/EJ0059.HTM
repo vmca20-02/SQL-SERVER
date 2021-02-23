@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-59">Ejercicio 59</h2>
+<p>Una playa de estacionamiento almacena cada día los datos de los vehículos que ingresan en la tabla llamada &quot;vehiculos&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>patente</strong>, <em>char(6)</em>. not null</li>
+<li><em><strong>tipo</strong>, </em>char(1)<em>., --'a'=auto, 'm'=moto</em>.</li>
+<li><strong>horallegada</strong>, <em>timestamp</em>. not null</li>
+<li><strong>horasalida</strong>, <em>timestamp</em>.</li>
+</ul></li>
+<li>Agregue una restricción &quot;primary key&quot; que incluya los campos &quot;patente&quot; y &quot;horallegada&quot;</li>
+<li>Ingrese un vehículo.</li>
+<li>Intente ingresar un registro repitiendo la clave primaria.<br />No se permite.</li>
+<li>Ingrese un registro repitiendo la patente pero no la hora de llegada.</li>
+<li>Ingrese un registro repitiendo la hora de llegada pero no la patente.</li>
+<li>Vea todas las restricciones para la tabla &quot;vehiculos&quot;</li>
+<li>Elimine la restricción &quot;primary key&quot;.</li>
+<li><p>Vea si se han eliminado</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 59
+******************************************************************************/
+
+DROP TABLE IF EXISTS vehiculos;
+
+CREATE TABLE vehiculos (
+    patente CHAR(6) NOT NULL,
+    tipo CHAR(1),
+    horallegada TIMESTAMP NOT NULL,
+    horasalida TIMESTAMP
+);
+
+ALTER TABLE vehiculos
+    ADD CONSTRAINT PK_vehiculos_patentellegada
+    PRIMARY KEY(patente,horallegada);
+
+INSERT INTO vehiculos 
+    VALUES  (&#39;SDR456&#39;,&#39;a&#39;,&#39;2005/10/10 10:10&#39;,NULL),
+        (&#39;SDR456&#39;,&#39;m&#39;,&#39;2005/10/10 10:10&#39;,NULL),
+        (&#39;SDR456&#39;,&#39;m&#39;,&#39;2005/10/10 12:10&#39;,NULL),
+        (&#39;SDR111&#39;,&#39;m&#39;,&#39;2005/10/10 10:10&#39;,NULL);
+
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;vehiculos&#39;;
+
+ALTER TABLE vehiculos
+    DROP CONSTRAINT PK_vehiculos_patentellegada;
+
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;vehiculos&#39;;
+</code></pre>
+
+</body>
+</html>
+

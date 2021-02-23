@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-57">Ejercicio 57</h2>
+<p>Una empresa de remises tiene registrada la información de sus vehículos en una tabla llamada<br />&quot;remis&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>patente</strong>, <em>char(6)</em>.</li>
+<li><strong>marca</strong>, <em>varchar(15)</em>.</li>
+<li><strong>modelo</strong>, <em>char(4)</em>.</li>
+</ul></li>
+<li>Ingrese algunos registros sin repetir patente:</li>
+<li>Definir una restricción &quot;primary key&quot; para el campo &quot;patente&quot;.</li>
+<li>Establezca una restricción &quot;primary key&quot; para el campo &quot;numero&quot;.<br />(<em>No lo permite ya que hay una &quot;primary key&quot;</em>)</li>
+<li><p>Vea la información de las restricciones</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 57
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS remis;
+
+CREATE TABLE remis (
+    numero SERIAL,
+    patente CHAR(6),
+    marca VARCHAR(15),
+    modelo CHAR(4)
+);
+
+INSERT INTO remis (patente,marca,modelo)VALUES  (&#39;ABC123&#39;,&#39;Renault 12&#39;,&#39;1990&#39;);
+
+INSERT INTO remis (patente,marca,modelo)VALUES  (&#39;DEF456&#39;,&#39;Fiat Duna&#39;,&#39;1995&#39;);
+
+ALTER TABLE remis
+    ADD CONSTRAINT PK_remis_patente
+    PRIMARY KEY(patente);
+    
+ALTER TABLE remis
+    ADD CONSTRAINT PK_remis_numero
+    PRIMARY KEY(numero);
+    
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;remis&#39;;
+</code></pre>
+
+</body>
+</html>
+

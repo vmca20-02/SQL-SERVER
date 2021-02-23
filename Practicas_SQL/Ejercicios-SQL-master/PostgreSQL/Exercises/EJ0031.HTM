@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-31">Ejercicio 31</h2>
+<p>Un comercio que vende artículos de computación registra los datos de sus artículos en una tabla con ese nombre.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>descripcion</strong>, <em>varchar(30)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(9</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>. default 0</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'impresora', 'Epson Stylus C45', 400.80, 20</em>.</li>
+<li><em>'impresora', 'Epson Stylus C85', 500</em>.</li>
+<li><em>'monitor', 'Samsung 14', 800</em>.</li>
+<li><em>'teclado', 'ingles Biswal', 100, 50</em>.</li>
+</ul></li>
+<li>El comercio quiere aumentar los precios de todos sus artículos en un 15%. Actualice todos los precios empleando operadores aritméticos.</li>
+<li>Vea el resultado</li>
+<li>Muestre todos los artículos, concatenando el nombre y la descripción de cada uno de ellos separados por coma.</li>
+<li><p>Reste a la cantidad de todos los teclados, el valor 5, empleando el operador aritmético menos (&quot;-&quot;)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 31
+******************************************************************************/
+
+DROP TABLE IF EXISTS articulos;
+
+CREATE TABLE articulos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    descripcion VARCHAR(30),
+    precio DECIMAL(9,2),
+    cantidad SMALLINT DEFAULT 0,
+    PRIMARY KEY (codigo)
+);
+
+INSERT INTO articulos (nombre, descripcion, precio,cantidad)
+    VALUES  (&#39;impresora&#39;,&#39;Epson Stylus C45&#39;,400.80,20),
+        (&#39;impresora&#39;,&#39;Epson Stylus C85&#39;,500),
+        (&#39;monitor&#39;,&#39;Samsung 14&#39;,800),
+        (&#39;teclado&#39;,&#39;ingles Biswal&#39;,100,50);
+
+UPDATE articulos SET precio=precio+(precio*0.15);
+SELECT * FROM articulos;
+
+SELECT nombre||&#39;,&#39;||descripcion
+    FROM articulos;
+
+UPDATE articulos SET cantidad=cantidad-5
+    WHERE nombre=&#39;teclado&#39;;
+SELECT * FROM articulos;
+</code></pre>
+
+</body>
+</html>
+

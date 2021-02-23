@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-29">Ejercicio 29</h2>
+<p>Un comercio que tiene un stand en una feria registra en una tabla llamada &quot;visitantes&quot; algunos datos de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>smallint</em>.</li>
+<li><strong>sexo</strong>, <em>char(1)</em>. default 'f'</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>. default 'Córdoba'</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+<li><strong>mail</strong>, <em>varchar(30)</em>. default 'no tiene'</li>
+<li><strong>montocompra</strong>, <em>decimal</em>. (6, 2)</li>
+</ul></li>
+<li>Vea la información de las columnas &quot;column_default&quot; y &quot;is_nullable&quot;</li>
+<li><p>Ingrese algunos registros sin especificar valores para algunos campos para ver cómo opera la cláusula &quot;default&quot;.</p>
+<ul>
+<li><em>'Susana Molina', 'Colon 123', 59.80</em>.</li>
+<li>*'Marcos Torres', 29, 'Carlos Paz', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;&#42;';a='&#64;';n='&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x6d;&#x61;&#114;&#x63;&#x6f;&#x73;&#116;&#x6f;&#114;&#114;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;&#42;</noscript>.</li>
+</ul></li>
+<li>Use la palabra &quot;default&quot; para ingresar valores en un insert.</li>
+<li><p>Ingrese un registro con &quot;default values&quot;.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 29
+******************************************************************************/
+
+DROP TABLE IF EXISTS visitantes;
+
+CREATE TABLE visitantes (
+    nombre VARCHAR(30),
+    edad SMALLINT,
+    sexo CHAR(1) DEFAULT &#39;f&#39;,
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20) DEFAULT &#39;Cordoba&#39;,
+    telefono VARCHAR(11),
+    mail VARCHAR(30) DEFAULT &#39;no tiene&#39;,
+    montocompra DECIMAL (6,2)
+);
+
+SELECT *
+    FROM information_schema.columns 
+    WHERE table_name = &#39;visitantes&#39;;
+    
+INSERT INTO visitantes (nombre, domicilio, montocompra)
+    VALUES  (&#39;Susana Molina&#39;,&#39;Colon 123&#39;,59.80),
+        (&#39;Marcos Torres&#39;,29,&#39;Carlos Paz&#39;,&#39;marcostorres@hotmail.com&#39;);
+SELECT * FROM visitantes;
+
+INSERT INTO visitantes
+    VALUES  (&#39;Marcelo Morales&#39;,38,DEFAULT,DEFAULT,DEFAULT,&#39;4255232&#39;,&#39;marcelomorales@hotmail.com&#39;,DEFAULT);
+
+INSERT INTO visitantes DEFAULT VALUES;
+
+SELECT * FROM visitantes;
+</code></pre>
+
+</body>
+</html>
+

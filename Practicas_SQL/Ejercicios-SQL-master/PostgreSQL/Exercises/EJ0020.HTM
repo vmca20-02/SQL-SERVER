@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-20">Ejercicio 20</h2>
+<p>Un instituto de enseñanza almacena los datos de sus estudiantes en una tabla llamada &quot;alumnos&quot;.</p>
+<ol>
+<li><p>Intente crear la tabla con la siguiente estructura (<em>no lo permite</em>):</p>
+<ul>
+<li><strong>legajo</strong>, <em>varchar(4) not null</em>.</li>
+<li><strong>documento</strong>, <em>varchar(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+<li><strong>primary key</strong>, <em>legajo</em>.</li>
+</ul></li>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>legajo</strong>, <em>varchar(4) not null</em>.</li>
+<li><strong>documento</strong>, <em>varchar(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li>Verifique que el campo &quot;documento&quot; no admite valores nulos (<em>sí los admite</em>).</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'A233', '22345345', 'Pérez Mariana', 'Colon 234'</em>.</li>
+<li><em>'A567', '23545345', 'Morales Marcos', 'Avellaneda 348'</em>.</li>
+</ul></li>
+<li>Intente ingresar un alumno con número de documento existente (<em>no lo permite</em>).</li>
+<li><p>Intente ingresar un alumno con documento nulo (<em>no lo permite</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 20
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS alumnos;
+
+CREATE TABLE alumnos (
+    legajo VARCHAR(4) NOT NULL,
+    documento VARCHAR(8),
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(documento),
+    PRIMARY KEY(legajo)
+);
+
+DROP TABLE IF EXISTS alumnos;
+
+CREATE TABLE alumnos (
+    legajo VARCHAR(4) NOT NULL,
+    documento VARCHAR(8),
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(documento)
+);
+SELECT table_name,column_name,udt_name,character_maximum_length,is_NULLable 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;alumnos&#39;;
+    
+INSERT INTO alumnos (legajo,documento,nombre,domicilio)
+    VALUES  (&#39;A233&#39;,&#39;22345345&#39;,&#39;Perez Mariana&#39;,&#39;Colon 234&#39;),
+        (&#39;A567&#39;,&#39;23545345&#39;,&#39;Morales Marcos&#39;,&#39;Avellaneda 348&#39;);
+        
+INSERT INTO alumnos (legajo,documento,nombre,domicilio)
+    VALUES  (&#39;A642&#39;,&#39;23545345&#39;,&#39;Gonzalez Analia&#39;,&#39;Caseros 444&#39;);
+    
+INSERT INTO alumnos (legajo,documento,nombre,domicilio)
+    VALUES  (&#39;A685&#39;,NULL,&#39;Miranda Carmen&#39;,&#39;Uspallata 999&#39;);
+</code></pre>
+
+</body>
+</html>
+

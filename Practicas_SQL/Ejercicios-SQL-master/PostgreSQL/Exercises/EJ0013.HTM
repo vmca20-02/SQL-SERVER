@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-13">Ejercicio 13</h2>
+<p>Trabaje con la tabla &quot;agenda&quot; que registra la información referente a sus amigos.</p>
+<ol>
+<li><p>Cree la tabla con los siguientes campos:</p>
+<ul>
+<li><strong>apellido</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros (<em>insert into</em>):</p>
+<ul>
+<li><em>Álvarez, Alberto, Colon 123, 4234567</em>.</li>
+<li><em>Juárez, Juan, Avellaneda 135, 4458787</em>.</li>
+<li><em>López, María, Urquiza 333, 4545454</em>.</li>
+<li><em>López, José, Urquiza 333, 4545454</em>.</li>
+<li><em>Salas, Susana, Gral. Paz 1234, 4123456.</em>.</li>
+</ul></li>
+<li>Elimine el registro cuyo nombre sea &quot;Juan&quot; (<em>1 registro afectado</em>)</li>
+<li>Elimine los registros cuyo número telefónico sea igual a &quot;4545454&quot; (<em>2 registros afectados</em>)</li>
+<li>Muestre la tabla.</li>
+<li>Elimine todos los registros (<em>2 registros afectados</em>)</li>
+<li><p>Muestre la tabla.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 13
+******************************************************************************/
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11)
+);
+INSERT INTO agenda (apellido,nombre,domicilio,telefono)
+    VALUES  (&#39;Alvarez&#39;,&#39;Alberto&#39;,&#39;Colon 123&#39;,&#39;4234567&#39;),
+        (&#39;Juarez&#39;,&#39;Juan&#39;,&#39;Avellaneda 135&#39;,&#39;4458787&#39;),
+        (&#39;Lopez&#39;,&#39;Maria&#39;,&#39;Urquiza 333&#39;,&#39;4545454&#39;),
+        (&#39;Lopez&#39;,&#39;Jose&#39;,&#39;Urquiza 333&#39;,&#39;4545454&#39;),
+        (&#39;Salas&#39;,&#39;Susana&#39;,&#39;Gral. Paz 1234&#39;,&#39;4123456&#39;);
+        
+DELETE FROM agenda
+    WHERE nombre=&#39;Juan&#39;;
+    
+DELETE FROM agenda
+    WHERE telefono=&#39;4545454&#39;;
+    
+SELECT * FROM agenda;
+
+DELETE FROM agenda;
+
+SELECT * FROM agenda;
+</code></pre>
+
+</body>
+</html>
+

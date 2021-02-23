@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-88">Ejercicio 88</h2>
+<p>Una empresa organiza un curso de computación (<em>dispone de dos aulas</em>), almacenar en una tabla inscritos los datos del estudiante.</p>
+<p>Cada vez que se inscribe un alumno asignarlo a un aula en forma alternada (<em>primero a la 1 y luego a la 2, luego nuevamente a la 1 y así sucesivamente</em>).</p>
+<ol>
+<li>Crear una secuencia sec_codigoaulainscriptos (<em>valor inicial 1, incremento 1, valor máximo 2 y debe ser circular</em>).</li>
+<li><p>Crear la tabla inscritos:</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8) not null</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30) not null</em>.</li>
+<li><strong>codigocurso</strong>, <em>int default nextval('sec_codigoaulainscriptos')</em>.</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Insertar algunos registros:</p>
+<ul>
+<li><em>'20000000','Rodriguez Pablo'</em>.</li>
+<li><em>'30000000','Mercado Ana'</em>.</li>
+<li><em>'40000000','Morello Luis'</em>.</li>
+<li><em>'50000000','Prado Juan'</em>.</li>
+<li><em>00000','Solis Maria'</em>.</li>
+</ul></li>
+<li>Imprimir todos los alumnos del curso 1.</li>
+<li><p>Imprimir todos los alumnos del curso 2.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 88
+ ******************************************************************************/
+
+CREATE SEQUENCE sec_codigoaulainscritos
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 2
+    CYCLE;
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    documento CHAR(8) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    codigocurso INT DEFAULT NEXTVAL(&#39;sec_codigoaulainscritos&#39;),
+    PRIMARY KEY(documento)
+);
+INSERT INTO inscritos(documento,nombre) 
+    VALUES  (&#39;20000000&#39;,&#39;Rodriguez Pablo&#39;),
+        (&#39;30000000&#39;,&#39;Mercado Ana&#39;),
+        (&#39;40000000&#39;,&#39;Morello Luis&#39;),
+        (&#39;50000000&#39;,&#39;Prado Juan&#39;),
+        (&#39;60000000&#39;,&#39;Solis Maria&#39;);
+
+SELECT * FROM inscritos WHERE codigocurso=1;
+SELECT * FROM inscritos WHERE codigocurso=2;
+</code></pre>
+
+</body>
+</html>
+

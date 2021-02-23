@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-55">Ejercicio 55</h2>
+<p>Una playa de estacionamiento almacena los datos de los vehículos que ingresan en la tabla llamada &quot;vehiculos&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>patente</strong>, <em>char(6)</em>.</li>
+<li><strong>tipo</strong>, <em>char(4)</em>.</li>
+<li><strong>fechahoraentrada</strong>, <em>timestamp</em>.</li>
+<li><strong>fechahorasalida</strong>, <em>timestamp</em>.</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+<li><p>Ingresamos algunos registros:</p>
+<ul>
+<li><em>'AIC124', 'auto', '2007/01/17 8:05', '2007/01/17 12:30'</em>.</li>
+<li><em>'CAA258', 'auto', '2007/01/17 8:10', null</em>.</li>
+<li><em>'DSE367', 'moto', '2007/01/17 8:30', '2007/01/17 18:00'</em>.</li>
+</ul></li>
+<li>Agregue una restricción &quot;check&quot; para asegurarse que la fecha de entrada a la playa no sea<br />posterior a la fecha y hora actual</li>
+<li>Agregue otra restricción &quot;check&quot; al campo &quot;fechahoraentrada&quot; que establezca que sus valores no<br />sean posteriores a &quot;fechahorasalida&quot;</li>
+<li>Intente ingresar un valor que no cumpla con la primera restricción establecida en el campo<br />&quot;fechahoraentrada&quot;</li>
+<li>Intente modificar un registro para que la salida sea anterior a la entrada<br />Mensaje de error.</li>
+<li>Vea todas las restricciones para la tabla &quot;vehiculos&quot;:</li>
+<li><p>Vea todos los registros</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 55
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS vehiculos;
+
+CREATE TABLE vehiculos (
+    numero SERIAL,
+    patente CHAR(6),
+    tipo CHAR(4),
+    fechahoraentrada TIMESTAMP,
+    fechahorasalida TIMESTAMP,
+    PRIMARY KEY(numero)
+);
+
+INSERT INTO vehiculos (patente,tipo,fechahoraentrada,fechahorasalida)
+    VALUES  (&#39;AIC124&#39;,&#39;auto&#39;,&#39;2007/01/17 8:05&#39;,&#39;2007/01/17 12:30&#39;),
+        (&#39;CAA258&#39;,&#39;auto&#39;,&#39;2007/01/17 8:10&#39;,NULL),
+        (&#39;DSE367&#39;,&#39;moto&#39;,&#39;2007/01/17 8:30&#39;,&#39;2007/01/17 18:00&#39;);
+
+ALTER TABLE vehiculos
+    ADD CONSTRAINT CK_vehiculos_fechahoraentrada_actual
+    CHECK (fechahoraentrada &lt;&gt;CURRENT_DATE);
+
+ALTER TABLE vehiculos
+    ADD CONSTRAINT CK_vehiculos_fechahoraentradasalida
+    CHECK (fechahoraentrada &lt;&gt;fechahorasalida);
+
+INSERT INTO vehiculos (patente,tipo,fechahoraentrada,fechahorasalida)
+    VALUES  (&#39;ABC123&#39;,&#39;auto&#39;,&#39;2007/05/05 10:10&#39;,NULL);
+
+UPDATE vehiculos SET fechahorasalida=&#39;2007/01/17 7:30&#39;
+    WHERE patente=&#39;CAA258&#39;;
+
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;vehiculos&#39;;
+
+SELECT * FROM vehiculos;
+</code></pre>
+
+</body>
+</html>
+

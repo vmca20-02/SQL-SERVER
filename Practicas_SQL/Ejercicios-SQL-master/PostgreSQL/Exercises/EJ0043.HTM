@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-43">Ejercicio 43</h2>
+<p>Una empresa almacena los datos de sus empleados en una tabla &quot;empleados&quot;.</p>
+<ol>
+<li><p>Cree una tabla con los siguientes campos:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>fechaingreso</strong>, <em>date</em>.</li>
+<li><strong>seccion</strong>, <em>varchar(20)</em>.</li>
+<li><strong>sueldo</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Juan Pérez', '22333444', 'Colon 123', '1990-10-08', 'Gerencia', 900.50</em>.</li>
+<li><em>'Ana Acosta', '23444555', 'Caseros 987', '1995-12-18', 'Secretaria', 590.30</em>.</li>
+<li><em>'Lucas Duarte', '25666777', 'Sucre 235', '2005-05-15', 'Sistemas', 790</em>.</li>
+<li><em>'Pamela González', '26777888', 'Sarmiento 873', '1999-02-12', 'Secretaria', 550</em>.</li>
+<li><em>'Marcos Juárez', '30000111', 'Rivadavia 801', '2002-09-22', 'Contaduría', 630.70</em>.</li>
+<li><em>'Yolanda Pérez', '35111222', 'Colon 180', '1990-10-08', 'Administración', 400</em>.</li>
+<li><em>'Rodolfo Pérez', '35555888', 'Coronel Olmedo 588', '1990-05-28', 'Sistemas', 800</em>.</li>
+</ul></li>
+<li>Muestre todos los empleados con apellido &quot;Pérez&quot; empleando el operador &quot;like&quot; (<em>3 registros</em>)</li>
+<li>Muestre todos los empleados cuyo domicilio comience con &quot;Co&quot; y tengan un &quot;8&quot; (<em>2 registros</em>)</li>
+<li>Muestre todos los nombres y sueldos de los empleados cuyos sueldos incluyen centavos (<em>3<br />registros</em>)</li>
+<li><p>Muestre los empleados que hayan ingresado en &quot;1990&quot; (<em>3 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 43
+******************************************************************************/
+
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    nombre VARCHAR(30),
+    documento CHAR(8),
+    domicilio VARCHAR(30),
+    fechaingreso DATE,
+    seccion VARCHAR(20),
+    sueldo DECIMAL(6,2),
+    PRIMARY KEY(documento)
+);
+INSERT INTO empleados
+    VALUES  (&#39;Juan Perez&#39;,&#39;22333444&#39;,&#39;Colon 123&#39;,&#39;1990-10-08&#39;,&#39;Gerencia&#39;,900.50),
+        (&#39;Ana Acosta&#39;,&#39;23444555&#39;,&#39;Caseros 987&#39;,&#39;1995-12-18&#39;,&#39;Secretaria&#39;,590.30),
+        (&#39;Lucas Duarte&#39;,&#39;25666777&#39;,&#39;Sucre 235&#39;,&#39;2005-05-15&#39;,&#39;Sistemas&#39;,790),
+        (&#39;Pamela Gonzalez&#39;,&#39;26777888&#39;,&#39;Sarmiento 873&#39;,&#39;1999-02-12&#39;,&#39;Secretaria&#39;,550),
+        (&#39;Marcos Juarez&#39;,&#39;30000111&#39;,&#39;Rivadavia 801&#39;,&#39;2002-09-22&#39;,&#39;Contaduria&#39;,630.70),
+        (&#39;Yolanda Perez&#39;,&#39;35111222&#39;,&#39;Colon 180&#39;,&#39;1990-10-08&#39;,&#39;AdMINistracion&#39;,400),
+        (&#39;Rodolfo Perez&#39;,&#39;35555888&#39;,&#39;Coronel Olmedo 588&#39;,&#39;1990-05-28&#39;,&#39;Sistemas&#39;,800);
+
+SELECT * FROM empleados
+    WHERE nombre like &#39;%Perez%&#39;;
+    
+SELECT * FROM empleados
+    WHERE domicilio like &#39;Co%8%&#39;;
+    
+SELECT nombre,sueldo FROM empleados
+    WHERE sueldo NOT like &#39;%.00&#39;;
+    
+SELECT * FROM empleados
+    WHERE fechaingreso like &#39;%1990%&#39;;
+</code></pre>
+
+</body>
+</html>
+

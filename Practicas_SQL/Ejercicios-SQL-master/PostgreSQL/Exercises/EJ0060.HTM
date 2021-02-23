@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-60">Ejercicio 60</h2>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>apellido</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>. not null</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+<li><strong>mail</strong>, <em>varchar(30)</em>.</li>
+</ul></li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li>*444', '0354545256', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;&#42;';a='&#64;';n='&#x27;&#112;&#x65;&#114;&#x65;&#122;&#108;&#x75;&#x69;&#x73;&#x61;&#108;&#98;&#x65;&#114;&#116;&#x6f;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#112;&#x65;&#114;&#x65;&#122;&#108;&#x75;&#x69;&#x73;&#x61;&#108;&#98;&#x65;&#114;&#116;&#x6f;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;&#42;</noscript>.</li>
+</ul></li>
+<li>Cree un índice común por el campo apellido.</li>
+<li>Cree un índice único por el mail.</li>
+<li><p>Borre los dos índices.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 60
+******************************************************************************/
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20) NOT NULL,
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11),
+    mail VARCHAR(30)
+);
+
+INSERT INTO agenda 
+    VALUES  (&#39;Perez&#39;,&#39;Juan&#39;,&#39;Sarmiento 345&#39;,&#39;4334455&#39;,&#39;juancito@gmail.com&#39;),
+        (&#39;Garcia&#39;,&#39;Ana&#39;,&#39;Urquiza 367&#39;,&#39;4226677&#39;,&#39;anamariagarcia@hotmail.com&#39;),
+        (&#39;Lopez&#39;,&#39;Juan&#39;,&#39;Avellaneda 900&#39;,NULL,&#39;juancitoLopez@gmail.com&#39;),
+        (&#39;Juarez&#39;,&#39;Mariana&#39;,&#39;Sucre 123&#39;,&#39;0525657687&#39;,&#39;marianaJuarez2@gmail.com&#39;),
+        (&#39;Molinari&#39;,&#39;Lucia&#39;,&#39;Peru 1254&#39;,&#39;4590987&#39;,&#39;molinarilucia@hotmail.com&#39;),
+        (&#39;Ferreyra&#39;,&#39;Patricia&#39;,&#39;Colon 1534&#39;,&#39;4585858&#39;,NULL),
+        (&#39;Perez&#39;,&#39;Susana&#39;,&#39;San Martin 333&#39;,NULL,NULL),
+        (&#39;Perez&#39;,&#39;Luis&#39;,&#39;Urquiza 444&#39;,&#39;0354545256&#39;,&#39;perezluisalberto@hotmail.com&#39;),
+        (&#39;Lopez&#39;,&#39;Maria&#39;,&#39;Salta 314&#39;,NULL,&#39;lopezmariayo@gmail.com&#39;);
+
+CREATE INDEX I_agenda_apellido ON agenda(apellido);
+
+CREATE  UNIQUE INDEX I_agenda_mail ON agenda(mail);
+
+DROP INDEX I_agenda_apellido;
+
+DROP INDEX I_agenda_mail;
+</code></pre>
+
+</body>
+</html>
+

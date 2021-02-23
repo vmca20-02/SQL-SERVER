@@ -1,0 +1,238 @@
+------------ARTICULOS------------
+
+--1.1. Obtener los nombres de los productos de la tienda.
+
+--1.2. Obtener los nombres y los precios de los productos de la tienda.
+
+--1.3. Obtener el nombre de los productos cuyo precio sea menor o igual a 200.
+
+--1.4. Obtener todos los datos de los articulos cuyo precio est ´e entre los 60 y los 120(ambas cantidades incluidas).
+
+--1.5.Obtener el nombre y el precio en pesetas(es decir,el precio en euros multiplicado por 166’386)
+
+--1.6.Seleccionar el precio medio de todos los productos.
+
+--1.7.Obtener el precio medio de los articulos cuyo codigo de fabricante sea 2.
+
+--1.8. Obtener el numero de articulos cuyo precio sea mayor o igual a 180
+
+--1.9. Obtener el nombre y precio de los articulos cuyo precio sea mayor o igual a 180 y ordenarlos descendentemente por precio, y luego ascendentemente por nombre.
+
+--1.10. Obtener un listado completo de articulos, incluyendo por cada articulo los datos del articulo y de su fabricante.
+
+--1.11. Obtener un listado de articulos, incluyendo el nombre del articulo, su precio, y el nombre de su fabricante.
+
+--1.12. Obtener el precio medio de los productos de cada fabricante, mostrando solo los codigos de fabricante.
+
+--1.13. Obtener el precio medio de los productos de cada fabricante, mostrando el nombre del fabricante.
+
+--1.14. Obtener los nombres de los fabricantes que ofrezcan productos cuyo precio medio sea mayor o igual a 150.
+
+--1.15. Obtener el nombre y precio del art ´iculo m ´as barato.
+
+--1.16. Obtener una lista con el nombre y precio de los articulos m ´as caros de cada pro-veedor (incluyendo el nombre del proveedor).
+
+--1.17. A ~nadir un nuevo producto: Altavoces de 70 (del fabricante 2)
+
+--1.18. Cambiar el nombre del producto 8 a ’Impresora Laser’
+
+--1.19. Aplicar un descuento del 10 % (multiplicar el precio por 0’9) a todos los productos.
+
+--1.20. Aplicar un descuento de 10 a todos los productos cuyo precio sea mayor o igual a 120
+
+------------DEPARTAMENTOS------------
+
+--2.1. Obtener los apellidos de los empleados.
+
+--2.2. Obtener los apellidos de los empleados sin repeticiones.
+
+--2.3. Obtener todos los datos de los empleados que se apellidan 'Lopez’.
+
+--2.4. Obtener todos los datos de los empleados que se apellidan 'Lopez’ y los que se apellidan ’Perez’.
+
+--2.5. Obtener todos los datos de los empleados que trabajan para el departamento 14.
+
+--2.6. Obtener todos los datos de los empleados que trabajan para el departamento 37 y para el departamento 77.
+
+--2.7. Obtener todos los datos de los empleados cuyo apellido comience por ’P’.
+
+--2.8. Obtener el presupuesto total de todos los departamentos.
+
+--2.9. Obtener el numero de empleados en cada departamento.
+
+--2.10. Obtener un listado completo de empleados, incluyendo por cada empleado los datos del empleado y de su departamento.
+
+--2.11. Obtener un listado completo de empleados, incluyendo el nombre y apellidos del empleado junto al nombre y presupuesto de su departamento.
+
+--2.12. Obtener los nombres y apellidos de los empleados que trabajen en departamentos cuyo presupuesto sea mayor de 60.000
+
+--2.13. Obtener los datos de los departamentos cuyo presupuesto es superior al presupuesto medio de todos los departamentos.
+
+--2.14. Obtener los nombres ( ´unicamente los nombres) de los departamentos que tienen mas de dos empleados.
+
+--2.15. A ~nadir un nuevo departamento: ‘Calidad’, con presupuesto de 40.000 y codigo
+        11. Anadir un empleado vinculado al departamento reci ´en creado: Esther Vazquez,DNI: 89267109
+
+--2.16. Aplicar un recorte presupuestario del 10 % a todos los departamentos.
+
+--2.17. Reasignar a los empleados del departamento de investigaci ´on (c ´odigo 77) al departamento de inform ´atica (codigo 14).
+
+--2.18. Despedir a todos los empleados que trabajan para el departamento de informatica(codigo 14).
+
+--2.19. Despedir a todos los empleados que trabajen para departamentos cuyo presupuesto sea superior a los 60.000.
+
+--2.20. Despedir a todos los empleados.
+
+------------ALMACENES------------
+
+--3.1. Obtener todos los almacenes
+
+--3.2. Obtener todas las cajas cuyo contenido tenga un valor superior a 150.
+
+--3.3. Obtener los tipos de contenidos de las cajas.
+
+--3.4. Obtener el valor medio de todas las cajas.
+
+--3.5. Obtener el valor medio de las cajas de cada almacen.
+
+--3.6. Obtener los c ´odigos de los almacenes en los cuales el valor medio de las cajas sea superior a 150
+
+--3.7. Obtener el numero de referencia de cada caja junto con el nombre de la ciudad en el que se encuentra.
+
+--3.8. Obtener el numero de cajas que hay en cada almac ´en.
+
+--3.9. Obtener los c ´odigos de los almacenes que est ´an saturados (los almacenes donde el numero de cajas es superior a la capacidad).
+
+--3.10. Obtener los numeros de referencia de las cajas que est ´an en Bilbao.
+
+--3.11. Insertar un nuevo almac ´en en Barcelona con capacidad para 3 cajas.
+
+--3.12. Insertar una nueva caja, con n ´umero de referencia ‘H5RT’, con contenido ‘Papel’,valor 200, y situada en el almac ´en 2.
+
+--3.13. Rebajar el valor de todas las cajas un 15 %.
+
+--3.14. Rebajar un 20 % el valor de todas las cajas cuyo valor sea superior al valor medio de todas las cajas.
+
+--3.15. Eliminar todas las cajas cuyo valor sea inferior a 100.
+
+--3.16. Vaciar el contenido de los almacenes que est ´an saturados.
+
+------------PELICULAS------------
+
+--4.1. Mostrar el nombre de todas las pel ´iculas.
+
+--4.2. Mostrar las distintas calificaciones de edad que existen.
+
+--4.3. Mostrar todas las pel ´iculas que no han sido calificadas.
+
+--4.4. Mostrar todas las salas que no proyectan ninguna pelicula.
+
+--4.5. Mostrar la informaci ´on de todas las salas y, si se proyecta alguna pel ´icula en la sala, mostrar tambi ´en la informaci ´on de la pel ´icula.
+
+--4.6. Mostrar la informaci ´on de todas las pel ´iculas y, si se proyecta en alguna sala,mostrar tambi ´en la informaci ´on de la sala.
+
+--4.7. Mostrar los nombres de las pel ´iculas que no se proyectan en ninguna sala.
+
+--4.8. A ~nadir una nueva pel ´icula ‘Uno, Dos, Tres’, para mayores de 7 a ~nos.
+
+--4.9. Hacer constar que todas las pel ´iculas no calificadas han sido calificadas ‘no reco-mendables para menores de 13 a ~nos’.
+
+--4.10. Eliminar todas las salas que proyectan pel ´iculas recomendadas para todos los publicos
+
+
+------------LOS DIRECTORES------------
+
+--5.1. Mostrar el DNI, nombre y apellidos de todos los directores.
+
+--5.2. Mostrar los datos de los directores que no tienen jefes.
+
+--5.3. Mostrar el nombre y apellidos de cada director, junto con la capacidad del despacho en el que se encuentra.
+
+--5.4. Mostrar el numero de directores que hay en cada despacho.
+
+--5.5. Mostrar los datos de los directores cuyos jefes no tienen jefes.
+
+--5.6. Mostrar los nombres y apellidos de los directores junto con los de su jefe.
+
+--5.7. Mostrar el numero de despachos que est ´an sobreutilizados.
+
+--5.8. A ~nadir un nuevo director llamado Paco P ´erez, DNI 28301700, sin jefe, y situado en el despacho 124.
+
+--5.9. Asignar a todos los empleados apellidados P ´erez un nuevo jefe con DNI 74568521.
+
+--5.10. Despedir a todos los directores, excepto a los que no tienen jefe.
+
+------------PIEZAS Y PROVEEDORES------------
+
+--6.1. Obtener los nombres de todas las piezas.
+
+--6.2. Obtener todos los datos de todos los proveedores.
+
+--6.3. Obtener el precio medio al que se nos suministran las piezas.
+
+--6.4. Obtener los nombres de los proveedores que suministran la pieza 1.
+
+--6.5. Obtener los nombres de las piezas suministradas por el proveedor cuyo c ´odigo es HAL.
+
+--6.6. Obtener los nombres de los proveedores que suministran las piezas m ´as caras,indicando el nombre de la pieza y el precio al que la suministran.
+
+--6.7. Hacer constar en la base de datos que la empresa ”Skellington Supplies”(codigo TNBC) va a empezar a suministrarnos tuercas (c ´odigo 1) a 7 pesetas cada tuerca.
+
+--6.8. Aumentar los precios en una unidad.
+
+--6.9. Hacer constar en la base de datos que la empresa ”Susan Calvin Corp.”(RBT) nova a suministrarnos ninguna pieza (aunque la empresa en s ´i va a seguir constando en nuestra base de datos).
+
+--6.10. Hacer constar en la base de datos que la empresa ”Susan Calvin Corp.”(RBT) ya no va a suministrarnos clavos (c ´odigo 4)
+
+
+------------LOS CIENTIFICOS------------
+
+--7.1. Sacar una relaci ´on completa de los cient ´ificos asignados a cada proyecto. Mostrar DNI, Nombre del cient ´ifico, Identificador del proyecto y nombre del proyecto.
+
+--7.2. Obtener el numero de proyectos al que est ´a asignado cada cient ´ifico (mostrar el DNI y el nombre).
+
+--7.3. Obtener el numero de cient ´ificos asignados a cada proyecto (mostrar el identificador de proyecto y el nombre del proyecto).
+
+--7.4. Obtener el numero de horas de dedicaci ´on de cada cientifico.
+
+--7.5. Obtener el DNI y nombre de los cient ´ificos que se dedican a m ´as de un proyecto y cuya dedicaci ´on media a cada proyecto sea superior a las 80 horas.
+
+
+------------LOS GRANDES ALMACENES------------
+
+--8.1. Mostrar el n ´umero de ventas de cada producto, ordenado de m ´as a menos ventas.
+
+--8.2. Obtener un informe completo de ventas, indicando el nombre del cajero que rea-liz ´o la venta, nombre y precios de los productos vendidos, y piso en el que se encuentra la maquina registradora donde se realizo la venta.
+
+--8.3. Obtener las ventas totales realizadas en cada piso.
+
+--8.4. Obtener el codigo y nombre de cada empleado junto con el importe total de sus ventas.
+
+--8.5. Obtener el c ´odigo y nombre de aquellos cajeros que hayan realizado ventas en pisos cuyas ventas totales sean inferiores a los 500
+
+
+------------LOS INVESTIGADORES------------
+
+--9.1. Obtener el DNI y nombre de aquellos investigadores que han realizado m ´as de una reserva.
+
+--9.2. Obtener un listado completa de reservas, incluyendo los siguientes datos:
+
+       --DNI y nombre del investigador, junto con el nombre de su facultad.
+       --Numero de serie y nombre del equipo reservado, junto con el nombre de la facultad a la que pertenece.
+       --Fecha de comienzo y fin de la reserva.
+
+--9.3. Obtener el DNI y el nombre de los investigadores que han reservado equipos que no son de su facultad.
+
+--9.4. Obtener los nombres de las facultades en las que ning ´un investigador ha realizado una reserva.
+
+--9.5. Obtener los nombres de las facultades con investigadores ’ociosos’ (investigadores que no han realizado ninguna reserva).
+
+--9.6. Obtener el n ´umero de serie y nombre de los equipos que nunca han sido reservados.
+
+
+
+
+
+
+
+

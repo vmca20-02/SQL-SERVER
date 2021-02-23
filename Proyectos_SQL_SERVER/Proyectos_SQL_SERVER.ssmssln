@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 11.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Sylvia_Moestl_Vasilik_Scripts", "Sylvia_Moestl_Vasilik_Scripts\Sylvia_Moestl_Vasilik_Scripts.ssmssqlproj", "{E77A5321-9F9F-48D5-A455-CA515AB358E5}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Proveedores_Partes_Scripts", "Proveedores_Partes_Scripts\Proveedores_Partes_Scripts.ssmssqlproj", "{C228C076-9876-405C-A405-2486E5316637}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Retos_SQL_Server", "Retos_SQL_Server\Retos_SQL_Server.ssmssqlproj", "{AFD4EED1-B759-4492-9D15-92F3FEC0B937}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E77A5321-9F9F-48D5-A455-CA515AB358E5}.Default|Default.ActiveCfg = Default
+		{C228C076-9876-405C-A405-2486E5316637}.Default|Default.ActiveCfg = Default
+		{AFD4EED1-B759-4492-9D15-92F3FEC0B937}.Default|Default.ActiveCfg = Default
+		{E83BC030-1668-4485-A02F-0262A51F68AA}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-1">Ejercicio 1</h2>
+<p>Necesita almacenar los datos de sus amigos en una tabla, los datos que guardará serán: apellido, nombre, domicilio y teléfono.</p>
+<ol>
+<li>Intente crear una tabla llamada <strong>&quot;/agenda&quot;</strong> (<em>aparece un mensaje de error porque usamos un caracter inválido &quot;/&quot; para el nombre</em>).</li>
+<li><p>Cree una tabla llamada &quot;agenda&quot;, debe tener los siguientes campos:</p>
+<ul>
+<li><strong>apellido</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>telefono</strong>, <em>varchar(11)</em>.</li>
+</ul></li>
+<li>Intente crearla nuevamente (<em>Aparece mensaje de error</em>).</li>
+<li>Visualice la estructura de la tabla.</li>
+<li>Elimine la tabla.</li>
+<li><p>Intente eliminar nuevamente la tabla (<em>Debe aparecer un mensaje de error</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 1
+******************************************************************************/
+
+CREATE TABLE &quot;/agenda&quot; (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11)
+);
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda(
+    apellido VARCHAR(30),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11)
+); -- Should fail
+
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;agenda&#39;;
+
+DROP TABLE agenda;
+
+DROP TABLE agenda; -- Should fail
+</code></pre>
+
+</body>
+</html>
+

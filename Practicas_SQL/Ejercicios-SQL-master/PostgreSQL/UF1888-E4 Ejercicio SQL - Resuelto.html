@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UF1888-E4 Ejercicio SQL - Resuelto</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+
+/* PERSONAL
+=============================================================================*/
+
+h1 {
+	padding-bottom: 25px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 12px;
+ }
+</style>
+</head>
+<body>
+<h1 id="uf1888-e4-ejercicio-sql">UF1888-E4: Ejercicio SQL</h1>
+<h2 id="objetivos-">Objetivos:</h2>
+<p>Llevar a la práctica los conocimientos de SQL adquiridos.</p>
+<h2 id="enunciado-">Enunciado:</h2>
+<p>Los ejercicios a realizar van a recuperar datos de dos tablas:</p>
+<ul>
+<li>la tabla de empleados (TEMPLE1)</li>
+<li>la de departamentos (TDEPAR2)</li>
+</ul>
+<h2 id="contenido-de-datos">Contenido de datos</h2>
+<p>Los nombres reales y características de las columnas se muestran en la siguiente tabla:</p>
+<h3 id="temple1-tabla-de-empleados-">TEMPLE1 (Tabla de Empleados)</h3>
+<table>
+<thead>
+<tr>
+<th>nuempl</th>
+<th>nombre</th>
+<th>i</th>
+<th>apellido</th>
+<th>dept</th>
+<th>tlfn</th>
+<th>feching</th>
+<th>ctr</th>
+<th>nv</th>
+<th>s</th>
+<th>fechnac</th>
+<th>salari o</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>CRISTINA</td>
+<td>I</td>
+<td>HERNANDEZ</td>
+<td>A00</td>
+<td>2070</td>
+<td>01.01.1965</td>
+<td>66</td>
+<td>18</td>
+<td>M</td>
+<td>14.08.1933</td>
+<td>527 5</td>
+</tr>
+<tr>
+<td>20</td>
+<td>MIGUEL</td>
+<td>L</td>
+<td>TAPIA</td>
+<td>B01</td>
+<td>2140</td>
+<td>10.10.1973</td>
+<td>61</td>
+<td>18</td>
+<td>H</td>
+<td>02.02.1948</td>
+<td>412 5</td>
+</tr>
+<tr>
+<td>30</td>
+<td>SALOME</td>
+<td>A</td>
+<td>KEMPES</td>
+<td>C01</td>
+<td>2080</td>
+<td>05.04.1975</td>
+<td>60</td>
+<td>20</td>
+<td>M</td>
+<td>11.05.1941</td>
+<td>382 5</td>
+</tr>
+<tr>
+<td>50</td>
+<td>JUAN</td>
+<td>B</td>
+<td>GARRIDO</td>
+<td>E01</td>
+<td>1507</td>
+<td>17.08.1949</td>
+<td>58</td>
+<td>16</td>
+<td>H</td>
+<td>15.09.1925</td>
+<td>401 7</td>
+</tr>
+<tr>
+<td>60</td>
+<td>ISIDRO</td>
+<td>F</td>
+<td>SUAREZ</td>
+<td>D11</td>
+<td>2290</td>
+<td>14.09.1973</td>
+<td>55</td>
+<td>16</td>
+<td>H</td>
+<td>07.07.1945</td>
+<td>322 5</td>
+</tr>
+<tr>
+<td>70</td>
+<td>EVA</td>
+<td>D</td>
+<td>PUENTE</td>
+<td>D21</td>
+<td>2400</td>
+<td>30.09.1980</td>
+<td>56</td>
+<td>16</td>
+<td>M</td>
+<td>26.05.1953</td>
+<td>361 7</td>
+</tr>
+<tr>
+<td>90</td>
+<td>ELENA</td>
+<td>W</td>
+<td>HERRANZ</td>
+<td>E11</td>
+<td>2230</td>
+<td>15.08.1970</td>
+<td>55</td>
+<td>16</td>
+<td>M</td>
+<td>15.05.1941</td>
+<td>294 5</td>
+</tr>
+<tr>
+<td>100</td>
+<td>TOMAS</td>
+<td>Q</td>
+<td>SOLER</td>
+<td>E21</td>
+<td>2170</td>
+<td>19.06.1980</td>
+<td>54</td>
+<td>14</td>
+<td>H</td>
+<td>18.12.1956</td>
+<td>261 5</td>
+</tr>
+<tr>
+<td>110</td>
+<td>VICENTE</td>
+<td>G</td>
+<td>LUENGO</td>
+<td>A00</td>
+<td>1140</td>
+<td>16.05.1958</td>
+<td>58</td>
+<td>19</td>
+<td>H</td>
+<td>05.11.1929</td>
+<td>465 0</td>
+</tr>
+<tr>
+<td>120</td>
+<td>SIMON</td>
+<td>-</td>
+<td>OTERO</td>
+<td>A00</td>
+<td>2022</td>
+<td>05.12.1963</td>
+<td>58</td>
+<td>14</td>
+<td>H</td>
+<td>18.10.1942</td>
+<td>292 5</td>
+</tr>
+<tr>
+<td>130</td>
+<td>DOLORES</td>
+<td>M</td>
+<td>QUINTANA</td>
+<td>C01</td>
+<td>2140</td>
+<td>28.07.1971</td>
+<td>55</td>
+<td>16</td>
+<td>M</td>
+<td>15.09.1925</td>
+<td>238 0</td>
+</tr>
+<tr>
+<td>140</td>
+<td>HELIODORA</td>
+<td>A</td>
+<td>NIETO</td>
+<td>C01</td>
+<td>2210</td>
+<td>15.12.1976</td>
+<td>56</td>
+<td>18</td>
+<td>M</td>
+<td>19.01.1946</td>
+<td>284 2</td>
+</tr>
+<tr>
+<td>150</td>
+<td>BRUNO</td>
+<td>-</td>
+<td>ALVAREZ</td>
+<td>D11</td>
+<td>2250</td>
+<td>12.02.1971</td>
+<td>55</td>
+<td>16</td>
+<td>H</td>
+<td>17.05.1947</td>
+<td>252 8</td>
+</tr>
+<tr>
+<td>160</td>
+<td>ELISA</td>
+<td>R</td>
+<td>PINTO</td>
+<td>D11</td>
+<td>1307</td>
+<td>11.10.1977</td>
+<td>54</td>
+<td>17</td>
+<td>M</td>
+<td>12.04.1955</td>
+<td>222 5</td>
+</tr>
+<tr>
+<td>170</td>
+<td>MATEO</td>
+<td>J</td>
+<td>YARZA</td>
+<td>D11</td>
+<td>2050</td>
+<td>15.09.1978</td>
+<td>54</td>
+<td>16</td>
+<td>H</td>
+<td>05.01.1951</td>
+<td>246 8</td>
+</tr>
+<tr>
+<td>180</td>
+<td>MARINA</td>
+<td>S</td>
+<td>SANDOVAL</td>
+<td>D11</td>
+<td>1050</td>
+<td>07.07.1973</td>
+<td>53</td>
+<td>17</td>
+<td>M</td>
+<td>21.02.1949</td>
+<td>213 4</td>
+</tr>
+<tr>
+<td>190</td>
+<td>JAIME</td>
+<td>H</td>
+<td>WALKER</td>
+<td>D11</td>
+<td>2100</td>
+<td>27.07.1974</td>
+<td>53</td>
+<td>16</td>
+<td>H</td>
+<td>25.06.1952</td>
+<td>204 5</td>
+</tr>
+<tr>
+<td>200</td>
+<td>DAVID</td>
+<td>-</td>
+<td>BONDIA</td>
+<td>D11</td>
+<td>2340</td>
+<td>03.03.1966</td>
+<td>55</td>
+<td>16</td>
+<td>H</td>
+<td>29.05.1941</td>
+<td>277 4</td>
+</tr>
+<tr>
+<td>210</td>
+<td>WENCESLAO</td>
+<td>T</td>
+<td>JURADO</td>
+<td>D11</td>
+<td>2310</td>
+<td>11.04.1979</td>
+<td>52</td>
+<td>17</td>
+<td>H</td>
+<td>23.02.1953</td>
+<td>182 7</td>
+</tr>
+<tr>
+<td>220</td>
+<td>JIMENA</td>
+<td>K</td>
+<td>LUQUE</td>
+<td>D11</td>
+<td>2300</td>
+<td>29.08.1968</td>
+<td>55</td>
+<td>18</td>
+<td>M</td>
+<td>19.03.1948</td>
+<td>298 4</td>
+</tr>
+<tr>
+<td>230</td>
+<td>JAIME</td>
+<td>J</td>
+<td>JIMENEZ</td>
+<td>D21</td>
+<td>1080</td>
+<td>21.11.1966</td>
+<td>53</td>
+<td>14</td>
+<td>H</td>
+<td>30.05.1935</td>
+<td>221 8</td>
+</tr>
+<tr>
+<td>240</td>
+<td>SALVADOR</td>
+<td>M</td>
+<td>MARTINEZ</td>
+<td>D21</td>
+<td>2260</td>
+<td>05.12.1979</td>
+<td>55</td>
+<td>17</td>
+<td>H</td>
+<td>31.03.1954</td>
+<td>287 6</td>
+</tr>
+<tr>
+<td>250</td>
+<td>DANIEL</td>
+<td>S</td>
+<td>SIERRA</td>
+<td>D21</td>
+<td>2357</td>
+<td>30.10.1969</td>
+<td>52</td>
+<td>15</td>
+<td>H</td>
+<td>12.11.1939</td>
+<td>191 8</td>
+</tr>
+<tr>
+<td>260</td>
+<td>SUSANA</td>
+<td>P</td>
+<td>JUNQUERA</td>
+<td>D21</td>
+<td>2302</td>
+<td>11.09.1975</td>
+<td>52</td>
+<td>16</td>
+<td>M</td>
+<td>05.10.1936</td>
+<td>172 5</td>
+</tr>
+<tr>
+<td>270</td>
+<td>MARIA</td>
+<td>L</td>
+<td>PEREZ</td>
+<td>D21</td>
+<td>2217</td>
+<td>30.09.1980</td>
+<td>55</td>
+<td>15</td>
+<td>M</td>
+<td>23.05.1953</td>
+<td>273 8</td>
+</tr>
+<tr>
+<td>280</td>
+<td>ENGRACIA</td>
+<td>R</td>
+<td>SANCHEZ</td>
+<td>E11</td>
+<td>2007</td>
+<td>24.03.1967</td>
+<td>54</td>
+<td>17</td>
+<td>M</td>
+<td>15.05.1941</td>
+<td>259 8</td>
+</tr>
+<tr>
+<td>290</td>
+<td>JUAN</td>
+<td>R</td>
+<td>PALACIOS</td>
+<td>E11</td>
+<td>2192</td>
+<td>30.05.1980</td>
+<td>42</td>
+<td>12</td>
+<td>H</td>
+<td>09.07.1946</td>
+<td>138 0</td>
+</tr>
+<tr>
+<td>300</td>
+<td>PEDRO</td>
+<td>I</td>
+<td>SIERRA</td>
+<td>E11</td>
+<td>3522</td>
+<td>19.06.1972</td>
+<td>48</td>
+<td>14</td>
+<td>H</td>
+<td>27.10.1936</td>
+<td>177 5</td>
+</tr>
+<tr>
+<td>310</td>
+<td>MATILDE</td>
+<td>F</td>
+<td>SERNA</td>
+<td>E11</td>
+<td>2130</td>
+<td>12.09.1964</td>
+<td>43</td>
+<td>12</td>
+<td>M</td>
+<td>21.04.1931</td>
+<td>157 4</td>
+</tr>
+<tr>
+<td>320</td>
+<td>RAMON</td>
+<td>V</td>
+<td>MORAN</td>
+<td>E21</td>
+<td>7112</td>
+<td>07.07.1965</td>
+<td>52</td>
+<td>16</td>
+<td>H</td>
+<td>11.08.1932</td>
+<td>199 5</td>
+</tr>
+<tr>
+<td>330</td>
+<td>WILLY</td>
+<td>-</td>
+<td>LERMA</td>
+<td>E21</td>
+<td>1132</td>
+<td>23.02.1976</td>
+<td>55</td>
+<td>14</td>
+<td>H</td>
+<td>18.07.1941</td>
+<td>253 7</td>
+</tr>
+<tr>
+<td>340</td>
+<td>JAVIER</td>
+<td>R</td>
+<td>GIL</td>
+<td>E21</td>
+<td>1162</td>
+<td>05.05.1947</td>
+<td>54</td>
+<td>16</td>
+<td>H</td>
+<td>17.05.1926</td>
+<td>238 4</td>
+</tr>
+<tr>
+<td>999</td>
+<td>ANGEL</td>
+<td>E</td>
+<td>MALDONADO</td>
+<td>E11</td>
+<td>----</td>
+<td>22.03.1988</td>
+<td>69</td>
+<td>20</td>
+<td>H</td>
+<td>12.11.1965</td>
+<td>750 0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tdepar2-tabla-de-departamentos-">TDEPAR2 (Tabla de Departamentos)</h3>
+<table>
+<thead>
+<tr>
+<th>numdep</th>
+<th>nomdep</th>
+<th>numdirec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A00</td>
+<td>CENTRO PROCESOS</td>
+<td>10</td>
+</tr>
+<tr>
+<td>B01</td>
+<td>PLANIFICACION</td>
+<td>20</td>
+</tr>
+<tr>
+<td>C01</td>
+<td>INFORMACION</td>
+<td>30</td>
+</tr>
+<tr>
+<td>D01</td>
+<td>DESARROLLO</td>
+<td>200</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>FABRICACION</td>
+<td>60</td>
+</tr>
+<tr>
+<td>D21</td>
+<td>ADMINISTRACION</td>
+<td>70</td>
+</tr>
+<tr>
+<td>E01</td>
+<td>SERVICIOS</td>
+<td>50</td>
+</tr>
+<tr>
+<td>E11</td>
+<td>OPERACIONES</td>
+<td>90</td>
+</tr>
+<tr>
+<td>E21</td>
+<td>SOFTWARE</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resoluci-n">Resolución</h2>
+<h3 id="creaci-n-de-las-tablas">Creación de las tablas</h3>
+<pre><code>CREATE TABLE temple1 (
+    nuempl CHAR(6) NOT NULL,
+    nombre CHAR(12) NOT NULL,
+    inicial CHAR(1) NOT NULL,
+    apellido CHAR(15) NOT NULL,
+    dept CHAR(3) NOT NULL,
+    tlfn CHAR(4),
+    feching  DATE NOT NULL,
+    codtra SMALLINT NOT NULL,
+    niveduc SMALLINT NOT NULL,
+    sexo CHAR(1) NOT NULL,
+    fechnac DATE  NOT NULL,
+    salario DECIMAL(9,2) NOT NULL
+ );</code></pre>
+<pre><code>CREATE TABLE tdepar2 (
+    numdep CHAR(3) NOT NULL,
+    nomdep CHAR(36) NOT NULL,
+    numdirec CHAR(6) NOT NULL
+);</code></pre>
+<h3 id="inserci-n-de-datos">Inserción de datos</h3>
+<pre><code>SET DATESTYLE TO &#39;European&#39;;</code></pre>
+<pre><code>INSERT INTO temple1 ( nuempl, nombre, inicial, apellido, dept, tlfn, feching, codtra, niveduc, sexo, fechnac, salario )
+    VALUES    ( 10, &#39;CRISTINA&#39;, &#39;I&#39;, &#39;HERNANDEZ&#39;, &#39;A00&#39;, 2070, &#39;01.01.1965&#39;, 66, 18, &#39;M&#39;, &#39;14.08.1933&#39;, 5275 ),
+        ( 20, &#39;MIGUEL&#39;, &#39;L&#39;, &#39;TAPIA&#39;, &#39;B01&#39;, 2140, &#39;10.10.1973&#39;, 61, 18, &#39;H&#39;, &#39;02.02.1948&#39;, 4125 ),
+        ( 30, &#39;SALOME&#39;, &#39;A&#39;, &#39;KEMPES&#39;, &#39;C01&#39;, 2080, &#39;05.04.1975&#39;, 60, 20, &#39;M&#39;, &#39;11.05.1941&#39;, 3825 ),
+        ( 50, &#39;JUAN&#39;, &#39;B&#39;, &#39;GARRIDO&#39;, &#39;E01&#39;, 1507, &#39;17.08.1949&#39;, 58, 16, &#39;H&#39;, &#39;15.09.1925&#39;, 4017 ),
+        ( 60, &#39;ISIDRO&#39;, &#39;F&#39;, &#39;SUAREZ&#39;, &#39;D11&#39;, 2290, &#39;14.09.1973&#39;, 55, 16, &#39;H&#39;, &#39;07.07.1945&#39;, 3225 ),
+        ( 70, &#39;EVA&#39;, &#39;D&#39;, &#39;PUENTE&#39;, &#39;D21&#39;, 2400, &#39;30.09.1980&#39;, 56, 16, &#39;M&#39;, &#39;26.05.1953&#39;, 3617 ),
+        ( 90, &#39;ELENA&#39;, &#39;W&#39;, &#39;HERRANZ&#39;, &#39;E11&#39;, 2230, &#39;15.08.1970&#39;, 55, 16, &#39;M&#39;, &#39;15.05.1941&#39;, 2945 ),
+        ( 100, &#39;TOMAS&#39;, &#39;Q&#39;, &#39;SOLER&#39;, &#39;E21&#39;, 2170, &#39;19.06.1980&#39;, 54, 14, &#39;H&#39;, &#39;18.12.1956&#39;, 2615 ),
+        ( 110, &#39;VICENTE&#39;, &#39;G&#39;, &#39;LUENGO&#39;, &#39;A00&#39;, 1140, &#39;16.05.1958&#39;, 58, 19, &#39;H&#39;, &#39;05.11.1929&#39;, 4650 ),
+        ( 120, &#39;SIMON&#39;, &#39;&#39;, &#39;OTERO&#39;, &#39;A00&#39;, 2022, &#39;05.12.1963&#39;, 58, 14, &#39;H&#39;, &#39;18.10.1942&#39;, 2925 ),
+        ( 130, &#39;DOLORES&#39;, &#39;M&#39;, &#39;QUINTANA&#39;, &#39;C01&#39;, 2140, &#39;28.07.1971&#39;, 55, 16, &#39;M&#39;, &#39;15.09.1925&#39;, 2380 ),
+        ( 140, &#39;HELIODORA&#39;, &#39;A&#39;, &#39;NIETO&#39;, &#39;C01&#39;, 2210, &#39;15.12.1976&#39;, 56, 18, &#39;M&#39;, &#39;19.01.1946&#39;, 2842 ),
+        ( 150, &#39;BRUNO&#39;, &#39;&#39;, &#39;ALVAREZ&#39;, &#39;D11&#39;, 2250, &#39;12.02.1971&#39;, 55, 16, &#39;H&#39;, &#39;17.05.1947&#39;, 2528 ),
+        ( 160, &#39;ELISA&#39;, &#39;R&#39;, &#39;PINTO&#39;, &#39;D11&#39;, 1307, &#39;11.10.1977&#39;, 54, 17, &#39;M&#39;, &#39;12.04.1955&#39;, 2225 ),
+        ( 170, &#39;MATEO&#39;, &#39;J&#39;, &#39;YARZA&#39;, &#39;D11&#39;, 2050, &#39;15.09.1978&#39;, 54, 16, &#39;H&#39;, &#39;05.01.1951&#39;, 2468 ),
+        ( 180, &#39;MARINA&#39;, &#39;S&#39;, &#39;SANDOVAL&#39;, &#39;D11&#39;, 1050, &#39;07.07.1973&#39;, 53, 17, &#39;M&#39;, &#39;21.02.1949&#39;, 2134 ),
+        ( 190, &#39;JAIME&#39;, &#39;H&#39;, &#39;WALKER&#39;, &#39;D11&#39;, 2100, &#39;27.07.1974&#39;, 53, 16, &#39;H&#39;, &#39;25.06.1952&#39;, 2045 ),
+        ( 200, &#39;DAVID&#39;, &#39;&#39;, &#39;BONDIA&#39;, &#39;D11&#39;, 2340, &#39;03.03.1966&#39;, 55, 16, &#39;H&#39;, &#39;29.05.1941&#39;, 2774 ),
+        ( 210, &#39;WENCESLAO&#39;, &#39;T&#39;, &#39;JURADO&#39;, &#39;D11&#39;, 2310, &#39;11.04.1979&#39;, 52, 17, &#39;H&#39;, &#39;23.02.1953&#39;, 1827 ),
+        ( 220, &#39;JIMENA&#39;, &#39;K&#39;, &#39;LUQUE&#39;, &#39;D11&#39;, 2300, &#39;29.08.1968&#39;, 55, 18, &#39;M&#39;, &#39;19.03.1948&#39;, 2984 ),
+        ( 230, &#39;JAIME&#39;, &#39;J&#39;, &#39;JIMENEZ&#39;, &#39;D21&#39;, 1080, &#39;21.11.1966&#39;, 53, 14, &#39;H&#39;, &#39;30.05.1935&#39;, 2218 ),
+        ( 240, &#39;SALVADOR&#39;, &#39;M&#39;, &#39;MARTINEZ&#39;, &#39;D21&#39;, 2260, &#39;05.12.1979&#39;, 55, 17, &#39;H&#39;, &#39;31.03.1954&#39;, 2876 ),
+        ( 250, &#39;DANIEL&#39;, &#39;S&#39;, &#39;SIERRA&#39;, &#39;D21&#39;, 2357, &#39;30.10.1969&#39;, 52, 15, &#39;H&#39;, &#39;12.11.1939&#39;, 1918 ),
+        ( 260, &#39;SUSANA&#39;, &#39;P&#39;, &#39;JUNQUERA&#39;, &#39;D21&#39;, 2302, &#39;11.09.1975&#39;, 52, 16, &#39;M&#39;, &#39;05.10.1936&#39;, 1725 ),
+        ( 270, &#39;MARIA&#39;, &#39;L&#39;, &#39;PEREZ&#39;, &#39;D21&#39;, 2217, &#39;30.09.1980&#39;, 55, 15, &#39;M&#39;, &#39;23.05.1953&#39;, 2738 ),
+        ( 280, &#39;ENGRACIA&#39;, &#39;R&#39;, &#39;SANCHEZ&#39;, &#39;E11&#39;, 2007, &#39;24.03.1967&#39;, 54, 17, &#39;M&#39;, &#39;15.05.1941&#39;, 2598 ),
+        ( 290, &#39;JUAN&#39;, &#39;R&#39;, &#39;PALACIOS&#39;, &#39;E11&#39;, 2192, &#39;30.05.1980&#39;, 42, 12, &#39;H&#39;, &#39;09.07.1946&#39;, 1380 ),
+        ( 300, &#39;PEDRO&#39;, &#39;I&#39;, &#39;SIERRA&#39;, &#39;E11&#39;, 3522, &#39;19.06.1972&#39;, 48, 14, &#39;H&#39;, &#39;27.10.1936&#39;, 1775 ),
+        ( 310, &#39;MATILDE&#39;, &#39;F&#39;, &#39;SERNA&#39;, &#39;E11&#39;, 2130, &#39;12.09.1964&#39;, 43, 12, &#39;M&#39;, &#39;21.04.1931&#39;, 1574 ),
+        ( 320, &#39;RAMON&#39;, &#39;V&#39;, &#39;MORAN&#39;, &#39;E21&#39;, 7112, &#39;07.07.1965&#39;, 52, 16, &#39;H&#39;, &#39;11.08.1932&#39;, 1995 ),
+        ( 330, &#39;WILLY&#39;, &#39;&#39;, &#39;LERMA&#39;, &#39;E21&#39;, 1132, &#39;23.02.1976&#39;, 55, 14, &#39;H&#39;, &#39;18.07.1941&#39;, 2537 ),
+        ( 340, &#39;JAVIER&#39;, &#39;R&#39;, &#39;GIL&#39;, &#39;E21&#39;, 1162, &#39;05.05.1947&#39;, 54, 16, &#39;H&#39;, &#39;17.05.1926&#39;, 2384 ),
+        ( 999, &#39;ANGEL&#39;, &#39;E&#39;, &#39;MALDONADO&#39;, &#39;E11&#39;, &#39;----&#39;, &#39;22.03.1988&#39;, 69, 20, &#39;H&#39;, &#39;12.11.1965&#39;, 7500 );</code></pre>
+<pre><code>INSERT INTO tdepar2 ( numdep, nomdep, numdirec ) 
+    VALUES     ( &#39;A00&#39;, &#39;CENTRO PROCESOS&#39;, 000010 ),
+        ( &#39;B01&#39;, &#39;PLANIFICACION&#39;, 000020 ),
+        ( &#39;C01&#39;, &#39;INFORMACION&#39;, 000030 ),
+        ( &#39;D01&#39;, &#39;DESARROLLO&#39;, &#39;&#39; ),
+        ( &#39;D11&#39;, &#39;FABRICACION&#39;, 000060 ),
+        ( &#39;D21&#39;, &#39;ADMINISTRACION&#39;, 000070 ),
+        ( &#39;E01&#39;, &#39;SERVICIOS&#39;, 000050 ),
+        ( &#39;E11&#39;, &#39;OPERACIONES&#39;, 000090 ), 
+        ( &#39;E21&#39;, &#39;SOFTWARE&#39;, 000100 );</code></pre>
+<h3 id="consultas">Consultas</h3>
+<p>1.- Obtener una lista de todas las empleadas de los departamentos que empiecen por D y por E. La lista anterior debe contener información sobre el número de personal, nombre, apellido y número de teléfono.</p>
+<pre><code>SELECT nuempl, nombre, apellido, tlfn , nomdep
+    FROM temple1
+        INNER JOIN tdepar2 ON (temple1.dept = tdepar2.numdep)
+    WHERE sexo=&#39;M&#39; AND (tdepar2.nomdep LIKE &#39;D%&#39; OR tdepar2.nomdep LIKE &#39;E%&#39;);</code></pre>
+<blockquote>
+<p><strong>Rectificación</strong> Con número de departamento</p>
+</blockquote>
+<pre><code>SELECT nuempl, nombre, apellido, tlfn , nomdep
+    FROM temple1
+        INNER JOIN tdepar2 ON (temple1.dept = tdepar2.numdep)
+    WHERE sexo=&#39;M&#39; AND (tdepar2.numdep LIKE &#39;D%&#39; OR tdepar2.numdep LIKE &#39;E%&#39;);</code></pre>
+<p>2.- Obtener un listado de todos los empleados (nombre y apellido) que ganan más de 2000€ al mes y que entraron en la compañía después del 1 de Enero de 1975. También se quiere la información correspondiente a su código de trabajo y al número de personal de sus directores.</p>
+<pre><code>SELECT nombre, apellido, codtra, numdirec
+    FROM temple1
+        INNER JOIN tdepar2 ON (temple1.dept = tdepar2.numdep)
+    WHERE salario &gt; 2000 AND feching &gt; &#39;01/01/1975&#39;</code></pre>
+<p>3.- Obtener una lista con el apellido, número de departamento y salario mensual de los empleados de los departamentos ‘A00’, ‘B01’, ‘C01’ y ‘D01’. La salida se quiere en orden descendente de salario dentro de cada departamento.</p>
+<pre><code>SELECT apellido, dept, salario
+    FROM temple1
+    WHERE dept IN ( &#39;A00&#39;, &#39;B01&#39;, &#39;C01&#39; , &#39;D01&#39;)
+    ORDER BY dept, salario DESC</code></pre>
+<p>4.- Se pide una lista que recupere el salario medio de cada departamento junto con el número de empleados que tiene. El resultado no debe incluir empleados que tengan un código de trabajo mayor que 54, ni departamentos con menos de tres empleados. Se quiere ordenada por número de departamento.</p>
+<pre><code>SELECT salario, numempl
+    FROM (
+        SELECT AVG(salario) as salario, COUNT(*) AS numempl, dept
+            FROM temple1
+            WHERE NOT codtra &gt; 54 
+            GROUP BY dept
+    ) AS result
+    WHERE NOT numempl &lt; 3
+    ORDER BY dept ASC;</code></pre>
+<p>5.- Seleccionar todos los empleados de los departamentos ‘D11’ y ‘E11’ cuyo primer apellido empiece por S.</p>
+<pre><code>SELECT * 
+    FROM temple1
+    WHERE dept IN ( &#39;D11&#39;, &#39;E11&#39; ) AND apellido LIKE &#39;S%&#39;;</code></pre>
+<p>6.- Obtener el nombre, apellido y fecha de ingreso de los directores de departamento ordenados por número de personal.</p>
+<pre><code>SELECT nombre, apellido, feching 
+    FROM temple1
+    WHERE CAST(nuempl AS INT) IN ( 
+                    SELECT CAST(numdirec AS INT) FROM tdepar2 WHERE numdirec &lt;&gt; &#39;&#39; 
+                     );</code></pre>
+<p>7.- Obtener un listado de las mujeres de los departamentos que empiecen por D y por E cuyo nivel de educación sea superior a la media; en este caso también ordenados por número de personal.</p>
+<pre><code>SELECT nuempl, nombre, apellido, tlfn , nomdep
+    FROM temple1
+        INNER JOIN tdepar2 ON (temple1.dept = tdepar2.numdep)
+    WHERE sexo=&#39;M&#39; AND (tdepar2.nomdep LIKE &#39;D%&#39; OR tdepar2.nomdep LIKE &#39;E%&#39;) AND niveduc &gt; ( SELECT AVG(niveduc) FROM temple1 )
+    ORDER BY nuempl;</code></pre>
+<blockquote>
+<p><strong>Rectificación</strong> Con número de departamento</p>
+</blockquote>
+<pre><code>SELECT nuempl, nombre, apellido, tlfn , nomdep
+    FROM temple1
+        INNER JOIN tdepar2 ON (temple1.dept = tdepar2.numdep)
+    WHERE sexo=&#39;M&#39; AND (tdepar2.numdep LIKE &#39;D%&#39; OR tdepar2.numdep LIKE &#39;E%&#39;) AND niveduc &gt; ( SELECT AVG(niveduc) FROM temple1 )
+    ORDER BY nuempl;</code></pre>
+<p>8.- Seleccionar todos los empleados cuyo nombre sea igual al de algunas personas del departamento D21 y cuyo código de trabajo sea diferente de todos los del E21 (la lista debe contener el número de personal, nombre, apellido, departamento y código de trabajo).</p>
+<pre><code>SELECT * 
+    FROM temple1
+    WHERE     nombre IN (SELECT nombre FROM temple1 WHERE dept=&#39;D21&#39;) AND 
+        codtra NOT IN (SELECT codtra FROM temple1 WHERE dept=&#39;E21&#39;);</code></pre>
+<p>9.- Listar los empleados que no sean directores (la información que debe aparecer es el número de personal, apellido y departamento).</p>
+<pre><code>SELECT *
+    FROM temple1
+    WHERE CAST(nuempl AS INT) NOT IN (SELECT CAST(numdirec AS INT) FROM tdepar2 WHERE numdirec &lt;&gt; &#39;&#39; )</code></pre>
+<p>10.- Seleccionar parejas de empleados (de sexo opuesto) que hayan nacido el mismo día (con información acerca de apellido y fecha de nacimiento).</p>
+<pre><code>SELECT * 
+    FROM temple1
+    WHERE fechnac = (SELECT fechnac FROM temple1 WHERE sexo = &#39;M&#39;
+            INTERSECT
+                SELECT fechnac FROM temple1 WHERE sexo = &#39;H&#39;);</code></pre>
+<p>11.- Obtener un listado de todos los empleados que pertenecen al mismo departamento que Tomás Soler.</p>
+<pre><code>SELECT * 
+    FROM temple1
+    WHERE dept = (select dept from temple1 WHERE nombre = &#39;Tomás&#39; AND apellido = &#39;Soler&#39;);</code></pre>
+<blockquote>
+<p><strong>Rectificación</strong> Con número de departamento</p>
+</blockquote>
+<pre><code>SELECT * 
+    FROM temple1
+    WHERE dept = (select dept from temple1 WHERE nombre = &#39;TOMAS&#39; AND apellido = &#39;SOLER&#39;);</code></pre>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-66">Ejercicio 66</h2>
+<p>Un club dicta clases de distintos deportes. Almacena la información en una tabla llamada &quot;deportes&quot; en la cual incluye el nombre del deporte y el nombre del profesor y en otra tabla llamada &quot;inscritos&quot; que incluye el documento del socio que se inscribe, el deporte y si la matricula está paga o no.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>deportes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>profesor</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>inscritos</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>codigodeporte</strong>, <em>smallint</em>. not null</li>
+<li><strong>matricula</strong>, <em>char(1)</em>. --'s'=paga 'n'=impaga</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros para ambas tablas.</li>
+<li>Muestre todos la información de la tabla &quot;inscritos&quot;, y consulte la tabla &quot;deportes&quot; para obtener el nombre de cada deporte (<em>6 registros</em>)</li>
+<li>Empleando un &quot;left join&quot; con &quot;deportes&quot; obtenga todos los datos de los inscritos (<em>7 registros</em>)</li>
+<li>Obtenga la misma salida anterior empleando un &quot;rigth join&quot;.</li>
+<li>Muestre los deportes para los cuales no hay inscritos, empleando un &quot;left join&quot; (<em>1 registro</em>)</li>
+<li>Muestre los documentos de los inscritos a deportes que no existen en la tabla &quot;deportes&quot; (<em>1 registro</em>)</li>
+<li><p>Emplee un &quot;full join&quot; para obtener todos los datos de ambas tablas, incluyendo las inscripciones a deportes inexistentes en &quot;deportes&quot; y los deportes que no tienen inscritos (<em>8 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 66
+******************************************************************************/
+
+DROP TABLE IF EXISTS deportes;
+
+CREATE TABLE deportes (
+    codigo SERIAL,
+    nombre VARCHAR(30),
+    profesor VARCHAR(30),
+    PRIMARY KEY (codigo)
+);
+
+DROP TABLE IF EXISTS inscritos;
+
+CREATE TABLE inscritos (
+    documento CHAR(8),
+    codigodeporte SMALLINT NOT NULL,
+    matricula CHAR(1)
+);
+
+INSERT INTO deportes(nombre,profesor) 
+    VALUES  (&#39;tenis&#39;,&#39;Marcelo Roca&#39;),
+        (&#39;natacion&#39;,&#39;Marta Torres&#39;),
+        (&#39;basquet&#39;,&#39;Luis Garcia&#39;),
+        (&#39;futbol&#39;,&#39;Marcelo Roca&#39;);
+
+INSERT INTO inscritos 
+    VALUES  (&#39;22222222&#39;,3,&#39;s&#39;),
+        (&#39;23333333&#39;,3,&#39;s&#39;),
+        (&#39;24444444&#39;,3,&#39;n&#39;),
+        (&#39;22222222&#39;,2,&#39;s&#39;),
+        (&#39;23333333&#39;,2,&#39;s&#39;),
+        (&#39;22222222&#39;,4,&#39;n&#39;),
+        (&#39;22222222&#39;,5,&#39;n&#39;); 
+
+SELECT documento,d.nombre,matricula
+    FROM inscritos AS i
+    JOIN deportes AS d
+    ON codigodeporte=codigo;
+
+SELECT documento,d.nombre,matricula
+    FROM inscritos AS i
+    LEFT JOIN deportes AS d
+    ON codigodeporte=codigo;
+
+SELECT documento,d.nombre,matricula
+    FROM deportes AS d
+    RIGHT JOIN inscritos AS i
+    ON codigodeporte=codigo;
+
+SELECT nombre
+    FROM deportes AS d
+    LEFT JOIN inscritos AS i
+    ON codigodeporte=codigo
+    WHERE codigodeporte is NULL;
+
+SELECT documento
+    FROM inscritos AS i
+    LEFT JOIN deportes AS d
+    ON codigodeporte=codigo
+    WHERE codigo is NULL;
+
+SELECT documento,nombre,profesor,matricula
+    FROM inscritos AS i
+    FULL JOIN deportes AS d
+    ON codigodeporte=codigo; 
+</code></pre>
+
+</body>
+</html>
+

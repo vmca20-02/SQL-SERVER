@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-3">Ejercicio 3</h2>
+<p>Trabaje con la tabla &quot;agenda&quot; que almacena información de sus amigos.</p>
+<ol>
+<li><p>Cree una tabla llamada <strong>agenda</strong> que tenga la siguiente estructura:</p>
+<ul>
+<li><strong>apellido</strong>, <em>cadena de 30</em>.</li>
+<li><strong>nombre</strong>, <em>cadena de 20</em>.</li>
+<li><strong>domicilio</strong>, <em>cadena de 30</em>.</li>
+<li><strong>telefono</strong>, <em>cadena de 11</em>.</li>
+</ul></li>
+<li>Visualice la estructura de la tabla &quot;agenda&quot;.</li>
+<li><p>Ingrese los siguientes registros:</p>
+<ul>
+<li><em>'Moreno', 'Alberto', 'Colon 123', '4234567'</em>.</li>
+<li><em>'Torres', 'Juan', 'Avellaneda 135', '4458787'</em>.</li>
+</ul></li>
+<li>Seleccione todos los registros de la tabla.</li>
+<li>Elimine la tabla &quot;agenda&quot;.</li>
+<li><p>Intente eliminar la tabla nuevamente (<em>aparece un mensaje de error</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 3
+******************************************************************************/
+
+DROP TABLE IF EXISTS agenda;
+
+CREATE TABLE agenda (
+    apellido VARCHAR(30),
+    nombre VARCHAR(20),
+    domicilio VARCHAR(30),
+    telefono VARCHAR(11)
+);
+SELECT table_name,column_name,udt_name,character_maximum_length 
+    FROM information_schema.columns 
+    WHERE table_name = &#39;agenda&#39;;
+
+INSERT INTO agenda (apellido, nombre, domicilio, telefono)
+    VALUES  (&#39;Moreno&#39;,&#39;Alberto&#39;,&#39;Colon 123&#39;,&#39;4234567&#39;),
+        (&#39;Torres&#39;,&#39;Juan&#39;,&#39;Avellaneda 135&#39;,&#39;4458787&#39;);
+
+SELECT * FROM agenda;
+
+DROP TABLE agenda;
+
+DROP TABLE agenda; -- Should fail
+</code></pre>
+
+</body>
+</html>
+

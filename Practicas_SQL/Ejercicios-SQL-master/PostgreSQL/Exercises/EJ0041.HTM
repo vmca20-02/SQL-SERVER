@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-41">Ejercicio 41</h2>
+<p>Una concesionaria de autos vende autos usados y almacena la información en una tabla llamada<br />&quot;autos&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>patente</strong>, <em>char(6)</em>.</li>
+<li><strong>marca</strong>, <em>varchar(20)</em>.</li>
+<li><strong>modelo</strong>, <em>char(4)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(8</em>., 2)</li>
+<li><strong>primary key</strong>, <em>patente</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'ACD123', 'Fiat 128', '1970', 15000</em>.</li>
+<li><em>'ACG234', 'Renault 11', '1980', 40000</em>.</li>
+<li><em>'BCD333', 'Peugeot 505', '1990', 80000</em>.</li>
+<li><em>'GCD123', 'Renault Clio', '1995', 70000</em>.</li>
+<li><em>'BCC333', 'Renault Megane', '1998', 95000</em>.</li>
+<li><em>'BVF543', 'Fiat 128', '1975', 20000</em>.</li>
+</ul></li>
+<li>Seleccione todos los autos cuyo modelo se encuentre entre '1970' y '1990' usando el operador &quot;between&quot; y ordénelos por dicho campo(<em>4 registros</em>)</li>
+<li><p>Seleccione todos los autos cuyo precio esté entre 50000 y 100000.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 41
+ ******************************************************************************/
+
+DROP TABLE IF EXISTS autos;
+
+CREATE TABLE autos (
+    patente CHAR(6),
+    marca VARCHAR(20),
+    modelo CHAR(4),
+    precio DECIMAL(8,2),
+    PRIMARY KEY(patente)
+);
+
+INSERT INTO autos
+    VALUES  (&#39;ACD123&#39;,&#39;Fiat 128&#39;,&#39;1970&#39;,15000),
+            (&#39;ACG234&#39;,&#39;Renault 11&#39;,&#39;1980&#39;,40000),
+            (&#39;BCD333&#39;,&#39;Peugeot 505&#39;,&#39;1990&#39;,80000),
+            (&#39;GCD123&#39;,&#39;Renault Clio&#39;,&#39;1995&#39;,70000),
+            (&#39;BCC333&#39;,&#39;Renault Megane&#39;,&#39;1998&#39;,95000),
+            (&#39;BVF543&#39;,&#39;Fiat 128&#39;,&#39;1975&#39;,20000);
+SELECT * FROM autos
+    WHERE modelo BETWEEN &#39;1970&#39; AND &#39;1990&#39;
+    ORDER BY modelo;
+    
+SELECT * FROM autos
+    WHERE precio BETWEEN 50000 AND 100000; 
+</code></pre>
+
+</body>
+</html>
+

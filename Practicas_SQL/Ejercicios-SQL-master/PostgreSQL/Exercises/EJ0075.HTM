@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-75">Ejercicio 75</h2>
+<p>Una empresa tiene registrados sus clientes en una tabla llamada &quot;clientes&quot;, también tiene una tabla &quot;provincias&quot; donde registra los nombres de las provincias.</p>
+<ol>
+<li><p>Cree las tablas &quot;clientes&quot; y &quot;provincias&quot;:</p>
+<ul>
+<li><p>clientes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>codigoprovincia</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>provincias</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+</ul></li>
+<li><p>Ingrese algunos registros para ambas tablas:</p>
+<ul>
+<li><em>'Pérez Juan', 'San Martin 123', 'Carlos Paz', 1</em>.</li>
+<li><em>'Moreno Marcos', 'Colon 234', 'Rosario', 2</em>.</li>
+<li><em>'Acosta Ana', 'Avellaneda 333', 'Posadas', 3</em>.</li>
+</ul></li>
+<li>Establezca una restricción &quot;foreign key&quot; especificando la acción &quot;en cascade&quot; para actualizaciones y &quot;no_action&quot; para eliminaciones.</li>
+<li>Intente eliminar el registro con código 3, de &quot;provincias&quot;. No se puede porque hay registros en &quot;clientes&quot; al cual hace referencia y la opción para eliminaciones se estableció como &quot;no action&quot;.</li>
+<li>Modifique el registro con código 3, de &quot;provincias&quot;.</li>
+<li>Verifique que el cambio se realizó en cascada, es decir, que se modificó en la tabla &quot;provincias&quot; y en &quot;clientes&quot;:</li>
+<li>Intente modificar la restricción &quot;foreign key&quot; para que permita eliminación en cascada. Mensaje de error, no se pueden modificar las restricciones.</li>
+<li><p>Intente eliminar la tabla &quot;provincias&quot;. No se puede eliminar porque una restricción &quot;foreign key&quot; hace referencia a ella.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 75
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    codigoprovincia SMALLINT,
+    PRIMARY KEY(codigo)
+);
+
+DROP TABLE IF EXISTS provincias;
+
+CREATE TABLE provincias (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    PRIMARY KEY(codigo)
+);
+INSERT INTO provincias 
+    VALUES  (1,&#39;Cordoba&#39;),
+        (2,&#39;Santa Fe&#39;),
+        (3,&#39;Misiones&#39;),
+        (4,&#39;Rio Negro&#39;);
+
+INSERT INTO clientes(nombre,domicilio,ciudad,codigoprovincia) 
+    VALUES  (&#39;Perez Juan&#39;,&#39;San Martin 123&#39;,&#39;Carlos Paz&#39;,1),
+        (&#39;Moreno Marcos&#39;,&#39;Colon 234&#39;,&#39;Rosario&#39;,2),
+        (&#39;Acosta Ana&#39;,&#39;Avellaneda 333&#39;,&#39;Posadas&#39;,3);
+        
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_codigoprovincia
+    FOREIGN KEY (codigoprovincia)
+    REFERENCES provincias(codigo)
+    ON UPDATE casCade
+    ON DELETE no action;
+
+DELETE FROM provincias WHERE codigo=3;
+
+UPDATE provincias SET codigo=9 WHERE codigo=3;
+
+SELECT *FROM provincias;
+
+SELECT *FROM clientes;
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_codigoprovincia
+    FOREIGN KEY (codigoprovincia)
+    REFERENCES provincias(codigo)
+    ON UPDATE casCade
+    ON DELETE casCade;
+
+DROP TABLE provincias;
+</code></pre>
+
+</body>
+</html>
+

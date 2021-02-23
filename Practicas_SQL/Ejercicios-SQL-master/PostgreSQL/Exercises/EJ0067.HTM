@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-67">Ejercicio 67</h2>
+<p>Una agencia matrimonial almacena la información de sus clientes de sexo femenino en una tabla llamada &quot;mujeres&quot; y en otra la de sus clientes de sexo masculino llamada &quot;varones&quot;.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>mujeres</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>int</em>.</li>
+</ul></li>
+<li><p>varones</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>edad</strong>, <em>int</em>.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese los siguientes registros.</li>
+<li>La agencia necesita la combinación de todas las personas de sexo femenino con las de sexo masculino. Use un &quot;cross join&quot; (<em>12 registros</em>)</li>
+<li>Realice la misma combinación pero considerando solamente las personas mayores de 40 años (<em>6 registros</em>)</li>
+<li><p>Forme las parejas pero teniendo en cuenta que no tengan una diferencia superior a 10 años (<em>8 registros</em>)</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 67
+******************************************************************************/
+
+DROP TABLE IF EXISTS mujeres;
+
+CREATE TABLE mujeres (
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    edad INT
+);
+
+DROP TABLE IF EXISTS varones;
+
+CREATE TABLE varones (
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    edad INT
+);
+
+INSERT INTO mujeres 
+    VALUES  (&#39;Maria Lopez&#39;,&#39;Colon 123&#39;,45),
+        (&#39;Liliana Garcia&#39;,&#39;Sucre 456&#39;,35),
+        (&#39;Susana Lopez&#39;,&#39;Avellaneda 98&#39;,41);
+INSERT INTO varones 
+    VALUES  (&#39;Juan Torres&#39;,&#39;Sarmiento 755&#39;,44),
+        (&#39;Marcelo Oliva&#39;,&#39;San Martin 874&#39;,56),
+        (&#39;Federico Pereyra&#39;,&#39;Colon 234&#39;,38),
+        (&#39;Juan Garcia&#39;,&#39;Peru 333&#39;,50);
+
+SELECT m.nombre,m.edad,v.nombre,v.edad
+    FROM mujeres AS m
+    CROSS JOIN varones AS v;
+
+SELECT m.nombre,m.edad,v.nombre,v.edad
+    FROM mujeres AS m
+    CROSS JOIN varones AS v
+    WHERE m.edad &gt; 40 AND v.edad &gt; 40;
+
+SELECT m.nombre,m.edad,v.nombre,v.edad
+    FROM mujeres AS m
+    CROSS JOIN varones AS v
+    WHERE m.edad-v.edad BETWEEN -10 AND 10;
+</code></pre>
+
+</body>
+</html>
+

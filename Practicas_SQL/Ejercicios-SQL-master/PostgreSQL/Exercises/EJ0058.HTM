@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-58">Ejercicio 58</h2>
+<p>Una empresa de remises tiene registrada la información de sus vehículos en una tabla llamada<br />&quot;remis&quot;.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>patente</strong>, <em>char(6)</em>.</li>
+<li><strong>marca</strong>, <em>varchar(15)</em>.</li>
+<li><strong>modelo</strong>, <em>char(4)</em>.</li>
+</ul></li>
+<li>Ingrese algunos registros, 2 de ellos con patente repetida y alguno con patente nula:</li>
+<li>Intente agregar una restricción &quot;unique&quot; para asegurarse que la patente del remis no tomará<br />valores repetidos.<br />No se puede porque hay valores duplicados.</li>
+<li>Elimine el registro con patente duplicada y establezca la restricción.<br />Note que hay 1 registro con valor nulo en &quot;patente&quot;.</li>
+<li>Intente ingresar un registro con patente repetida (<em>no lo permite</em>)</li>
+<li>Ingresar un registro con valor nulo para el campo &quot;patente&quot;.<br />Lo permite.</li>
+<li><p>Muestre la información de las restricciones</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 58
+******************************************************************************/
+
+DROP TABLE IF EXISTS remis;
+
+CREATE TABLE remis (
+    numero SERIAL,
+    patente CHAR(6),
+    marca VARCHAR(15),
+    modelo CHAR(4)
+);
+
+INSERT INTO remis(patente,marca,modelo) 
+    VALUES  (&#39;ABC123&#39;,&#39;Renault clio&#39;,&#39;1990&#39;),
+        (&#39;DEF456&#39;,&#39;Peugeot 504&#39;,&#39;1995&#39;),
+        (&#39;DEF456&#39;,&#39;Fiat Duna&#39;,&#39;1998&#39;),
+        (&#39;GHI789&#39;,&#39;Fiat Duna&#39;,&#39;1995&#39;),
+        (NULL,&#39;Fiat Duna&#39;,&#39;1995&#39;);
+
+ALTER TABLE remis
+    ADD CONSTRAINT UQ_remis_patente
+    UNIQUE(patente); 
+
+DELETE FROM remis WHERE numero=3;
+
+ALTER TABLE remis
+    ADD CONSTRAINT UQ_remis_patente
+    UNIQUE(patente); 
+
+INSERT INTO remis (patente,marca,modelo)VALUES  (&#39;ABC123&#39;,&#39;Renault 11&#39;,&#39;1995&#39;);
+
+INSERT INTO remis(patente,marca,modelo) VALUES  (NULL,&#39;Renault 11&#39;,&#39;1995&#39;);
+
+SELECT *
+    FROM information_schema.table_constraints
+    WHERE table_name = &#39;remis&#39;;
+</code></pre>
+
+</body>
+</html>
+

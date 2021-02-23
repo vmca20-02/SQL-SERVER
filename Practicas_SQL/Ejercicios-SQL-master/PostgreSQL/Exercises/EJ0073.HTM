@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-73">Ejercicio 73</h2>
+<p>Una empresa tiene registrados sus clientes en una tabla llamada &quot;clientes&quot;, también tiene una tabla &quot;provincias&quot; donde registra los nombres de las provincias.</p>
+<ol>
+<li><p>Cree las tablas &quot;clientes&quot; y &quot;provincias&quot;:</p>
+<ul>
+<li><p>clientes</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>ciudad</strong>, <em>varchar(20)</em>.</li>
+<li><strong>codigoprovincia</strong>, <em>smallint</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>provincias</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+</ul></li>
+<li>Intente agregar una restricción &quot;foreign key&quot; a la tabla &quot;clientes&quot; que haga referencia al campo &quot;codigo&quot; de &quot;provincias&quot; (<em>No se puede porque &quot;provincias&quot; no tiene restricción &quot;primary key&quot; &quot;unique&quot;</em>)</li>
+<li>Establezca una restricción &quot;primary key&quot; al campo &quot;codigo&quot; de &quot;provincias&quot;</li>
+<li><p>Ingrese algunos registros para ambas tablas:</p>
+<ul>
+<li><em>'Pérez Juan', 'San Martin 123', 'Carlos Paz', 1</em>.</li>
+<li><em>'Moreno Marcos', 'Colon 234', 'Rosario', 2</em>.</li>
+<li><em>'Acosta Ana', 'Avellaneda 333', 'Posadas', 3</em>.</li>
+<li><em>'Luisa López', 'Juárez 555', 'La Plata', 6</em>.</li>
+</ul></li>
+<li>Intente agregar la restricción &quot;foreign key&quot; del punto 2 a la tabla &quot;clientes&quot;. No se puede porque hay un registro en &quot;clientes&quot; cuyo valor de &quot;codigoprovincia&quot; no existe en &quot;provincias&quot;.</li>
+<li>Elimine el registro de &quot;clientes&quot; que no cumple con la restricción y establezca la restricción nuevamente.</li>
+<li>Intente agregar un cliente con un código de provincia inexistente en &quot;provincias&quot;. No se puede.</li>
+<li>Intente eliminar el registro con código 3, de &quot;provincias&quot;. No se puede porque hay registros en &quot;clientes&quot; al cual hace referencia.</li>
+<li>Elimine el registro con código &quot;4&quot; de &quot;provincias&quot;. Se permite porque en &quot;clientes&quot; ningún registro hace referencia a él.</li>
+<li><p>Intente modificar el registro con código 1, de &quot;provincias&quot;. No se puede porque hay registros en &quot;clientes&quot; al cual hace referencia.</p></li>
+</ol>
+<blockquote>
+<p>En este ejemplo, el campo &quot;codigoprovincia&quot; de &quot;clientes&quot; es una clave foránea, se emplea para enlazar la tabla &quot;clientes&quot; con &quot;provincias&quot;.</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 73
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    ciudad VARCHAR(20),
+    codigoprovincia SMALLINT,
+    PRIMARY KEY(codigo)
+);
+DROP TABLE IF EXISTS provincias;
+
+CREATE TABLE provincias (
+    codigo SERIAL,
+    nombre VARCHAR(20)
+);
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_codigoprovincia
+    FOREIGN KEY (codigoprovincia)
+    REFERENCES provincias(codigo);
+
+ALTER TABLE provincias
+    ADD CONSTRAINT PK_provincias_codigo
+    PRIMARY KEY (codigo);
+
+INSERT INTO provincias VALUES   (1,&#39;Cordoba&#39;);
+INSERT INTO provincias VALUES   (2,&#39;Santa Fe&#39;);
+INSERT INTO provincias VALUES   (3,&#39;Misiones&#39;);
+INSERT INTO provincias VALUES   (4,&#39;Rio Negro&#39;);
+
+INSERT INTO clientes(nombre,domicilio,ciudad,codigoprovincia) 
+    VALUES  (&#39;Perez Juan&#39;,&#39;San Martin 123&#39;,&#39;Carlos Paz&#39;,1),
+        (&#39;Moreno Marcos&#39;,&#39;Colon 234&#39;,&#39;Rosario&#39;,2),
+        (&#39;Acosta Ana&#39;,&#39;Avellaneda 333&#39;,&#39;Posadas&#39;,3),
+        (&#39;Luisa Lopez&#39;,&#39;Juarez 555&#39;,&#39;La Plata&#39;,6);
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_codigoprovincia
+    FOREIGN KEY (codigoprovincia)
+    REFERENCES provincias(codigo);
+
+DELETE FROM clientes WHERE codigoprovincia=6;
+
+ALTER TABLE clientes
+    ADD CONSTRAINT FK_clientes_codigoprovincia
+    FOREIGN KEY (codigoprovincia)
+    REFERENCES provincias(codigo);
+
+INSERT INTO clientes(nombre,domicilio,ciudad,codigoprovincia) 
+    VALUES  (&#39;Garcia Marcos&#39;,&#39;Colon 877&#39;,&#39;Lules&#39;,9);
+
+DELETE FROM provincias WHERE codigo=3;
+
+DELETE FROM provincias WHERE codigo=4;
+
+UPDATE provincias SET codigo=7 WHERE codigo=1;
+</code></pre>
+
+</body>
+</html>
+

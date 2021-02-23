@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-40">Ejercicio 40</h2>
+<p>En una página web se guardan los siguientes datos de las visitas: número de visita, nombre, mail, pais, fechayhora de la visita.</p>
+<ol>
+<li><p>Créela con la siguiente estructura:</p>
+<ul>
+<li><strong>numero</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>. default 'Anónimo'</li>
+<li><strong>mail</strong>, <em>varchar(50)</em>.</li>
+<li><strong>pais</strong>, <em>varchar</em>. (20)</li>
+<li><strong>fechayhora</strong>, <em>timestamp</em>.</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Ana María López', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x41;&#110;&#x61;&#x4d;&#x61;&#114;&#x69;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x41;&#110;&#x61;&#x4d;&#x61;&#114;&#x69;&#x61;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Argentina', '2006-10-10 10:10'</em>.</li>
+<li><em>'Gustavo González', <script type="text/javascript">
+<!--
+h='&#x67;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x47;&#x75;&#x73;&#116;&#x61;&#118;&#x6f;&#x47;&#x47;&#x6f;&#110;&#122;&#x61;&#108;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x47;&#x75;&#x73;&#116;&#x61;&#118;&#x6f;&#x47;&#x47;&#x6f;&#110;&#122;&#x61;&#108;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x67;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Chile', '2006-10-10 21:30'</em>.</li>
+<li><em>'Juancito', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Argentina', '2006-10-11 15:45'</em>.</li>
+<li><em>'Fabiola Martínez', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x4d;&#x61;&#114;&#116;&#x69;&#110;&#x65;&#122;&#70;&#x61;&#98;&#x69;&#x6f;&#108;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x4d;&#x61;&#114;&#116;&#x69;&#110;&#x65;&#122;&#70;&#x61;&#98;&#x69;&#x6f;&#108;&#x61;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'México', '2006-10-12 08:15'</em>.</li>
+<li><em>'Fabiola Martínez', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#x4d;&#x61;&#114;&#116;&#x69;&#110;&#x65;&#122;&#70;&#x61;&#98;&#x69;&#x6f;&#108;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x4d;&#x61;&#114;&#116;&#x69;&#110;&#x65;&#122;&#70;&#x61;&#98;&#x69;&#x6f;&#108;&#x61;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'México', '2006-09-12 20:45'</em>.</li>
+<li><em>'Juancito', <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Argentina', '2006-09-12 16:20'</em>.</li>
+<li><em>'Juancito', <script type="text/javascript">
+<!--
+h='&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#74;&#x75;&#x61;&#110;&#74;&#x6f;&#x73;&#x65;&#80;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#104;&#x6f;&#116;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Argentina', '2006-09-15 16:25'</em>.</li>
+<li><em>'Federico1', <script type="text/javascript">
+<!--
+h='&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x27;';a='&#64;';n='&#x27;&#102;&#x65;&#100;&#x65;&#114;&#x69;&#x63;&#x6f;&#x67;&#x61;&#114;&#x63;&#x69;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#102;&#x65;&#100;&#x65;&#114;&#x69;&#x63;&#x6f;&#x67;&#x61;&#114;&#x63;&#x69;&#x61;&#32;&#x61;&#116;&#32;&#120;&#x61;&#120;&#x61;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x27;</noscript>, 'Argentina'</em>.</li>
+</ul></li>
+<li>Seleccione los usuarios que visitaron la página entre el '2006-09-12' y '2006-10-11' (<em>5<br />registros</em>)<br />Note que incluye los de fecha mayor o igual al valor mínimo y menores al valor máximo, y que los<br />valores null no se incluyen.</li>
+<li><p>Recupere las visitas cuyo número se encuentra entre 2 y 5 (<em>4 registros</em>)<br />Note que incluye los valores límites.</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 40
+******************************************************************************/
+
+DROP TABLE IF EXISTS visitas;
+
+CREATE TABLE visitas (
+    numero SERIAL,
+    nombre VARCHAR(30) DEFAULT &#39;Anonimo&#39;,
+    mail VARCHAR(50),
+    pais VARCHAR (20),
+    fechayhora TIMESTAMP,
+    PRIMARY KEY(numero)
+);
+INSERT INTO visitas (nombre,mail,pais,fechayhora)
+    VALUES  (&#39;Ana Maria Lopez&#39;,&#39;AnaMaria@hotmail.com&#39;,&#39;Argentina&#39;,&#39;2006-10-10 10:10&#39;),
+        (&#39;Gustavo Gonzalez&#39;,&#39;GustavoGGonzalez@gotmail.com&#39;,&#39;Chile&#39;,&#39;2006-10-10 21:30&#39;),
+        (&#39;Juancito&#39;,&#39;JuanJosePerez@hotmail.com&#39;,&#39;Argentina&#39;,&#39;2006-10-11 15:45&#39;),
+        (&#39;Fabiola Martinez&#39;,&#39;MartinezFabiola@hotmail.com&#39;,&#39;Mexico&#39;,&#39;2006-10-12 08:15&#39;),
+        (&#39;Fabiola Martinez&#39;,&#39;MartinezFabiola@hotmail.com&#39;,&#39;Mexico&#39;,&#39;2006-09-12 20:45&#39;),
+        (&#39;Juancito&#39;,&#39;JuanJosePerez@gmail.com&#39;,&#39;Argentina&#39;,&#39;2006-09-12 16:20&#39;),
+        (&#39;Juancito&#39;,&#39;JuanJosePerez@hotmail.com&#39;,&#39;Argentina&#39;,&#39;2006-09-15 16:25&#39;),
+        (&#39;Federico1&#39;,&#39;federicogarcia@xaxamail.com&#39;,&#39;Argentina&#39;);
+        
+SELECT * FROM visitas
+    WHERE fechayhora BETWEEN &#39;2006-09-12&#39; AND &#39;2006-10-11&#39;;
+    
+SELECT * FROM visitas
+    WHERE numero BETWEEN 2 AND 5;
+</code></pre>
+
+</body>
+</html>
+

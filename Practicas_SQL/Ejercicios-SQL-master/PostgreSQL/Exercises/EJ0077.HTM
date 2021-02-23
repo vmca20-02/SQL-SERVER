@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-77">Ejercicio 77</h2>
+<p>Un profesor almacena el documento, nombre y la nota final de cada alumno de su clase en una tabla llamada &quot;alumnos&quot;.</p>
+<ol>
+<li><p>Créela</p>
+<ul>
+<li><strong>documento</strong>, <em>char(8)</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>nota</strong>, <em>decimal(4</em>., 2)</li>
+<li><strong>primary key</strong>, <em>documento</em>.</li>
+</ul></li>
+<li>Ingrese algunos registros:</li>
+<li>Obtenga todos los datos de los alumnos con la nota más alta, empleando subconsulta (<em>2 registros</em>).</li>
+<li>Realice la misma consulta anterior pero intente que la consulta interna retorne, además del máximo valor de precio, el título. Mensaje de error, porque la lista de selección de una subconsulta que va luego de un operador de<br />comparación puede incluir sólo un campo o expresión (<em>excepto si se emplea &quot;exists&quot; o &quot;in&quot;</em>).</li>
+<li>Muestre los alumnos que tienen una nota menor al promedio, su nota, y la diferencia con el promedio (<em>3 registros</em>).</li>
+<li>Cambie la nota del alumno que tiene la menor nota por 4 (<em>1 registro modificado</em>).</li>
+<li><p>Elimine los alumnos cuya nota es menor al promedio (<em>3 registros eliminados</em>).</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 77
+******************************************************************************/
+
+DROP TABLE IF EXISTS alumnos;
+
+CREATE TABLE alumnos (
+    documento CHAR(8),
+    nombre VARCHAR(30),
+    nota DECIMAL(4,2),
+    PRIMARY KEY(documento)
+);
+
+INSERT INTO alumnos 
+    VALUES  (&#39;30111111&#39;,&#39;Ana Algarbe&#39;,5.1),
+        (&#39;30222222&#39;,&#39;Bernardo Bustamante&#39;,3.2),
+        (&#39;30333333&#39;,&#39;Carolina Conte&#39;,4.5),
+        (&#39;30444444&#39;,&#39;Diana DoMINguez&#39;,9.7),
+        (&#39;30555555&#39;,&#39;Fabian Fuentes&#39;,8.5),
+        (&#39;30666666&#39;,&#39;Gaston Gonzalez&#39;,9.70);
+
+SELECT alumnos.*
+    FROM alumnos
+    WHERE nota=
+    (SELECT MAX(nota) FROM alumnos);
+
+SELECT titulo,autor, precio
+    FROM libros
+    WHERE precio=
+    (SELECT titulo, MAX(precio) FROM libros);
+
+SELECT alumnos.*,
+    (SELECT AVG(nota) FROM alumnos)-nota AS diferencia
+    FROM alumnos
+    WHERE nota &lt; 
+    (SELECT AVG(nota) FROM alumnos);
+
+UPDATE alumnos SET nota=4
+    WHERE nota=
+    (SELECT MIN(nota) FROM alumnos);
+
+DELETE FROM alumnos
+    WHERE nota &lt; 
+    (SELECT AVG(nota) FROM alumnos);
+</code></pre>
+
+</body>
+</html>
+

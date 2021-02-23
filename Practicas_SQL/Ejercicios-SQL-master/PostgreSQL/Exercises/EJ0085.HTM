@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-85">Ejercicio 85</h2>
+<p>Un comercio que vende artículos de librería y papelería almacena la información de sus ventas en una tabla llamada &quot;facturas&quot; y otra &quot;clientes&quot;.</p>
+<ol>
+<li><p>Cree las tablas:</p>
+<ul>
+<li><p>facturas</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>clientes</p>
+<ul>
+<li><strong>numero</strong>, <em>int</em>. not null</li>
+<li><strong>fecha</strong>, <em>date</em>.</li>
+<li><strong>codigocliente</strong>, <em>int</em>. not null</li>
+<li><strong>total</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>primary key</strong>, <em>numero</em>.</li>
+</ul></li>
+</ul></li>
+<li>Ingrese algunos registros:</li>
+<li><p>El comercio necesita una tabla llamada &quot;clientespref&quot; en la cual quiere almacenar el nombre y domicilio de aquellos clientes que han comprado hasta el momento más de 500 pesos en mercaderías. Créela la tabla:</p>
+<ul>
+<li><strong>nombre</strong>, <em>varchar(30)</em>.</li>
+<li><strong>domicilio</strong>, <em>varchar(30)</em>.</li>
+</ul></li>
+<li>Ingrese los registros en la tabla &quot;clientespref&quot; seleccionando registros de la tabla &quot;clientes&quot; y &quot;facturas&quot;.</li>
+<li><p>Vea los registros de &quot;clientespref&quot;:</p></li>
+</ol>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 85
+******************************************************************************/
+
+DROP TABLE IF EXISTS clientes;
+
+CREATE TABLE clientes (
+    codigo SERIAL,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    PRIMARY KEY(codigo)
+);
+DROP TABLE IF EXISTS facturas;
+
+CREATE TABLE facturas (
+    numero INT NOT NULL,
+    fecha DATE,
+    codigocliente INT NOT NULL,
+    total DECIMAL(6,2),
+    PRIMARY KEY(numero)
+);
+INSERT INTO clientes(nombre,domicilio) 
+    VALUES  (&#39;Juan Lopez&#39;,&#39;Colon 123&#39;),
+        (&#39;Luis Torres&#39;,&#39;Sucre 987&#39;),
+        (&#39;Ana Garcia&#39;,&#39;Sarmiento 576&#39;),
+        (&#39;Susana Molina&#39;,&#39;San Martin 555&#39;);
+INSERT INTO facturas 
+    VALUES  (1200,&#39;2007-01-15&#39;,1,300),
+        (1201,&#39;2007-01-15&#39;,2,550),
+        (1202,&#39;2007-01-15&#39;,3,150),
+        (1300,&#39;2007-01-20&#39;,1,350),
+        (1310,&#39;2007-01-22&#39;,3,100);
+DROP TABLE IF EXISTS clientespref;
+
+CREATE TABLE clientespref (
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30)
+);
+
+INSERT INTO clientespref
+    SELECT nombre,domicilio
+        FROM clientes 
+        WHERE codigo in 
+        (SELECT codigocliente
+             FROM clientes AS c
+             JOIN facturas AS f
+             ON codigocliente=codigo
+             GROUP BY codigocliente
+             HAVING SUM(total) &gt; 500);
+
+SELECT *FROM clientespref;
+</code></pre>
+
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>body{font: 12.8px Sans-serif; line-height: 1.5em; width: 19cm; max-width: 100%;margin:auto;}pre{word-wrap: break-word;border: 1px solid #CCC; padding: 20px;background-color:#EEE;border-radius:5px;}</style>
+</head>
+
+<body>
+<h2 id="ejercicio-42">Ejercicio 42</h2>
+<p>Trabaje con la tabla llamada &quot;medicamentos&quot; de una farmacia.</p>
+<ol>
+<li><p>Cree la tabla con la siguiente estructura:</p>
+<ul>
+<li><strong>codigo</strong>, <em>serial</em>.</li>
+<li><strong>nombre</strong>, <em>varchar(20)</em>.</li>
+<li><strong>laboratorio</strong>, <em>varchar(20)</em>.</li>
+<li><strong>precio</strong>, <em>decimal(6</em>., 2)</li>
+<li><strong>cantidad</strong>, <em>smallint</em>.</li>
+<li><strong>fechavencimiento</strong>, <em>date</em>. not null</li>
+<li><strong>primary key</strong>, <em>codigo</em>.</li>
+</ul></li>
+<li><p>Ingrese algunos registros:</p>
+<ul>
+<li><em>'Sertal', 'Roche', 5.2, 1, '2005-02-01'</em>.</li>
+<li><em>'Buscapina', 'Roche', 4.10, 3, '2006-03-01'</em>.</li>
+<li><em>'Amoxidal 500', 'Bayer', 15.60, 100, '2007-05-01'</em>.</li>
+<li><em>'Paracetamol 500', 'Bago'</em>.<br />1.90, 20, '2008-02-01'</li>
+<li><em>'Bayaspirina', 'Bayer', 2.10, 150, '2009-12-01'); </em>.</li>
+<li><em>'Amoxidal jarabe', 'Bayer', 5.10, 250, '2010-10-01'); </em>.</li>
+</ul></li>
+<li>Recupere los nombres y precios de los medicamentos cuyo laboratorio sea &quot;Bayer&quot; o &quot;Bago&quot;<br />empleando el operador &quot;in&quot; (<em>4 registros</em>)</li>
+<li><p>Seleccione los remedios cuya cantidad se encuentre entre 1 y 5 empleando el operador &quot;between&quot; y<br />luego el operador &quot;in&quot; (<em>2 registros</em>)</p></li>
+</ol>
+<blockquote>
+<p>Note que es más conveniente emplear, en este caso, el operador &quot;&quot;between&quot;.</p>
+</blockquote>
+<h3 id="resuelto">Resuelto</h3>
+<pre><code>/** EJERCICIO 42
+******************************************************************************/
+
+DROP TABLE IF EXISTS medicamentos;
+
+CREATE TABLE medicamentos (
+    codigo SERIAL,
+    nombre VARCHAR(20),
+    laboratorio VARCHAR(20),
+    precio DECIMAL(6,2),
+    cantidad SMALLINT,
+    fechavencimiento DATE NOT NULL,
+    PRIMARY KEY(codigo)
+);
+
+INSERT INTO medicamentos(nombre,laboratorio,precio,cantidad,fechavencimiento)
+    VALUES  (&#39;Sertal&#39;,&#39;Roche&#39;,5.2,1,&#39;2005-02-01&#39;),
+        (&#39;Buscapina&#39;,&#39;Roche&#39;,4.10,3,&#39;2006-03-01&#39;),
+        (&#39;Amoxidal 500&#39;,&#39;Bayer&#39;,15.60,100,&#39;2007-05-01&#39;),
+        (&#39;Paracetamol 500&#39;,&#39;Bago&#39;,1.90,20,&#39;2008-02-01&#39;),
+        (&#39;Bayaspirina&#39;,&#39;Bayer&#39;,2.10,150,&#39;2009-12-01&#39;),
+        (&#39;Amoxidal jarabe&#39;,&#39;Bayer&#39;,5.10,250,&#39;2010-10-01&#39;); 
+        
+SELECT nombre,precio FROM medicamentos
+    WHERE laboratorio in (&#39;Bayer&#39;,&#39;Bago&#39;);
+    
+SELECT * FROM medicamentos
+    WHERE cantidad BETWEEN 1 AND 5;
+    
+SELECT * FROM medicamentos
+    WHERE cantidad in (1,2,3,4,5);
+</code></pre>
+
+</body>
+</html>
+
