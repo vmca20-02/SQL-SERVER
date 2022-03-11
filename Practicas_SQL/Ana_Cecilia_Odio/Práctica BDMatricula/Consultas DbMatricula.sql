@@ -2,21 +2,21 @@
 
 /*Consultas simples.*/
 
-/*	Obtener toda la informaciÛn del profesor cedula 3333. */
+/*	Obtener toda la informaci√≥n del profesor cedula 3333. */
 
 
 /* 2.	Obtener los carnets de todos los estudiantes que han matriculado         cursos 
-        en orden de cÛdigo de materia, grupo y carnets.  */
+        en orden de c√≥digo de materia, grupo y carnets.  */
 
 
-/*3.	Obtener los cÛdigos y nombres de los cursos que tienen entre 
-        2 y 4 crÈditos.*/
+/*3.	Obtener los c√≥digos y nombres de los cursos que tienen entre 
+        2 y 4 cr√©ditos.*/
 
 
 /*4.	Obtener la cedula y nombre de todos los profesores cuyo 
         apellido empieza con A. */
 
-/* 5.	Listar la cedula, el nombre y el telÈfono de todos los profesores
+/* 5.	Listar la cedula, el nombre y el tel√©fono de todos los profesores
         apellido Perez.*/
 
 
@@ -31,27 +31,27 @@
         Ciencias.*/
 
 
-/*9.	Obtener la cantidad de cursos que tienen mas de 3 crÈditos. */
+/*9.	Obtener la cantidad de cursos que tienen mas de 3 cr√©ditos. */
 
 
 
-/* Consultas de reuniÛn.*/
+/* Consultas de reuni√≥n.*/
 
-/*10.Obtener una lista con la informaciÛn: Nombre del profesor,  
+/*10.Obtener una lista con la informaci√≥n: Nombre del profesor,  
      nombre de la materia y el grupo que imparte con la cantidad de 
-     crÈditos de cada materia impartida.*/
+     cr√©ditos de cada materia impartida.*/
 
 
 /*11. Obtener el nombre de la materia, el grupo y los nombres de los 
-estudiantes matriculados con sus notas, pero ˙nicamente deben aparecer
+estudiantes matriculados con sus notas, pero √∫nicamente deben aparecer
 los estudiantes con nota mayor a 90.*/
 
 
 /*12.Obtener la lista de los nombres de los estudiantes que reciben 
-    alguna lecciÛn con el profesor Alvarez y que hallan perdido el curso.*/
+    alguna lecci√≥n con el profesor Alvarez y que hallan perdido el curso.*/
 
 
-/* 13.	Obtener el cÛdigo de la materia, el nombre y la cantidad 
+/* 13.	Obtener el c√≥digo de la materia, el nombre y la cantidad 
         de estudiantes matriculados en total en cada materia.*/
 
         
@@ -60,21 +60,21 @@ los estudiantes con nota mayor a 90.*/
 
 /*15.	Obtener el nombre de materia, el grupo, el total de 
        matriculados para las materias
-        que imparte el profesor ¡lvarez y cuyo cÛdigo 
+        que imparte el profesor √Ålvarez y cuyo c√≥digo 
         de curso empieza con "A"*/
 
 /*16.	Obtener el nombre del estudiante y la carrera de los estudiantes
         que matricularon Ingles. */
 
 
-/* 17 Obtener cantidad de crÈditos que poseen los cursos impartidos 
-    por cada  profesor(por cÈdula y nombre).   */
+/* 17 Obtener cantidad de cr√©ditos que poseen los cursos impartidos 
+    por cada  profesor(por c√©dula y nombre).   */
 
 
 
 /*Consultas con subconsulta.*/
 
-/*18.	Obtener nombres de las materias y crÈditos de los cursos 
+/*18.	Obtener nombres de las materias y cr√©ditos de los cursos 
         impartidos por el profesor cedula 1111*/
 
 
@@ -83,13 +83,13 @@ los estudiantes con nota mayor a 90.*/
 
 
 /*19.	Obtener el nombre de los estudiantes matriculados en cursos de 
-        m·s de 3 crÈditos.*/
+        m√°s de 3 cr√©ditos.*/
 
 /*20	Obtener el nombre de los estudiantes matriculados en cursos de 
-        m·s de 3 crÈditos que imparta el profesor Perez.*/
+        m√°s de 3 cr√©ditos que imparta el profesor Perez.*/
 
 
-/*21.	Obtener el carnet de los estudiantes y el cÛdigo del curso donde 
+/*21.	Obtener el carnet de los estudiantes y el c√≥digo del curso donde 
        obtuvieron una nota mayor que el promedio general de todas las
        notas obtenidas por todos los estudiantes matriculados.*/
 
@@ -104,41 +104,41 @@ los estudiantes con nota mayor a 90.*/
 
 
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
-       est·n en la carrera de matem·tica.*/
+       est√°n en la carrera de matem√°tica.*/
 
 
 /*Consultas con funciones agregadas.
 
-25.	Obtener la nota promedio por cÛdigo de materia */
+25.	Obtener la nota promedio por c√≥digo de materia */
 
 
-/*26.	Obtener la cantidad de estudiantes matriculados por cÛdigo de 
+/*26.	Obtener la cantidad de estudiantes matriculados por c√≥digo de 
         materia.*/
 
-/*27.	Obtener la nota mÌnima por cada estudiante.*/
+/*27.	Obtener la nota m√≠nima por cada estudiante.*/
 
 
 
-/*28	Obtener la nota mÌnima por cada estudiante pero que aparezcan 
-        ˙nicamente los que tienen un mÌnimo mayor a 70.*/
+/*28	Obtener la nota m√≠nima por cada estudiante pero que aparezcan 
+        √∫nicamente los que tienen un m√≠nimo mayor a 70.*/
 
 
 /*29 Obtener el promedio de las notas de los cursos cuyo
-       cÛdigo empieza con A, pero que aparezcan ˙nicamente aquellos
+       c√≥digo empieza con A, pero que aparezcan √∫nicamente aquellos
        cursos cuya nota promedio sea mayor a 80.*/
 
 
 
 /*30 Obtener la cantidad  de grupos impartidos por 
           cada profesor, pero de manera que
-         ˙nicamente aparezcan aquellos que imparten m·s de 2 grupos.*/
+         √∫nicamente aparezcan aquellos que imparten m√°s de 2 grupos.*/
 
 
-/*31	Nota promedio por cÛdigo de curso , pero ˙nicamente de los
+/*31	Nota promedio por c√≥digo de curso , pero √∫nicamente de los
         cursos que tienen mas de un 80 como promedio.*/
 
 
-/*32	Nota promedio por cÛdigo de curso , pero ˙nicamente de los
+/*32	Nota promedio por c√≥digo de curso , pero √∫nicamente de los
         cursos que tienen mas de un estudiante matriculado.*/
 
 
@@ -146,7 +146,7 @@ los estudiantes con nota mayor a 90.*/
 /*33.	Cantidad de cursos matriculados por cada carnet de estudiante.*/
 
 
-/*34.	Promedio obtenido por cada carnet de estudiante , ˙nicamente los estudiantes
+/*34.	Promedio obtenido por cada carnet de estudiante , √∫nicamente los estudiantes
         que tienen un promedio menor a 70. */
 
 
@@ -158,37 +158,36 @@ los estudiantes con nota mayor a 90.*/
  
 	
 /*36.	Agregar 10 puntos en la nota a los estudiantes que 
-        hallan matriculado BiologÌa */
+        hallan matriculado Biolog√≠a */
 
 
-/*37.	Agregar en la base de datos al profesor JimÈnez, quien tiene un 
-        numero de cedula 4444 y su telÈfono es 4425478.*/
+/*37.	Agregar en la base de datos al profesor Jim√©nez, quien tiene un 
+        numero de cedula 4444 y su tel√©fono es 4425478.*/
 
 
-/*38.	Cambiar el telÈfono del profesor PÈrez cambi·ndolo por el 2356255.*/
+/*38.	Cambiar el tel√©fono del profesor P√©rez cambi√°ndolo por el 2356255.*/
 
 
-/* 39.	Modificar la tabla estudiantes agreg·ndole el campo 
-        telefono el cual es numÈrico.*/
+/* 39.	Modificar la tabla estudiantes agreg√°ndole el campo 
+        telefono el cual es num√©rico.*/
 
 
 /*40.  Pasar a los estudiantes cuyo apellido termine en "A" 
-       matriculados en la carrera de QuÌmica a BiologÌa.*/
+       matriculados en la carrera de Qu√≠mica a Biolog√≠a.*/
 
 
-/*41.	Listar el cÛdigo de materia, el grupo y el promedio de nota, 
-        pero ˙nicamenTestudiante 
-        para los cursos que tuvieron un promedio menor a 70.*/
+/*41.	Listar el c√≥digo de materia, el grupo y el promedio de nota, 
+        pero √∫nicamen para los cursos que tuvieron un promedio menor a 70.*/
 
 
-/*42.	Listar el cÛdigo de materia, el grupo y el total de estudiantes 
+/*42.	Listar el c√≥digo de materia, el grupo y el total de estudiantes 
         matriculados para los cursos que matricularon en total 
-        2 Û m·s estudiantes.*/
+        2 √≥ m√°s estudiantes.*/
 
 
-/*43.	Agregar a la tabla profesores el campo direcciÛn el cual es de 30 caracteres.*/
+/*43.	Agregar a la tabla profesores el campo direcci√≥n el cual es de 30 caracteres.*/
 
 
-/*44.	*Agregar un grupo mas de ingles que lo impartir· el profesor ¡lvarez.*/
+/*44.	*Agregar un grupo mas de ingles que lo impartir√° el profesor √Ålvarez.*/
 
 
