@@ -77,31 +77,21 @@ los estudiantes con nota mayor a 90.*/
 /*18.	Obtener nombres de las materias y créditos de los cursos 
         impartidos por el profesor cedula 1111*/
 
-
-
-
-
-
 /*19.	Obtener el nombre de los estudiantes matriculados en cursos de 
         más de 3 créditos.*/
 
 /*20	Obtener el nombre de los estudiantes matriculados en cursos de 
         más de 3 créditos que imparta el profesor Perez.*/
 
-
 /*21.	Obtener el carnet de los estudiantes y el código del curso donde 
        obtuvieron una nota mayor que el promedio general de todas las
        notas obtenidas por todos los estudiantes matriculados.*/
-
-        
+  
 /*22.	Obtener el carnet y nombre del estudiante que obtuvo 
          la nota mas baja de toda la universidad.  */
 
-
-
 /*23.	Obtener la lista de nombres de estudiantes que matricularon a la 
         vez el curso A20 y el A21. */
-
 
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
        están en la carrera de matemática.*/
