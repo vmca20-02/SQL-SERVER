@@ -268,12 +268,19 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
 		      
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
        están en la carrera de matemática.(SOLUCIONADO:CONFIRMAR)*/
+       
+--24.A (UN ALUNO QUE ESTA CURSANDO MATEMATICA COMO CARRERA E INGLES COMO CURSO)
+ SELECT est.Carnet,est.Nombre AS 'Estudiante',mat.Nombre AS 'Curso',est.Carrera AS 'Carrera'
+ FROM Testudiante est INNER JOIN Tmatricula matr ON matr.Carnet=est.Carnet
+      INNER JOIN Tgrupo grup ON grup.Grupo=matr.Grupo AND grup.CodMateria=matr.CodMateria
+	  INNER JOIN Tmateria mat ON mat.CodMateria=grup.CodMateria
+ WHERE mat.Nombre LIKE 'Ingles' AND est.Carrera LIKE 'Matemáticas'
 
-
+--24.B (UN ALUMNO QUE ESTA CURSANDO INGLES Y MATEMATICA COMO CURSOS)
  SELECT est.Carnet,est.Nombre AS 'Estudiante'
  FROM Testudiante est INNER JOIN Tmatricula matr ON matr.Carnet=est.Carnet
       INNER JOIN Tgrupo grup ON grup.Grupo=matr.Grupo AND grup.CodMateria=matr.CodMateria
-      INNER JOIN Tmateria mat ON mat.CodMateria=grup.CodMateria
+	  INNER JOIN Tmateria mat ON mat.CodMateria=grup.CodMateria
  WHERE mat.Nombre IN ('Ingles','Matematica')
  GROUP BY est.Carnet,est.Nombre
  HAVING COUNT(mat.CodMateria)=2
