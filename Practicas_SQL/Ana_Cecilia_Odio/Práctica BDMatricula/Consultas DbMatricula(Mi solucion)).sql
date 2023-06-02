@@ -356,6 +356,15 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
 /*Acciones varias sobre la base de datos.
 35.  Eliminar el grupo 01 de Ciencias de la Base de datos y pasar a los estudiantes 
      matriculados en dicho grupo al grupo 02 de Ciencias*/
+     
+     DELETE
+     FROM Tgrupo
+     WHERE CodMateria='A20' AND Grupo='01'
+
+    INSERT INTO Tgrupo(CodMateria,Grupo,CedulaProf)
+    SELECT grup.CodMateria,'02',grup.CedulaProf
+    FROM Tgrupo grup
+    WHERE grup.CodMateria='A20' AND grup.Grupo='01'
 
 /*36.	Agregar 10 puntos en la nota a los estudiantes que 
         hallan matriculado Biología.(SOLUCIONADO)*/
