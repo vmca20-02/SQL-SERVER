@@ -269,29 +269,16 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
        están en la carrera de matemática.(SOLUCIONADO:CONFIRMAR)*/
 
-	---REGULAR QUERY(Como haria este Query normalmente)
-	SELECT est.Carnet,est.Nombre
-	FROM Testudiante est
-    WHERE est.Carrera LIKE '%Matemáticas%'
-	AND est.Carnet IN ( 
-			            SELECT matr.Carnet
-						FROM Tmatricula matr
-						WHERE matr.Grupo IN(SELECT grup.Grupo
-										    FROM Tgrupo grup)
-						AND
-						matr.CodMateria IN(SELECT mat.CodMateria
-										   FROM Tmateria mat
-										   WHERE mat.Nombre LIKE '%Ingles%'))
 
-	---MI PRIMERA OPCION(Este query se me hace mas coherente,ESTE SERIA UN USO FORMIDABLE DE SUB-QUERYS)
-	SELECT est.Carnet,est.Nombre
-	FROM Testudiante est
-    WHERE est.Carrera LIKE '%Matemáticas%'
-	AND est.Carnet IN (SELECT matr.Carnet
-					   FROM Tmatricula matr
-					   WHERE matr.CodMateria IN (SELECT CodMateria
-												 FROM Tmateria mat
-												 WHERE mat.Nombre LIKE '%Ingles%'))
+ SELECT est.Carnet,est.Nombre AS 'Estudiante'
+ FROM Testudiante est INNER JOIN Tmatricula matr ON matr.Carnet=est.Carnet
+      INNER JOIN Tgrupo grup ON grup.Grupo=matr.Grupo AND grup.CodMateria=matr.CodMateria
+      INNER JOIN Tmateria mat ON mat.CodMateria=grup.CodMateria
+ WHERE mat.Nombre IN ('Ingles','Matematica')
+ GROUP BY est.Carnet,est.Nombre
+ HAVING COUNT(mat.CodMateria)=2
+
+	
 
 ---Consultas con funciones agregadas---
 
