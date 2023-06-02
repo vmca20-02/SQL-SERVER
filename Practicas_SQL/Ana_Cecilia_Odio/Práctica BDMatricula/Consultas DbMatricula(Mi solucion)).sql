@@ -129,7 +129,7 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
 	FROM Tmatricula matr INNER JOIN Tgrupo grup ON grup.CodMateria=matr.CodMateria AND grup.Grupo=matr.Grupo
 		 INNER JOIN Tmateria mat ON mat.CodMateria=grup.CodMateria
 		 INNER JOIN Tprofesor prof ON prof.Cedula=grup.CedulaProf
-	WHERE prof.Nombre='Alvarez' AND mat.Nombre LIKE 'A%'
+	WHERE prof.Nombre='Alvarez' AND mat.CodMateria LIKE 'A%'
 	GROUP BY mat.CodMateria,mat.Nombre
 
 /*16.Obtener el nombre del estudiante y la carrera de los estudiantes
