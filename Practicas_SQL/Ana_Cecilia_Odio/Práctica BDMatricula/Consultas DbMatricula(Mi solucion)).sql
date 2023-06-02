@@ -249,12 +249,10 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
 
 /*23.	Obtener la lista de nombres de estudiantes que matricularon a la 
         vez el curso A20 y el A21.(SOLUCIONADO)*/
-
-	SELECT est.Carnet,est.Nombre
-	FROM Testudiante est
-	WHERE est.Carnet IN(SELECT matr.Carnet
-		                FROM Tmatricula matr
-		                WHERE matr.CodMateria='A20' OR matr.CodMateria='A21')
+	
+    SELECT est.Carnet,est.Nombre AS 'Estudiante',matr.CodMateria AS 'Cod Curso',matr.Nota
+    FROM Testudiante est INNER JOIN Tmatricula matr ON matr.Carnet=est.Carnet
+    WHERE matr.CodMateria IN('A20','A21')
 
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
        están en la carrera de matemática.(SOLUCIONADO:CONFIRMAR)*/
