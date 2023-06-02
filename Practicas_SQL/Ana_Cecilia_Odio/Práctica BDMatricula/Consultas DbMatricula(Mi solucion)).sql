@@ -361,10 +361,10 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
      FROM Tgrupo
      WHERE CodMateria='A20' AND Grupo='01'
 
-    INSERT INTO Tgrupo(CodMateria,Grupo,CedulaProf)
-    SELECT grup.CodMateria,'02',grup.CedulaProf
-    FROM Tgrupo grup
-    WHERE grup.CodMateria='A20' AND grup.Grupo='01'
+     INSERT INTO Tgrupo(CodMateria,Grupo,CedulaProf)
+     SELECT grup.CodMateria,'02',grup.CedulaProf
+     FROM Tgrupo grup
+     WHERE grup.CodMateria='A20' AND grup.Grupo='01'
 
 /*36.	Agregar 10 puntos en la nota a los estudiantes que 
         hallan matriculado Biología.(SOLUCIONADO)*/
