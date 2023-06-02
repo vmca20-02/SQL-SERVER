@@ -278,8 +278,6 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
  GROUP BY est.Carnet,est.Nombre
  HAVING COUNT(mat.CodMateria)=2
 
-	
-
 ---Consultas con funciones agregadas---
 
 /*25.Obtener la nota promedio por código de materia.(SOLUCIONADO) */
