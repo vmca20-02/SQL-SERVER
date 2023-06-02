@@ -256,7 +256,16 @@ los estudiantes con nota mayor a 90.(SOLUCIONADO)*/
    GROUP BY est.Carnet,est.Nombre
    HAVING  COUNT(est.Carnet)=2               
    ORDER BY est.Nombre
-
+   
+   --VERSION CON SUB-CONSULTA (PARA MOSTRAR INFORMACION)
+  SELECT est.Carnet,est.Nombre AS 'Estudiante'
+  FROM  Testudiante est
+  WHERE est.Carnet IN(SELECT matr.Carnet
+                      FROM Tmatricula matr 
+                      WHERE matr.CodMateria IN('A20','A21')
+                      GROUP BY  matr.Carnet
+                      HAVING  COUNT(matr.Carnet)=2)               
+		      
 /*24.	Obtener la lista de nombres de estudiantes que cursen Ingles y
        están en la carrera de matemática.(SOLUCIONADO:CONFIRMAR)*/
 
